@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 270 64" role="img" aria-label="University of Melbourne">
+  <rect width="270" height="64" fill="none"/>
+  <circle cx="30" cy="32" r="21" fill="#607895"/>
+  <path d="M18 22h24v5H18zm3 8h18v13H21z" fill="#fff"/>
+  <text x="62" y="29" fill="#607895" font-family="Georgia,serif" font-size="20" font-weight="700">University of</text>
+  <text x="62" y="50" fill="#061a40" font-family="Georgia,serif" font-size="24" font-weight="700">Melbourne</text>
+</svg>

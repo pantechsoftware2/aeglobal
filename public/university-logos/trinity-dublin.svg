@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 285 64" role="img" aria-label="Trinity College Dublin">
+  <rect width="285" height="64" fill="none"/>
+  <path d="M30 10l23 42H7z" fill="#061a40"/>
+  <path d="M30 23l9 17H21z" fill="#b9d7dc"/>
+  <text x="65" y="30" fill="#061a40" font-family="Georgia,serif" font-size="23" font-weight="700">Trinity College</text>
+  <text x="65" y="51" fill="#118282" font-family="Georgia,serif" font-size="22" font-weight="700">Dublin</text>
+</svg>
