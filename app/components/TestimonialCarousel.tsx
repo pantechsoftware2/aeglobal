@@ -63,8 +63,8 @@ export default function TestimonialCarousel() {
           <Image
             src={activeTestimonial.image}
             alt=""
-            width={92}
-            height={132}
+            fill
+            sizes="78px"
           />
         </div>
         <div className="testimonial-body">

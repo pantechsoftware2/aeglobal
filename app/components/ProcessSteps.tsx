@@ -32,18 +32,26 @@ export default function ProcessSteps({ items }: { items: ProcessStepItem[] }) {
 
   useEffect(() => {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const section =
-      containerRef.current?.closest<HTMLElement>(".process-support-scroll") ??
-      containerRef.current?.closest<HTMLElement>(".process-scroll");
+    const section = containerRef.current?.closest<HTMLElement>(".process-sticky");
     const steps = stepsRef.current.filter(Boolean) as HTMLElement[];
 
     if (!section || steps.length === 0) return;
 
     const setComplete = () => {
-      gsap.set(steps, { opacity: 1, visibility: "visible", y: 0, force3D: true, willChange: "auto" });
+      gsap.set(steps, {
+        opacity: 1,
+        scale: 1,
+        rotateX: 0,
+        visibility: "visible",
+        y: 0,
+        force3D: true,
+        willChange: "auto"
+      });
     };
 
-    if (reducedMotion.matches) {
+    const supportsPinnedStory = window.matchMedia("(min-width: 761px)").matches;
+
+    if (reducedMotion.matches || !supportsPinnedStory) {
       setComplete();
       return;
     }
@@ -51,51 +59,76 @@ export default function ProcessSteps({ items }: { items: ProcessStepItem[] }) {
     const maxIndex = Math.max(0, items.length - 1);
     const ySetters = steps.map((step) => gsap.quickSetter(step, "y", "px"));
     const opacitySetters = steps.map((step) => gsap.quickSetter(step, "opacity"));
+    const scaleSetters = steps.map((step) => gsap.quickSetter(step, "scale"));
+    const rotateXSetters = steps.map((step) => gsap.quickSetter(step, "rotateX", "deg"));
 
     const render = (progress: number) => {
-      const sectionProgress = clamp(progress / 0.95);
-      const snapPosition = sectionProgress * maxIndex;
+      const snapPosition = clamp(progress) * maxIndex;
       const activeIndex = Math.min(maxIndex, Math.floor(snapPosition));
       const nextIndex = Math.min(maxIndex, activeIndex + 1);
       const localProgress = snapPosition - activeIndex;
-      const transitionProgress = easeOutCubic(clamp((localProgress - 0.62) / 0.38));
+      const transitionProgress = easeOutCubic(clamp((localProgress - 0.52) / 0.48));
 
       steps.forEach((_, index) => {
-        let translateY = 160;
+        let translateY = 54;
         let opacity = 0;
+        let scale = 0.96;
+        let rotateX = -4;
 
         if (index < activeIndex) {
-          translateY = -160;
+          translateY = -46;
+          scale = 0.96;
+          rotateX = 4;
         }
 
         if (index === activeIndex) {
-          translateY = -160 * transitionProgress;
+          translateY = -46 * transitionProgress;
           opacity = 1 - transitionProgress;
+          scale = 1 - 0.04 * transitionProgress;
+          rotateX = 4 * transitionProgress;
         }
 
         if (index === nextIndex) {
-          translateY = 160 * (1 - transitionProgress);
+          translateY = 54 * (1 - transitionProgress);
           opacity = transitionProgress;
+          scale = 0.96 + 0.04 * transitionProgress;
+          rotateX = -4 * (1 - transitionProgress);
         }
 
         if (activeIndex === maxIndex && index === maxIndex) {
           translateY = 0;
           opacity = 1;
+          scale = 1;
+          rotateX = 0;
         }
 
         ySetters[index](translateY);
         opacitySetters[index](opacity);
+        scaleSetters[index](scale);
+        rotateXSetters[index](rotateX);
       });
     };
 
-    gsap.set(steps, { opacity: 0, visibility: "visible", y: 160, force3D: true, willChange: "transform, opacity" });
+    gsap.set(steps, {
+      opacity: 0,
+      scale: 0.96,
+      rotateX: -4,
+      transformOrigin: "center center",
+      visibility: "visible",
+      y: 54,
+      force3D: true,
+      willChange: "transform, opacity"
+    });
     render(0);
 
     const trigger = ScrollTrigger.create({
       trigger: section,
-      start: "top top",
-      end: "bottom bottom",
-      scrub: 0.36,
+      start: "center center",
+      end: () => `+=${Math.max(steps.length - 1, 1) * window.innerHeight * 0.72}`,
+      pin: section,
+      pinSpacing: true,
+      anticipatePin: 1,
+      scrub: 0.5,
       snap: {
         snapTo: maxIndex > 0 ? 1 / maxIndex : 1,
         duration: { min: 0.22, max: 0.46 },

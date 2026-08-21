@@ -577,18 +577,16 @@ p {
 
 .process-support-scroll {
   position: relative;
-  height: 430vh;
-  overflow: clip;
+  height: auto;
+  overflow: visible;
   border-bottom: 1px solid var(--line);
 }
 
 .process-support-sticky {
-  position: sticky;
-  top: 0;
-  display: grid;
-  grid-template-rows: minmax(300px, 36svh) minmax(560px, 64svh);
-  min-height: 112svh;
-  overflow: hidden;
+  position: relative;
+  display: block;
+  min-height: 0;
+  overflow: visible;
   background: var(--paper);
 }
 
@@ -596,7 +594,7 @@ p {
   display: block;
   height: auto;
   margin-bottom: 0;
-  overflow: hidden;
+  overflow: visible;
   padding: 0;
   border-bottom: 0;
 }
@@ -609,10 +607,9 @@ p {
   gap: clamp(38px, 6vw, 78px);
   align-items: center;
   isolation: isolate;
-  height: 100%;
-  min-height: 0;
+  min-height: 100svh;
   overflow: hidden;
-  padding: clamp(28px, 5vh, 52px) var(--page-gutter) 24px;
+  padding: clamp(48px, 8vh, 90px) var(--page-gutter);
   background: var(--paper);
 }
 
@@ -1200,8 +1197,8 @@ p {
 }
 
 .process-support-sticky .support {
-  min-height: 0;
-  height: 100%;
+  min-height: 620px;
+  height: auto;
   padding-top: clamp(42px, 6vh, 70px);
   padding-bottom: clamp(42px, 6vh, 70px);
 }
@@ -1588,7 +1585,7 @@ blockquote {
   .process-sticky {
     grid-template-columns: 1fr;
     gap: 28px;
-    min-height: 0;
+    min-height: 100svh;
   }
 
   .university-copy {
@@ -1753,6 +1750,7 @@ blockquote {
 
   .process-sticky {
     height: auto;
+    min-height: 0;
     padding: 62px 0;
   }
 
