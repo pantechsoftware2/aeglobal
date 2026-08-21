@@ -53,7 +53,7 @@ export default function ProcessSteps({ items }: { items: ProcessStepItem[] }) {
     const opacitySetters = steps.map((step) => gsap.quickSetter(step, "opacity"));
 
     const render = (progress: number) => {
-      const sectionProgress = clamp(progress / 0.78);
+      const sectionProgress = clamp(progress / 0.95);
       const snapPosition = sectionProgress * maxIndex;
       const activeIndex = Math.min(maxIndex, Math.floor(snapPosition));
       const nextIndex = Math.min(maxIndex, activeIndex + 1);
@@ -95,11 +95,11 @@ export default function ProcessSteps({ items }: { items: ProcessStepItem[] }) {
       trigger: section,
       start: "top top",
       end: "bottom bottom",
-      scrub: 0.18,
+      scrub: 0.36,
       snap: {
         snapTo: maxIndex > 0 ? 1 / maxIndex : 1,
-        duration: { min: 0.12, max: 0.28 },
-        delay: 0.02,
+        duration: { min: 0.22, max: 0.46 },
+        delay: 0.04,
         ease: "power2.out"
       },
       invalidateOnRefresh: true,
