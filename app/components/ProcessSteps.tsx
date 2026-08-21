@@ -2,7 +2,7 @@
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FileText, Globe2, MailOpen, Plane, Search, type LucideIcon } from "lucide-react";
+import { ArrowRight, FileText, Globe2, MailOpen, Plane, Search, type LucideIcon } from "lucide-react";
 import { useEffect, useRef } from "react";
 
 export type ProcessStepIcon = "search" | "file" | "mail" | "globe" | "plane";
@@ -143,6 +143,9 @@ export default function ProcessSteps({ items }: { items: ProcessStepItem[] }) {
             <strong>{String(index + 1).padStart(2, "0")}</strong>
             <h3>{step.title}</h3>
             <p>{step.copy}</p>
+            <span className="step-arrow" aria-hidden="true">
+              <ArrowRight size={20} />
+            </span>
           </article>
         );
       })}

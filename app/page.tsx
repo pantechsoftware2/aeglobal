@@ -82,7 +82,7 @@ export default function HomePage() {
     <main>
       <header className="site-header">
         <a className="brand" href="#" aria-label="AE Global Group home">
-          <Image src="/brand/mark.png" alt="" width={40} height={34} priority />
+          <Image src="/brand/mark.png" alt="" width={50} height={44} priority />
           <span>AE Global Group</span>
         </a>
         <nav className="desktop-nav" aria-label="Primary navigation">
@@ -249,7 +249,7 @@ export default function HomePage() {
       <footer className="footer" id="about">
         <div className="footer-brand">
           <a className="brand" href="#">
-            <Image src="/brand/mark.png" alt="" width={38} height={32} />
+            <Image src="/brand/mark.png" alt="" width={58} height={52} />
             <span>AE Global Group</span>
           </a>
           <p>Study abroad counseling for students who want clear options, careful preparation and no guesswork.</p>
