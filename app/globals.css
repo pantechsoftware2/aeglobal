@@ -168,11 +168,12 @@ p {
   isolation: isolate;
   overflow: hidden;
   background:
-    linear-gradient(90deg, #fff 0%, #fff 43%, rgba(255, 255, 255, 0.86) 55%, rgba(255, 255, 255, 0) 70%),
-    #fff;
+    linear-gradient(90deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.82) 42%, rgba(255, 255, 255, 0.55) 64%, rgba(255, 255, 255, 0.28) 100%),
+    url("/images/hero-london-reference-bg.png") center bottom / cover no-repeat;
 }
 
 .hero::before {
+  display: none;
   position: absolute;
   top: -180px;
   left: 4%;
@@ -248,7 +249,7 @@ p {
 .destination-hero img {
   z-index: -1;
   object-fit: contain;
-  object-position: center top;
+  object-position: right top;
   transform: scale(1.04);
   transform-origin: center top;
 }
@@ -1454,7 +1455,6 @@ blockquote {
   .hero {
     grid-template-columns: 1fr;
     min-height: auto;
-    background: #fff;
   }
 
   .hero-copy {
