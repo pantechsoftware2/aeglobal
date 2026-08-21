@@ -9,6 +9,7 @@ import {
   Send,
   ShieldCheck
 } from "lucide-react";
+import AtomicGlobe from "./components/AtomicGlobe";
 import DestinationTabs from "./components/DestinationTabs";
 import ProcessSteps, { type ProcessStepItem } from "./components/ProcessSteps";
 import TestimonialCarousel from "./components/TestimonialCarousel";
@@ -112,13 +113,7 @@ export default function HomePage() {
           </div>
         </div>
         <div className="hero-image" aria-hidden="true">
-          <Image
-            src="/images/generated-hero-london.webp"
-            alt=""
-            fill
-            sizes="(max-width: 900px) 100vw, 56vw"
-            priority
-          />
+          <AtomicGlobe />
         </div>
       </section>
 

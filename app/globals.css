@@ -217,15 +217,22 @@ p {
 .hero-image {
   position: relative;
   z-index: 2;
+  display: grid;
+  place-items: center;
   min-height: 485px;
   align-self: end;
+  overflow: hidden;
 }
 
-.hero-image::after {
+.hero-image::before {
   position: absolute;
-  inset: 0;
+  width: min(92%, 680px);
+  aspect-ratio: 1;
+  z-index: 0;
   content: "";
-  background: linear-gradient(90deg, #fff 0%, rgba(255, 255, 255, 0.72) 17%, rgba(255, 255, 255, 0) 38%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(222, 235, 248, 0.72) 0 38%, rgba(222, 235, 248, 0.34) 58%, rgba(222, 235, 248, 0.12) 72%, rgba(222, 235, 248, 0) 88%);
+  pointer-events: none;
 }
 
 .hero-image img,
@@ -244,6 +251,55 @@ p {
   object-position: center top;
   transform: scale(1.04);
   transform-origin: center top;
+}
+
+.atomic-globe {
+  position: relative;
+  z-index: 1;
+  width: min(86%, 560px);
+  aspect-ratio: 1;
+  overflow: visible;
+}
+
+.atomic-globe::before {
+  display: none;
+}
+
+.atomic-globe-canvas {
+  position: absolute;
+  inset: 0;
+}
+
+.atomic-globe-canvas canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.atomic-marker-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.atomic-map-marker {
+  position: absolute;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  border: 1px solid rgba(29, 78, 216, 0.24);
+  border-radius: 999px;
+  padding: 0 11px;
+  color: var(--navy);
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 12px 28px rgba(4, 54, 94, 0.14);
+  font-size: 11px;
+  font-weight: 900;
+  opacity: 0;
+  transition: opacity 180ms ease;
+  white-space: nowrap;
+  will-change: transform, opacity;
 }
 
 .trust-points {
@@ -529,8 +585,8 @@ p {
   position: sticky;
   top: 0;
   display: grid;
-  grid-template-rows: minmax(300px, 40svh) minmax(420px, 60svh);
-  min-height: 100svh;
+  grid-template-rows: minmax(300px, 36svh) minmax(560px, 64svh);
+  min-height: 112svh;
   overflow: hidden;
   background: var(--paper);
 }
@@ -809,10 +865,66 @@ p {
   }
 }
 
+@keyframes globe-core-spin {
+  from {
+    transform: rotateX(62deg) rotateZ(-18deg) rotateY(0deg);
+  }
+
+  to {
+    transform: rotateX(62deg) rotateZ(-18deg) rotateY(360deg);
+  }
+}
+
+@keyframes orbit-spin-one {
+  from {
+    transform: rotateX(68deg) rotateZ(-22deg) rotateY(0deg);
+  }
+
+  to {
+    transform: rotateX(68deg) rotateZ(-22deg) rotateY(360deg);
+  }
+}
+
+@keyframes orbit-spin-two {
+  from {
+    transform: rotateX(72deg) rotateY(52deg) rotateZ(20deg);
+  }
+
+  to {
+    transform: rotateX(72deg) rotateY(52deg) rotateZ(380deg);
+  }
+}
+
+@keyframes orbit-spin-three {
+  from {
+    transform: rotateX(54deg) rotateY(-58deg) rotateZ(12deg);
+  }
+
+  to {
+    transform: rotateX(54deg) rotateY(-58deg) rotateZ(372deg);
+  }
+}
+
+@keyframes node-float {
+  from {
+    transform: translate3d(0, -6px, 0);
+  }
+
+  to {
+    transform: translate3d(0, 8px, 0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .marquee-track {
     animation: none;
     transform: none;
+  }
+
+  .atomic-globe-core,
+  .atomic-orbit,
+  .atomic-node {
+    animation: none;
   }
 
   .testimonial-card {
@@ -974,7 +1086,7 @@ p {
   display: grid;
   grid-template-columns: minmax(420px, 0.95fr) minmax(380px, 1fr);
   align-items: center;
-  min-height: 480px;
+  min-height: 620px;
   overflow: hidden;
   padding: 64px var(--page-gutter);
   color: #fff;
@@ -986,8 +1098,8 @@ p {
 .process-support-sticky .support {
   min-height: 0;
   height: 100%;
-  padding-top: clamp(28px, 4.5vh, 46px);
-  padding-bottom: clamp(28px, 4.5vh, 46px);
+  padding-top: clamp(42px, 6vh, 70px);
+  padding-bottom: clamp(42px, 6vh, 70px);
 }
 
 .process-support-sticky .support h2 {
@@ -1175,7 +1287,7 @@ p {
   line-height: 1.4;
   display: -webkit-box;
   overflow: hidden;
-  -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
 }
 
@@ -1353,6 +1465,10 @@ blockquote {
     min-height: 360px;
   }
 
+  .atomic-globe {
+    width: min(74vw, 440px);
+  }
+
   .hero-image::after {
     background: linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0) 35%);
   }
@@ -1430,6 +1546,20 @@ blockquote {
 
   .hero h1 {
     font-size: clamp(38px, 10vw, 50px);
+  }
+
+  .hero-image {
+    min-height: 330px;
+  }
+
+  .atomic-globe {
+    width: min(86vw, 340px);
+  }
+
+  .atomic-map-marker {
+    min-height: 24px;
+    padding: 0 9px;
+    font-size: 9px;
   }
 
   .destination-hero h2,
