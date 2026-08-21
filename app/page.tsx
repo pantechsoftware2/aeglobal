@@ -145,8 +145,8 @@ export default function HomePage() {
             </a>
           </div>
           <Image
-            src="/images/generated-destinations-cliffs.webp"
-            alt="Dramatic green coastal cliffs beside the sea"
+            src="/images/generated-destinations-landmarks-v2.webp"
+            alt="Collage of global study destination landmarks"
             fill
             sizes="100vw"
           />

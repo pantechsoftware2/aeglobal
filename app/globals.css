@@ -238,6 +238,14 @@ p {
   object-position: center center;
 }
 
+.destination-hero img {
+  z-index: -1;
+  object-fit: contain;
+  object-position: center top;
+  transform: scale(1.04);
+  transform-origin: center top;
+}
+
 .trust-points {
   position: relative;
   display: grid;
@@ -292,9 +300,10 @@ p {
 .destination-hero::after {
   position: absolute;
   inset: 0;
-  z-index: -1;
+  z-index: 0;
   content: "";
-  background: linear-gradient(90deg, #f7fbfd 0%, rgba(247, 251, 253, 0.98) 34%, rgba(247, 251, 253, 0.34) 66%);
+  pointer-events: none;
+  background: linear-gradient(90deg, #f7fbfd 0%, rgba(247, 251, 253, 0.98) 40%, rgba(247, 251, 253, 0.72) 52%, rgba(247, 251, 253, 0.12) 74%);
 }
 
 .destination-hero > div {
@@ -1278,7 +1287,14 @@ blockquote {
   }
 
   .destination-hero::after {
-    background: linear-gradient(180deg, #f7fbfd 0%, rgba(247, 251, 253, 0.9) 42%, rgba(247, 251, 253, 0.08) 78%);
+    background: linear-gradient(180deg, #f7fbfd 0%, rgba(247, 251, 253, 0.96) 48%, rgba(247, 251, 253, 0.24) 88%);
+  }
+
+  .destination-hero img {
+    object-fit: cover;
+    object-position: center top;
+    transform: scale(1.02);
+    transform-origin: center top;
   }
 
   .destination-panel {
