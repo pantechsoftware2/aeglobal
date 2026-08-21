@@ -32,26 +32,6 @@ const toVector = (lat: number, lng: number, radius = 1) => {
 const getLandPositions = () =>
   new Float32Array(window.innerWidth < 760 ? globeLandPositions.mobile : globeLandPositions.desktop);
 
-const createDotTexture = () => {
-  const canvas = document.createElement("canvas");
-  canvas.width = 64;
-  canvas.height = 64;
-  const context = canvas.getContext("2d");
-
-  if (context) {
-    const gradient = context.createRadialGradient(32, 32, 0, 32, 32, 30);
-    gradient.addColorStop(0, "rgba(255,255,255,1)");
-    gradient.addColorStop(0.32, "rgba(7,38,92,0.98)");
-    gradient.addColorStop(1, "rgba(7,38,92,0)");
-    context.fillStyle = gradient;
-    context.beginPath();
-    context.arc(32, 32, 30, 0, Math.PI * 2);
-    context.fill();
-  }
-
-  return new THREE.CanvasTexture(canvas);
-};
-
 const createArc = (from: Marker, to: Marker) => {
   const start = toVector(from.lat, from.lng, 1.03);
   const end = toVector(to.lat, to.lng, 1.03);
@@ -67,6 +47,57 @@ const createArc = (from: Marker, to: Marker) => {
 
   return new THREE.Line(geometry, material);
 };
+
+const createPointMaterial = (dotSize: number) =>
+  new THREE.ShaderMaterial({
+    uniforms: {
+      uColor: { value: new THREE.Color("#092f68") },
+      uHover: { value: new THREE.Vector3(0, 0, 1) },
+      uHoverStrength: { value: 0 },
+      uSize: { value: dotSize },
+      uTime: { value: 0 }
+    },
+    vertexShader: `
+      uniform vec3 uHover;
+      uniform float uHoverStrength;
+      uniform float uSize;
+      uniform float uTime;
+
+      varying float vAlpha;
+      varying float vWave;
+
+      void main() {
+        vec3 normalPosition = normalize(position);
+        float distanceToHover = distance(normalPosition, normalize(uHover));
+        float ripple = exp(-distanceToHover * distanceToHover * 30.0);
+        float wave = ripple * (0.55 + 0.45 * sin(distanceToHover * 34.0 - uTime * 7.0));
+        float lift = wave * uHoverStrength * 0.12;
+        vec3 displaced = normalPosition * (1.0 + lift);
+        vec4 mvPosition = modelViewMatrix * vec4(displaced, 1.0);
+
+        vWave = wave * uHoverStrength;
+        vAlpha = 0.52 + vWave * 0.48;
+        gl_PointSize = uSize * (300.0 / -mvPosition.z) * (1.0 + vWave * 1.4);
+        gl_Position = projectionMatrix * mvPosition;
+      }
+    `,
+    fragmentShader: `
+      uniform vec3 uColor;
+      varying float vAlpha;
+      varying float vWave;
+
+      void main() {
+        vec2 center = gl_PointCoord - vec2(0.5);
+        float dist = length(center);
+        float circle = smoothstep(0.5, 0.16, dist);
+        vec3 color = mix(uColor, vec3(0.42, 0.72, 1.0), vWave);
+        gl_FragColor = vec4(color, circle * vAlpha);
+      }
+    `,
+    transparent: true,
+    depthWrite: false,
+    blending: THREE.NormalBlending
+  });
 
 export default function AtomicGlobe() {
   const hostRef = useRef<HTMLDivElement | null>(null);
@@ -94,9 +125,16 @@ export default function AtomicGlobe() {
     scene.add(globeGroup);
 
     let pointGeometry: THREE.BufferGeometry | null = null;
-    let pointMaterial: THREE.PointsMaterial | null = null;
+    let pointMaterial: THREE.ShaderMaterial | null = null;
     let globePoints: THREE.Points | null = null;
     let disposed = false;
+    let hoverTarget = 0;
+    const hoverPoint = new THREE.Vector3(0, 0, 1);
+    const raycaster = new THREE.Raycaster();
+    const pointer = new THREE.Vector2();
+    const inverseMatrix = new THREE.Matrix4();
+    const localRay = new THREE.Ray();
+    const hoverSphere = new THREE.Sphere(new THREE.Vector3(0, 0, 0), 1.04);
 
     const shell = new THREE.Mesh(
       new THREE.SphereGeometry(1.01, 48, 48),
@@ -119,16 +157,7 @@ export default function AtomicGlobe() {
       pointGeometry = new THREE.BufferGeometry();
       pointGeometry.setAttribute("position", new THREE.BufferAttribute(getLandPositions(), 3));
 
-      pointMaterial = new THREE.PointsMaterial({
-        color: "#092f68",
-        map: createDotTexture(),
-        opacity: 0.98,
-        size: window.innerWidth < 760 ? 0.028 : 0.026,
-        sizeAttenuation: true,
-        transparent: true,
-        depthWrite: false,
-        blending: THREE.NormalBlending
-      });
+      pointMaterial = createPointMaterial(window.innerWidth < 760 ? 0.028 : 0.026);
 
       globePoints = new THREE.Points(pointGeometry, pointMaterial);
       globeGroup.add(globePoints);
@@ -151,10 +180,39 @@ export default function AtomicGlobe() {
     const markerProjection = markers.map((marker) => toVector(marker.lat, marker.lng, 1.1));
     const screenPosition = new THREE.Vector3();
     let markerFrame = 0;
+    const updateHover = (event: PointerEvent) => {
+      const rect = host.getBoundingClientRect();
+      pointer.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+      pointer.y = -(((event.clientY - rect.top) / rect.height) * 2 - 1);
+      raycaster.setFromCamera(pointer, camera);
+      inverseMatrix.copy(globeGroup.matrixWorld).invert();
+      localRay.copy(raycaster.ray).applyMatrix4(inverseMatrix);
+
+      const intersection = new THREE.Vector3();
+      if (localRay.intersectSphere(hoverSphere, intersection)) {
+        hoverPoint.copy(intersection.normalize());
+        hoverTarget = 1;
+        return;
+      }
+
+      hoverTarget = 0;
+    };
+    const clearHover = () => {
+      hoverTarget = 0;
+    };
+
+    host.addEventListener("pointermove", updateHover, { passive: true });
+    host.addEventListener("pointerleave", clearHover);
 
     const animate = () => {
       frame = window.requestAnimationFrame(animate);
       if (!reducedMotion) globeGroup.rotation.y += 0.0026;
+      if (pointMaterial) {
+        pointMaterial.uniforms.uTime.value += 0.016;
+        pointMaterial.uniforms.uHover.value.copy(hoverPoint);
+        pointMaterial.uniforms.uHoverStrength.value +=
+          (hoverTarget - pointMaterial.uniforms.uHoverStrength.value) * 0.14;
+      }
 
       renderer.render(scene, camera);
 
@@ -180,9 +238,10 @@ export default function AtomicGlobe() {
       disposed = true;
       window.clearTimeout(pointCloudTimer);
       window.cancelAnimationFrame(frame);
+      host.removeEventListener("pointermove", updateHover);
+      host.removeEventListener("pointerleave", clearHover);
       observer.disconnect();
       pointGeometry?.dispose();
-      pointMaterial?.map?.dispose();
       pointMaterial?.dispose();
       if (globePoints) globeGroup.remove(globePoints);
       shell.geometry.dispose();
