@@ -4,16 +4,13 @@ import {
   Award,
   ClipboardList,
   FileText,
-  Globe2,
   GraduationCap,
   Home,
-  MailOpen,
-  Plane,
-  Search,
   Send,
   ShieldCheck
 } from "lucide-react";
 import DestinationTabs from "./components/DestinationTabs";
+import ProcessSteps, { type ProcessStepItem } from "./components/ProcessSteps";
 import TestimonialCarousel from "./components/TestimonialCarousel";
 
 const trustPoints = [
@@ -55,12 +52,12 @@ const shortlistCriteria = [
   "Career direction"
 ];
 
-const process = [
-  { title: "Audit", copy: "We review your academics, budget, goals and timeline.", icon: Search },
-  { title: "Shortlist", copy: "You get a focused list of countries, courses and universities.", icon: FileText },
-  { title: "Apply", copy: "We help prepare forms, SOPs and supporting documents.", icon: MailOpen },
-  { title: "Visa Prep", copy: "You organize the documents needed for the visa stage.", icon: Globe2 },
-  { title: "Depart", copy: "Plan travel, stay and arrival basics before you fly.", icon: Plane }
+const process: ProcessStepItem[] = [
+  { title: "Audit", copy: "We review your academics, budget, goals and timeline.", icon: "search" },
+  { title: "Shortlist", copy: "You get a focused list of countries, courses and universities.", icon: "file" },
+  { title: "Apply", copy: "We help prepare forms, SOPs and supporting documents.", icon: "mail" },
+  { title: "Visa Prep", copy: "You organize the documents needed for the visa stage.", icon: "globe" },
+  { title: "Depart", copy: "Plan travel, stay and arrival basics before you fly.", icon: "plane" }
 ];
 
 const services = [
@@ -201,47 +198,41 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="process" id="courses">
-        <div className="section-intro">
-          <p className="eyebrow">How we work</p>
-          <h2>One process.<br />No scattered advice.</h2>
-          <p>Every student journey is different. We keep the work clear, practical and requirement-led.</p>
-        </div>
-        <div className="process-steps">
-          {process.map((step, index) => {
-            const Icon = step.icon;
-            return (
-              <article className="step" key={step.title}>
-                <div className="step-icon"><Icon size={26} /></div>
-                <strong>{String(index + 1).padStart(2, "0")}</strong>
-                <h3>{step.title}</h3>
-                <p>{step.copy}</p>
-              </article>
-            );
-          })}
-        </div>
-      </section>
+      <section className="process-support-scroll">
+        <div className="process-support-sticky">
+          <section className="process process-scroll" id="courses">
+            <div className="process-sticky">
+              <div className="section-intro">
+                <p className="eyebrow">How we work</p>
+                <h2>One process.<br />No scattered advice.</h2>
+                <p>Every student journey is different. We keep the work clear, practical and requirement-led.</p>
+              </div>
+              <ProcessSteps items={process} />
+            </div>
+          </section>
 
-      <section className="support" id="services">
-        <div className="support-content">
-          <p className="eyebrow">Student Support</p>
-          <h2>You don&apos;t have to manage<br />every step alone.</h2>
-          <p>Get help with the real work: requirements, timelines, documents, visa preparation and departure planning.</p>
-          <div className="service-grid">
-            {services.map((service) => {
-              const Icon = service.icon;
-              return (
-                <div className="service" key={service.label}>
-                  <Icon size={22} />
-                  <span>{service.label}</span>
-                  <small>{service.copy}</small>
-                </div>
-              );
-            })}
-          </div>
-          <a className="teal-button" href="#contact">
-            Get Study Abroad Support <ArrowRight size={16} />
-          </a>
+          <section className="support" id="services">
+            <div className="support-content">
+              <p className="eyebrow">Student Support</p>
+              <h2>You don&apos;t have to manage<br />every step alone.</h2>
+              <p>Get help with the real work: requirements, timelines, documents, visa preparation and departure planning.</p>
+              <div className="service-grid">
+                {services.map((service) => {
+                  const Icon = service.icon;
+                  return (
+                    <div className="service" key={service.label}>
+                      <Icon size={22} />
+                      <span>{service.label}</span>
+                      <small>{service.copy}</small>
+                    </div>
+                  );
+                })}
+              </div>
+              <a className="teal-button" href="#contact">
+                Get Study Abroad Support <ArrowRight size={16} />
+              </a>
+            </div>
+          </section>
         </div>
       </section>
 
