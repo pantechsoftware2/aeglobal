@@ -12,6 +12,7 @@ import {
 import AtomicGlobe from "./components/AtomicGlobe";
 import DestinationTabs from "./components/DestinationTabs";
 import ProcessSteps, { type ProcessStepItem } from "./components/ProcessSteps";
+import StoryTestimonials from "./components/StoryTestimonials";
 import TestimonialCarousel from "./components/TestimonialCarousel";
 
 const trustPoints = [
@@ -245,6 +246,8 @@ export default function HomePage() {
           <a className="secondary-button" href="#destinations">Show Me My Options</a>
         </div>
       </section>
+
+      <StoryTestimonials />
 
       <footer className="footer" id="about">
         <div className="footer-brand">
