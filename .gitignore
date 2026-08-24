@@ -9,6 +9,9 @@ out/
 dist/
 build/
 
+# Raw video sources
+public/video/*.h264
+
 # TypeScript
 *.tsbuildinfo
 next-env.d.ts
