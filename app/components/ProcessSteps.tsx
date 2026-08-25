@@ -3,7 +3,7 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FileText, Globe2, MailOpen, Plane, Search, type LucideIcon } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 
 export type ProcessStepIcon = "search" | "file" | "mail" | "globe" | "plane";
 
@@ -31,12 +31,13 @@ export default function ProcessSteps({ items }: { items: ProcessStepItem[] }) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const stepsRef = useRef<Array<HTMLElement | null>>([]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const section = containerRef.current?.closest<HTMLElement>(".process-sticky");
+    const stickySection = containerRef.current?.closest<HTMLElement>(".process-sticky");
+    const scrollSection = containerRef.current?.closest<HTMLElement>(".process-scroll");
     const steps = stepsRef.current.filter(Boolean) as HTMLElement[];
 
-    if (!section || steps.length === 0) return;
+    if (!stickySection || !scrollSection || steps.length === 0) return;
 
     const setComplete = () => {
       gsap.set(steps, {
@@ -104,92 +105,68 @@ export default function ProcessSteps({ items }: { items: ProcessStepItem[] }) {
     };
 
     const render = (progress: number) => {
-      const snapPosition = clamp(progress) * maxIndex;
-      const activeIndex = Math.min(maxIndex, Math.floor(snapPosition));
-      const nextIndex = Math.min(maxIndex, activeIndex + 1);
-      const localProgress = snapPosition - activeIndex;
-      const transitionProgress = easeOutCubic(localProgress);
-      const currentFade = clamp((transitionProgress - 0.68) / 0.24);
-      const outgoingContentProgress = 1 - easeOutCubic(clamp((transitionProgress - 0.52) / 0.26));
-      const incomingContentProgress = easeOutCubic(clamp((transitionProgress - 0.5) / 0.28));
+      const position = clamp(progress) * maxIndex;
 
       steps.forEach((_, index) => {
-        let translateX = 0;
-        let translateY = 88;
+        const offset = index - position;
+        const currentStrength = easeOutCubic(clamp(1 - Math.abs(offset)));
+        const nextStrength = easeOutCubic(clamp(1 - Math.abs(offset - 0.34)));
+        const previousStrength = easeOutCubic(clamp(1 - Math.abs(offset + 0.34)));
+        const stackStrength = clamp(1 - Math.abs(offset) / 2.15);
+        const isBefore = offset < 0;
+        const isAfter = offset > 0;
+
+        let translateY = 0;
+        let scale = 1;
+        let rotateX = 0;
+        let rotateZ = 0;
         let opacity = 0;
-        let scale = 0.94;
-        let rotateX = -2.4;
-        let rotateZ = 1.2;
-        let zIndex = 0;
         let shadowAlpha = 0.08;
-        let contentProgress = 0;
-        let numberY = 34;
-        let waveY = 14;
-        let waveX = -10;
-        let dotsY = -8;
+        let waveY = 0;
+        let waveX = 0;
+        let dotsY = 0;
 
-        if (index < activeIndex) {
-          translateX = 0;
-          translateY = -58;
-          scale = 0.955;
-          rotateX = 4.5;
-          rotateZ = -1.2;
-          numberY = -28;
-          shadowAlpha = 0.06;
-          waveY = -10;
-          waveX = 8;
-          dotsY = 8;
+        if (isBefore) {
+          const depth = clamp(Math.abs(offset));
+          translateY = mix(-48, -88, clamp(depth - 1));
+          scale = mix(0.965, 0.94, clamp(depth - 1));
+          rotateX = mix(4.5, 6, clamp(depth - 1));
+          rotateZ = mix(-0.6, -1.1, clamp(depth - 1));
+          opacity = mix(0.5, 0, clamp((Math.abs(offset) - 0.46) / 0.44));
+          waveY = mix(-8, -14, depth);
+          waveX = mix(6, 12, depth);
+          dotsY = mix(5, 10, depth);
         }
 
-        if (index === activeIndex) {
-          translateX = 0;
-          translateY = -44 * transitionProgress;
-          opacity = 1 - currentFade;
-          scale = 1 - 0.035 * transitionProgress;
-          rotateX = 3.5 * transitionProgress;
-          rotateZ = -0.8 * transitionProgress;
-          zIndex = 20;
-          shadowAlpha = mix(0.14, 0.08, transitionProgress);
-          contentProgress = outgoingContentProgress;
-          numberY = mix(0, -30, transitionProgress);
-          waveY = mix(0, -10, transitionProgress);
-          waveX = mix(0, 10, transitionProgress);
-          dotsY = mix(0, 8, transitionProgress);
+        if (isAfter) {
+          const depth = clamp(offset);
+          translateY = mix(74, 118, clamp(offset - 1));
+          scale = mix(0.965, 0.94, clamp(offset - 1));
+          rotateX = mix(-1.8, -3, clamp(offset - 1));
+          rotateZ = mix(0.5, 1.1, clamp(offset - 1));
+          opacity = stackStrength * mix(0.9, 0.22, depth);
+          waveY = mix(12, 18, depth);
+          waveX = mix(-8, -14, depth);
+          dotsY = mix(-6, -12, depth);
         }
 
-        if (index === nextIndex) {
-          const incomingOpacity = easeOutCubic(clamp((transitionProgress - 0.32) / 0.36));
-          translateX = 0;
-          translateY = 96 * (1 - transitionProgress);
-          opacity = incomingOpacity;
-          scale = 0.955 + 0.045 * transitionProgress;
-          rotateX = -2 * (1 - transitionProgress);
-          rotateZ = 0.8 * (1 - transitionProgress);
-          zIndex = 10;
-          shadowAlpha = mix(0.08, 0.14, transitionProgress);
-          contentProgress = incomingContentProgress;
-          numberY = mix(34, 0, incomingContentProgress);
-          waveY = mix(14, 0, transitionProgress);
-          waveX = mix(-10, 0, transitionProgress);
-          dotsY = mix(-8, 0, transitionProgress);
+        if (currentStrength > 0) {
+          translateY = mix(translateY, 0, currentStrength);
+          scale = mix(scale, 1, currentStrength);
+          rotateX = mix(rotateX, 0, currentStrength);
+          rotateZ = mix(rotateZ, 0, currentStrength);
+          opacity = mix(opacity, 1, currentStrength);
+          shadowAlpha = mix(shadowAlpha, 0.14, currentStrength);
+          waveY = mix(waveY, 0, currentStrength);
+          waveX = mix(waveX, 0, currentStrength);
+          dotsY = mix(dotsY, 0, currentStrength);
         }
 
-        if (activeIndex === maxIndex && index === maxIndex) {
-          translateY = 0;
-          opacity = 1;
-          scale = 1;
-          rotateX = 0;
-          rotateZ = 0;
-          zIndex = 20;
-          shadowAlpha = 0.14;
-          contentProgress = 1;
-          numberY = 0;
-          waveY = 0;
-          waveX = 0;
-          dotsY = 0;
-        }
+        const contentProgress = currentStrength;
+        const numberY = mix(isBefore ? -28 : 30, 0, currentStrength);
+        const zIndex = Math.round(100 - Math.abs(offset) * 10);
 
-        xSetters[index](translateX);
+        xSetters[index](0);
         ySetters[index](translateY);
         opacitySetters[index](opacity);
         scaleSetters[index](scale);
@@ -197,9 +174,9 @@ export default function ProcessSteps({ items }: { items: ProcessStepItem[] }) {
         rotateZSetters[index](rotateZ);
         zIndexSetters[index](zIndex);
         shadowSetters[index](shadowAlpha);
-        waveYSetters[index](waveY);
-        waveXSetters[index](waveX);
-        dotsYSetters[index](dotsY);
+        waveYSetters[index](mix(waveY, 0, nextStrength * 0.2 + previousStrength * 0.12));
+        waveXSetters[index](mix(waveX, 0, nextStrength * 0.2 + previousStrength * 0.12));
+        dotsYSetters[index](mix(dotsY, 0, nextStrength * 0.2 + previousStrength * 0.12));
         setContentState(index, contentProgress, numberY);
       });
     };
@@ -219,17 +196,31 @@ export default function ProcessSteps({ items }: { items: ProcessStepItem[] }) {
     render(0);
 
     const trigger = ScrollTrigger.create({
-      trigger: section,
-      start: "center center",
-      end: () => `+=${Math.max(steps.length - 1, 1) * window.innerHeight * 0.72}`,
-      pin: section,
+      trigger: scrollSection,
+      start: "top top",
+      end: () => `+=${Math.max(1, maxIndex) * Math.round(window.innerHeight * 0.72)}`,
+      pin: stickySection,
       pinSpacing: true,
       anticipatePin: 1,
-      scrub: 0.9,
+      scrub: 0.85,
       invalidateOnRefresh: true,
       onUpdate: (self) => render(self.progress)
     });
     render(trigger.progress);
+
+    const refresh = () => {
+      ScrollTrigger.refresh();
+      render(trigger.progress);
+    };
+    const refreshFrame = window.requestAnimationFrame(() => {
+      refresh();
+    });
+    const refreshTimeout = window.setTimeout(refresh, 450);
+    const resizeObserver = new ResizeObserver(refresh);
+
+    resizeObserver.observe(document.body);
+    window.addEventListener("load", refresh, { once: true });
+    document.fonts?.ready.then(refresh).catch(() => undefined);
 
     const handleMotionChange = () => {
       if (reducedMotion.matches) {
@@ -245,6 +236,10 @@ export default function ProcessSteps({ items }: { items: ProcessStepItem[] }) {
 
     return () => {
       reducedMotion.removeEventListener("change", handleMotionChange);
+      window.cancelAnimationFrame(refreshFrame);
+      window.clearTimeout(refreshTimeout);
+      window.removeEventListener("load", refresh);
+      resizeObserver.disconnect();
       trigger.kill();
       gsap.set(steps, { willChange: "auto" });
     };

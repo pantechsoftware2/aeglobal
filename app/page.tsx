@@ -10,6 +10,7 @@ import {
   ShieldCheck
 } from "lucide-react";
 import AtomicGlobe from "./components/AtomicGlobe";
+import ChatBot from "./components/ChatBot";
 import DestinationTabs from "./components/DestinationTabs";
 import ProcessSteps, { type ProcessStepItem } from "./components/ProcessSteps";
 import StoryTestimonials from "./components/StoryTestimonials";
@@ -147,6 +148,7 @@ export default function HomePage() {
         <DestinationTabs />
       </section>
 
+      <StoryTestimonials />
 
       <section className="partners" id="partners">
         <div className="university-showcase">
@@ -247,8 +249,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      <StoryTestimonials />
-
       <footer className="footer" id="about">
         <div className="footer-brand">
           <a className="brand" href="#">
@@ -272,6 +272,7 @@ export default function HomePage() {
           <span>Privacy Policy&nbsp;&nbsp;&nbsp;&nbsp; Terms &amp; Conditions</span>
         </div>
       </footer>
+      <ChatBot />
     </main>
   );
 }
