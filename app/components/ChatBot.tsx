@@ -364,16 +364,15 @@ export default function ChatBot() {
 
       {!isOpen ? (
         <button className="chat-toggle" type="button" aria-label="Open Mimi chat" onClick={openChat}>
-          <span className="chat-toggle-avatar" aria-hidden="true">
-            <Image
-              src="/images/mimi-chatbot.png"
-              alt=""
-              width={72}
-              height={72}
-              sizes="72px"
-            />
-          </span>
-          <span>Mimi</span>
+          <Image
+            src="/images/mimi-chatbot.png"
+            alt=""
+            width={128}
+            height={150}
+            sizes="128px"
+            aria-hidden="true"
+          />
+          <span aria-hidden="true">Mimi</span>
         </button>
       ) : null}
     </div>
