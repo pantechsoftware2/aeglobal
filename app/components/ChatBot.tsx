@@ -372,7 +372,7 @@ export default function ChatBot() {
             sizes="128px"
             aria-hidden="true"
           />
-          <span aria-hidden="true">Mimi</span>
+          <span aria-hidden="true">Ask Me</span>
         </button>
       ) : null}
     </div>

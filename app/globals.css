@@ -1793,65 +1793,57 @@ blockquote {
   position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  width: 154px;
+  gap: 8px;
+  width: 125px;
   min-height: 62px;
   overflow: visible;
-  border: 1px solid rgba(255, 255, 255, 0.56);
-  border-right: 0;
-  border-radius: 999px 0 0 999px;
-  padding: 6px 16px 6px 7px;
+  border: 0;
+  border-radius: 0;
+  padding: 6px 10px 6px 7px;
   color: var(--paper);
-  background:
-    radial-gradient(circle at 28% 50%, rgba(0, 229, 242, 0.22), transparent 42%),
-    linear-gradient(135deg, rgba(0, 27, 63, 0.96), rgba(0, 127, 136, 0.95));
-  box-shadow: 0 18px 44px rgba(0, 27, 63, 0.22);
+  background: transparent;
   font-size: 13px;
   font-weight: 900;
   text-shadow: 0 2px 10px rgba(0, 27, 63, 0.42);
-  transform: translateX(96px);
+  transform: translateX(65px);
   transition:
     width 360ms cubic-bezier(0.22, 1, 0.36, 1),
     min-height 360ms cubic-bezier(0.22, 1, 0.36, 1),
-    border-radius 260ms ease,
     padding 260ms ease,
     transform 360ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 220ms ease,
     filter 220ms ease;
 }
 
 .chat-toggle::before {
   position: absolute;
-  left: 8px;
-  top: 50%;
-  width: 48px;
-  height: 48px;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  width: 118px;
+  height: 62px;
   content: "";
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.96);
-  box-shadow:
-    inset 0 0 0 2px rgba(255, 255, 255, 0.6),
-    0 8px 20px rgba(0, 27, 63, 0.2);
-  transform: translateY(-50%);
+  border-right: 0;
+  border-radius: 999px 0 0 999px;
+  background:
+    radial-gradient(circle at 28% 50%, rgba(0, 229, 242, 0.22), transparent 42%),
+    linear-gradient(135deg, rgba(0, 27, 63, 0.96), rgba(0, 127, 136, 0.95));
+  box-shadow: 0 18px 44px rgba(0, 27, 63, 0.22);
   transition:
-    opacity 220ms ease,
-    transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
-    width 320ms cubic-bezier(0.22, 1, 0.36, 1),
-    height 320ms cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow 220ms ease,
+    transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .chat-toggle:hover::before,
 .chat-toggle:focus-visible::before {
-  width: 88px;
-  height: 88px;
-  opacity: 0.42;
-  transform: translate(-6px, -64%);
+  box-shadow: 0 22px 52px rgba(0, 27, 63, 0.28);
+  transform: translateX(0);
 }
 
 .chat-toggle::after {
   position: absolute;
   left: 46px;
   top: 12px;
+  z-index: 3;
   width: 10px;
   height: 10px;
   content: "";
@@ -1868,19 +1860,17 @@ blockquote {
 
 .chat-toggle:hover::after,
 .chat-toggle:focus-visible::after {
-  left: 94px;
-  top: 20px;
+  left: 84px;
+  top: 18px;
 }
 
 .chat-toggle:hover,
 .chat-toggle:focus-visible {
-  width: 184px;
+  width: 138px;
   min-height: 128px;
   align-items: flex-end;
-  border-radius: 28px 0 0 28px;
-  padding: 8px 18px 12px 8px;
+  padding: 8px 10px 12px 7px;
   transform: translateX(0);
-  box-shadow: 0 22px 52px rgba(0, 27, 63, 0.28);
   filter: drop-shadow(0 22px 34px rgba(0, 27, 63, 0.24));
 }
 
@@ -1906,18 +1896,25 @@ blockquote {
 .chat-toggle:focus-visible img {
   width: 112px;
   height: auto;
-  transform: translate(-6px, -16px);
+  transform: translate(-15px, -16px);
   filter:
     drop-shadow(0 18px 24px rgba(0, 27, 63, 0.24))
     drop-shadow(0 0 18px rgba(0, 229, 242, 0.28));
 }
 
 .chat-toggle span {
-  position: relative;
-  z-index: 2;
+  position: absolute;
+  right: 7px;
+  bottom: 18px;
+  z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 58px;
   white-space: nowrap;
   opacity: 0;
-  transform: translateX(8px);
+  text-align: center;
+  transform: translateY(4px);
   transition:
     opacity 220ms ease,
     transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
@@ -1926,7 +1923,7 @@ blockquote {
 .chat-toggle:hover span,
 .chat-toggle:focus-visible span {
   opacity: 1;
-  transform: translate(-6px, -2px);
+  transform: translateY(0);
 }
 
 .chat-panel {
@@ -2613,14 +2610,19 @@ blockquote {
   }
 
   .chat-toggle {
-    width: 136px;
+    width: 126px;
     min-height: 58px;
-    transform: translateX(84px);
+    transform: translateX(74px);
+  }
+
+  .chat-toggle::before {
+    width: 108px;
+    height: 58px;
   }
 
   .chat-toggle:hover,
   .chat-toggle:focus-visible {
-    width: 158px;
+    width: 126px;
     min-height: 112px;
     transform: translateX(0);
   }
@@ -2633,10 +2635,13 @@ blockquote {
   .chat-toggle:hover img,
   .chat-toggle:focus-visible img {
     width: 94px;
-    transform: translate(-4px, -12px);
+    transform: translate(-11px, -12px);
   }
 
   .chat-toggle span {
+    right: 7px;
+    bottom: 16px;
+    min-width: 54px;
     font-size: 12px;
   }
 
