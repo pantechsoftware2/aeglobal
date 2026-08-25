@@ -1,7 +1,7 @@
 "use client";
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const studentStories = [
   {
@@ -35,7 +35,30 @@ const studentStories = [
 ];
 
 export default function StoryTestimonials() {
+  const sectionRef = useRef<HTMLElement | null>(null);
   const trackRef = useRef<HTMLDivElement | null>(null);
+  const [shouldLoadVideos, setShouldLoadVideos] = useState(false);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section || shouldLoadVideos) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) return;
+
+        setShouldLoadVideos(true);
+        observer.disconnect();
+      },
+      {
+        rootMargin: "420px 0px"
+      }
+    );
+
+    observer.observe(section);
+
+    return () => observer.disconnect();
+  }, [shouldLoadVideos]);
 
   const moveStories = (direction: -1 | 1) => {
     const track = trackRef.current;
@@ -51,7 +74,7 @@ export default function StoryTestimonials() {
   };
 
   return (
-    <section className="story-testimonials" aria-labelledby="student-stories-title">
+    <section className="story-testimonials" aria-labelledby="student-stories-title" ref={sectionRef}>
       <div className="story-testimonials-header">
         <div>
           <p className="eyebrow">Student Stories</p>
@@ -71,14 +94,14 @@ export default function StoryTestimonials() {
           {studentStories.map((story) => (
             <article className="story-card" key={story.label}>
               <video
-                autoPlay
+                autoPlay={shouldLoadVideos}
                 loop
                 muted
                 playsInline
                 poster={story.poster}
-                preload="metadata"
+                preload={shouldLoadVideos ? "metadata" : "none"}
               >
-                <source src={story.video} type="video/mp4" />
+                {shouldLoadVideos ? <source src={story.video} type="video/mp4" /> : null}
               </video>
               <div className="story-card-overlay">
                 <span>{story.label}</span>

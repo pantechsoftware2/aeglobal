@@ -1,7 +1,5 @@
 "use client";
 
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FileText, Globe2, MailOpen, Plane, Search, type LucideIcon } from "lucide-react";
 import { useLayoutEffect, useRef } from "react";
 
@@ -23,15 +21,27 @@ const icons: Record<ProcessStepIcon, LucideIcon> = {
 
 const clamp = (value: number) => Math.min(1, Math.max(0, value));
 const easeOutCubic = (value: number) => 1 - Math.pow(1 - value, 3);
+const easeInOutCubic = (value: number) =>
+  value < 0.5 ? 4 * value * value * value : 1 - Math.pow(-2 * value + 2, 3) / 2;
 const mix = (from: number, to: number, progress: number) => from + (to - from) * progress;
-
-gsap.registerPlugin(ScrollTrigger);
 
 export default function ProcessSteps({ items }: { items: ProcessStepItem[] }) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const stepsRef = useRef<Array<HTMLElement | null>>([]);
 
   useLayoutEffect(() => {
+    let effectCleanup: (() => void) | undefined;
+    let isCancelled = false;
+
+    void (async () => {
+    const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([
+      import("gsap"),
+      import("gsap/ScrollTrigger")
+    ]);
+
+    if (isCancelled) return;
+
+    gsap.registerPlugin(ScrollTrigger);
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const stickySection = containerRef.current?.closest<HTMLElement>(".process-sticky");
     const scrollSection = containerRef.current?.closest<HTMLElement>(".process-scroll");
@@ -109,62 +119,51 @@ export default function ProcessSteps({ items }: { items: ProcessStepItem[] }) {
 
       steps.forEach((_, index) => {
         const offset = index - position;
-        const currentStrength = easeOutCubic(clamp(1 - Math.abs(offset)));
-        const nextStrength = easeOutCubic(clamp(1 - Math.abs(offset - 0.34)));
-        const previousStrength = easeOutCubic(clamp(1 - Math.abs(offset + 0.34)));
-        const stackStrength = clamp(1 - Math.abs(offset) / 2.15);
-        const isBefore = offset < 0;
-        const isAfter = offset > 0;
+        const distance = Math.abs(offset);
+        const proximity = easeInOutCubic(clamp((0.66 - distance) / 0.66));
+        const isOutgoing = offset < 0;
+        const isIncoming = offset > 0;
 
         let translateY = 0;
         let scale = 1;
         let rotateX = 0;
         let rotateZ = 0;
         let opacity = 0;
-        let shadowAlpha = 0.08;
+        let shadowAlpha = 0.1;
         let waveY = 0;
         let waveX = 0;
         let dotsY = 0;
 
-        if (isBefore) {
-          const depth = clamp(Math.abs(offset));
-          translateY = mix(-48, -88, clamp(depth - 1));
-          scale = mix(0.965, 0.94, clamp(depth - 1));
-          rotateX = mix(4.5, 6, clamp(depth - 1));
-          rotateZ = mix(-0.6, -1.1, clamp(depth - 1));
-          opacity = mix(0.5, 0, clamp((Math.abs(offset) - 0.46) / 0.44));
-          waveY = mix(-8, -14, depth);
-          waveX = mix(6, 12, depth);
-          dotsY = mix(5, 10, depth);
+        if (isOutgoing) {
+          const exit = easeInOutCubic(clamp(-offset));
+          translateY = mix(0, -62, exit);
+          scale = mix(1, 0.965, exit);
+          rotateX = mix(0, 4, exit);
+          rotateZ = mix(0, -0.45, exit);
+          opacity = mix(1, 0, easeInOutCubic(clamp((exit - 0.62) / 0.38)));
+          shadowAlpha = mix(0.14, 0.08, exit);
+          waveY = mix(0, -10, exit);
+          waveX = mix(0, 7, exit);
+          dotsY = mix(0, 8, exit);
+        } else if (isIncoming) {
+          const entry = easeOutCubic(clamp(1 - offset));
+          translateY = mix(82, 0, entry);
+          scale = mix(0.968, 1, entry);
+          rotateX = mix(-2.2, 0, entry);
+          rotateZ = mix(0.42, 0, entry);
+          opacity = offset > 1.05 ? 0 : mix(0.28, 1, entry);
+          shadowAlpha = mix(0.06, 0.14, entry);
+          waveY = mix(12, 0, entry);
+          waveX = mix(-8, 0, entry);
+          dotsY = mix(-8, 0, entry);
+        } else {
+          opacity = 1;
+          shadowAlpha = 0.14;
         }
 
-        if (isAfter) {
-          const depth = clamp(offset);
-          translateY = mix(74, 118, clamp(offset - 1));
-          scale = mix(0.965, 0.94, clamp(offset - 1));
-          rotateX = mix(-1.8, -3, clamp(offset - 1));
-          rotateZ = mix(0.5, 1.1, clamp(offset - 1));
-          opacity = stackStrength * mix(0.9, 0.22, depth);
-          waveY = mix(12, 18, depth);
-          waveX = mix(-8, -14, depth);
-          dotsY = mix(-6, -12, depth);
-        }
-
-        if (currentStrength > 0) {
-          translateY = mix(translateY, 0, currentStrength);
-          scale = mix(scale, 1, currentStrength);
-          rotateX = mix(rotateX, 0, currentStrength);
-          rotateZ = mix(rotateZ, 0, currentStrength);
-          opacity = mix(opacity, 1, currentStrength);
-          shadowAlpha = mix(shadowAlpha, 0.14, currentStrength);
-          waveY = mix(waveY, 0, currentStrength);
-          waveX = mix(waveX, 0, currentStrength);
-          dotsY = mix(dotsY, 0, currentStrength);
-        }
-
-        const contentProgress = currentStrength;
-        const numberY = mix(isBefore ? -28 : 30, 0, currentStrength);
-        const zIndex = Math.round(100 - Math.abs(offset) * 10);
+        const contentProgress = proximity;
+        const numberY = mix(isOutgoing ? -24 : 24, 0, proximity);
+        const zIndex = Math.round(100 - distance * 12 + (isIncoming ? -2 : 0));
 
         xSetters[index](0);
         ySetters[index](translateY);
@@ -174,9 +173,9 @@ export default function ProcessSteps({ items }: { items: ProcessStepItem[] }) {
         rotateZSetters[index](rotateZ);
         zIndexSetters[index](zIndex);
         shadowSetters[index](shadowAlpha);
-        waveYSetters[index](mix(waveY, 0, nextStrength * 0.2 + previousStrength * 0.12));
-        waveXSetters[index](mix(waveX, 0, nextStrength * 0.2 + previousStrength * 0.12));
-        dotsYSetters[index](mix(dotsY, 0, nextStrength * 0.2 + previousStrength * 0.12));
+        waveYSetters[index](waveY);
+        waveXSetters[index](waveX);
+        dotsYSetters[index](dotsY);
         setContentState(index, contentProgress, numberY);
       });
     };
@@ -234,7 +233,7 @@ export default function ProcessSteps({ items }: { items: ProcessStepItem[] }) {
 
     reducedMotion.addEventListener("change", handleMotionChange);
 
-    return () => {
+    effectCleanup = () => {
       reducedMotion.removeEventListener("change", handleMotionChange);
       window.cancelAnimationFrame(refreshFrame);
       window.clearTimeout(refreshTimeout);
@@ -242,6 +241,16 @@ export default function ProcessSteps({ items }: { items: ProcessStepItem[] }) {
       resizeObserver.disconnect();
       trigger.kill();
       gsap.set(steps, { willChange: "auto" });
+    };
+
+    if (isCancelled) {
+      effectCleanup();
+    }
+    })();
+
+    return () => {
+      isCancelled = true;
+      effectCleanup?.();
     };
   }, [items.length]);
 

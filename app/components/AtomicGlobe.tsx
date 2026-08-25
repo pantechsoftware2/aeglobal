@@ -1,6 +1,6 @@
 "use client";
 
-import * as THREE from "three";
+import type * as ThreeNamespace from "three";
 import { useEffect, useRef } from "react";
 import { globeLandPositions } from "../data/globeLandPositions";
 
@@ -18,7 +18,9 @@ const markers: Marker[] = [
   { label: "New Zealand", lat: -36.8509, lng: 174.7645 }
 ];
 
-const toVector = (lat: number, lng: number, radius = 1) => {
+type ThreeModule = typeof ThreeNamespace;
+
+const toVector = (THREE: ThreeModule, lat: number, lng: number, radius = 1) => {
   const phi = THREE.MathUtils.degToRad(90 - lat);
   const theta = THREE.MathUtils.degToRad(lng + 180);
 
@@ -32,9 +34,9 @@ const toVector = (lat: number, lng: number, radius = 1) => {
 const getLandPositions = () =>
   new Float32Array(window.innerWidth < 760 ? globeLandPositions.mobile : globeLandPositions.desktop);
 
-const createArc = (from: Marker, to: Marker) => {
-  const start = toVector(from.lat, from.lng, 1.03);
-  const end = toVector(to.lat, to.lng, 1.03);
+const createArc = (THREE: ThreeModule, from: Marker, to: Marker) => {
+  const start = toVector(THREE, from.lat, from.lng, 1.03);
+  const end = toVector(THREE, to.lat, to.lng, 1.03);
   const middle = start.clone().add(end).normalize().multiplyScalar(1.42);
   const curve = new THREE.QuadraticBezierCurve3(start, middle, end);
   const points = curve.getPoints(64);
@@ -48,7 +50,7 @@ const createArc = (from: Marker, to: Marker) => {
   return new THREE.Line(geometry, material);
 };
 
-const createPointMaterial = (dotSize: number) =>
+const createPointMaterial = (THREE: ThreeModule, dotSize: number) =>
   new THREE.ShaderMaterial({
     uniforms: {
       uColor: { value: new THREE.Color("#092f68") },
@@ -105,6 +107,14 @@ export default function AtomicGlobe() {
   const markerRefs = useRef<Array<HTMLSpanElement | null>>([]);
 
   useEffect(() => {
+    let effectCleanup: (() => void) | undefined;
+    let isCancelled = false;
+
+    void (async () => {
+    const THREE = await import("three");
+
+    if (isCancelled) return;
+
     const host = hostRef.current;
     const markerLayer = markerLayerRef.current;
     if (!host || !markerLayer) return;
@@ -124,9 +134,9 @@ export default function AtomicGlobe() {
     globeGroup.rotation.x = THREE.MathUtils.degToRad(10);
     scene.add(globeGroup);
 
-    let pointGeometry: THREE.BufferGeometry | null = null;
-    let pointMaterial: THREE.ShaderMaterial | null = null;
-    let globePoints: THREE.Points | null = null;
+    let pointGeometry: ThreeNamespace.BufferGeometry | null = null;
+    let pointMaterial: ThreeNamespace.ShaderMaterial | null = null;
+    let globePoints: ThreeNamespace.Points | null = null;
     let disposed = false;
     let hoverTarget = 0;
     const hoverPoint = new THREE.Vector3(0, 0, 1);
@@ -148,7 +158,7 @@ export default function AtomicGlobe() {
     globeGroup.add(shell);
 
     markers.forEach((marker, index) => {
-      globeGroup.add(createArc(marker, markers[(index + 1) % markers.length]));
+      globeGroup.add(createArc(THREE, marker, markers[(index + 1) % markers.length]));
     });
 
     const addPointCloud = () => {
@@ -157,7 +167,7 @@ export default function AtomicGlobe() {
       pointGeometry = new THREE.BufferGeometry();
       pointGeometry.setAttribute("position", new THREE.BufferAttribute(getLandPositions(), 3));
 
-      pointMaterial = createPointMaterial(window.innerWidth < 760 ? 0.028 : 0.026);
+      pointMaterial = createPointMaterial(THREE, window.innerWidth < 760 ? 0.028 : 0.026);
 
       globePoints = new THREE.Points(pointGeometry, pointMaterial);
       globeGroup.add(globePoints);
@@ -177,7 +187,7 @@ export default function AtomicGlobe() {
     resize();
 
     let frame = 0;
-    const markerProjection = markers.map((marker) => toVector(marker.lat, marker.lng, 1.1));
+    const markerProjection = markers.map((marker) => toVector(THREE, marker.lat, marker.lng, 1.1));
     const screenPosition = new THREE.Vector3();
     let markerFrame = 0;
     const updateHover = (event: PointerEvent) => {
@@ -234,7 +244,7 @@ export default function AtomicGlobe() {
 
     animate();
 
-    return () => {
+    effectCleanup = () => {
       disposed = true;
       window.clearTimeout(pointCloudTimer);
       window.cancelAnimationFrame(frame);
@@ -245,15 +255,25 @@ export default function AtomicGlobe() {
       pointMaterial?.dispose();
       if (globePoints) globeGroup.remove(globePoints);
       shell.geometry.dispose();
-      (shell.material as THREE.Material).dispose();
+      (shell.material as ThreeNamespace.Material).dispose();
       scene.traverse((object) => {
         if (object instanceof THREE.Line) {
           object.geometry.dispose();
-          (object.material as THREE.Material).dispose();
+          (object.material as ThreeNamespace.Material).dispose();
         }
       });
       renderer.dispose();
       if (host.contains(renderer.domElement)) host.removeChild(renderer.domElement);
+    };
+
+    if (isCancelled) {
+      effectCleanup();
+    }
+    })();
+
+    return () => {
+      isCancelled = true;
+      effectCleanup?.();
     };
   }, []);
 

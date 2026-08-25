@@ -90,6 +90,39 @@ const welcomeMessage: ChatMessage = {
   options: starterOptions
 };
 
+const chatStorageKey = "ae-global-mimi-chat";
+const chatOpenStorageKey = "ae-global-mimi-open";
+const chatInputStorageKey = "ae-global-mimi-input";
+
+const isChatMessage = (message: unknown): message is ChatMessage => {
+  if (!message || typeof message !== "object") return false;
+
+  const item = message as Partial<ChatMessage>;
+
+  return (
+    (item.role === "assistant" || item.role === "user") &&
+    typeof item.content === "string" &&
+    (!item.options || (Array.isArray(item.options) && item.options.every((option) => typeof option === "string")))
+  );
+};
+
+const readStoredMessages = () => {
+  if (typeof window === "undefined") return [welcomeMessage];
+
+  try {
+    const storedMessages = window.localStorage.getItem(chatStorageKey);
+    if (!storedMessages) return [welcomeMessage];
+
+    const parsedMessages = JSON.parse(storedMessages) as unknown;
+    if (!Array.isArray(parsedMessages)) return [welcomeMessage];
+
+    const validMessages = parsedMessages.filter(isChatMessage).slice(-20);
+    return validMessages.length ? validMessages : [welcomeMessage];
+  } catch {
+    return [welcomeMessage];
+  }
+};
+
 const formatMessageLines = (content: string) =>
   content
     .replace(/\s+(\d+\.\s)/g, "\n$1")
@@ -155,6 +188,7 @@ export default function ChatBot() {
   const [input, setInput] = useState("");
   const [isSending, setIsSending] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([welcomeMessage]);
+  const [hasLoadedStoredChat, setHasLoadedStoredChat] = useState(false);
   const messagesRef = useRef<HTMLDivElement | null>(null);
   const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -163,6 +197,42 @@ export default function ChatBot() {
   };
 
   useEffect(() => {
+    const frame = requestAnimationFrame(() => {
+      const storedMessages = readStoredMessages();
+      const storedOpen = window.localStorage.getItem(chatOpenStorageKey) === "true";
+      const storedInput = window.localStorage.getItem(chatInputStorageKey) ?? "";
+
+      setMessages(storedMessages);
+      setInput(storedInput);
+      setIsOpen(storedOpen);
+      setCanShowChat(storedOpen || storedMessages.length > 1);
+      setHasLoadedStoredChat(true);
+    });
+
+    return () => cancelAnimationFrame(frame);
+  }, []);
+
+  useEffect(() => {
+    if (!hasLoadedStoredChat) return;
+
+    window.localStorage.setItem(chatStorageKey, JSON.stringify(messages.slice(-20)));
+  }, [hasLoadedStoredChat, messages]);
+
+  useEffect(() => {
+    if (!hasLoadedStoredChat) return;
+
+    window.localStorage.setItem(chatOpenStorageKey, String(isOpen && !isClosing));
+  }, [hasLoadedStoredChat, isOpen, isClosing]);
+
+  useEffect(() => {
+    if (!hasLoadedStoredChat) return;
+
+    window.localStorage.setItem(chatInputStorageKey, input);
+  }, [hasLoadedStoredChat, input]);
+
+  useEffect(() => {
+    if (!hasLoadedStoredChat) return;
+
     const updateChatVisibility = () => {
       const destinations = document.getElementById("destinations");
 
@@ -172,7 +242,7 @@ export default function ChatBot() {
       }
 
       const showAfter = destinations.offsetTop + destinations.offsetHeight - window.innerHeight * 0.15;
-      setCanShowChat((wasVisible) => wasVisible || window.scrollY >= showAfter);
+      setCanShowChat((wasVisible) => wasVisible || isOpen || messages.length > 1 || window.scrollY >= showAfter);
     };
 
     updateChatVisibility();
@@ -183,7 +253,7 @@ export default function ChatBot() {
       window.removeEventListener("scroll", updateChatVisibility);
       window.removeEventListener("resize", updateChatVisibility);
     };
-  }, []);
+  }, [hasLoadedStoredChat, isOpen, messages.length]);
 
   useEffect(() => {
     return () => {
@@ -307,7 +377,7 @@ export default function ChatBot() {
           <header className="chat-header">
             <span className="chat-avatar" aria-hidden="true">
               <Image
-                src="/images/mimi-chatbot.png"
+                src="/images/mimi-chatbot.webp"
                 alt=""
                 width={58}
                 height={58}
@@ -365,7 +435,7 @@ export default function ChatBot() {
       {!isOpen ? (
         <button className="chat-toggle" type="button" aria-label="Open Mimi chat" onClick={openChat}>
           <Image
-            src="/images/mimi-chatbot.png"
+            src="/images/mimi-chatbot.webp"
             alt=""
             width={128}
             height={150}

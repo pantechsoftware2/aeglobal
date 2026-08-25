@@ -84,7 +84,7 @@ export default function HomePage() {
     <main>
       <header className="site-header">
         <a className="brand" href="#" aria-label="AE Global Group home">
-          <Image src="/brand/mark.png" alt="" width={50} height={44} priority />
+          <Image src="/brand/mark.png" alt="" width={50} height={44} preload />
           <span>AE Global Group</span>
         </a>
         <nav className="desktop-nav" aria-label="Primary navigation">

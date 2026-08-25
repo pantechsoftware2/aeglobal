@@ -76,6 +76,17 @@ const unrelatedKeywords = [
   "omelette",
   "egg",
   "food",
+  "buy",
+  "buying",
+  "shopping",
+  "purchase",
+  "music",
+  "taste",
+  "culture",
+  "tourist",
+  "tourism",
+  "restaurant",
+  "hotel",
   "movie",
   "song",
   "game",
@@ -122,6 +133,29 @@ const getFallbackReply = (question: string) => {
     "AE Global Group helps students with destination comparison, university shortlisting, applications, visa preparation, accommodation and pre-departure planning. Tell me what stage you are in, and I can suggest the next practical step.";
 };
 
+const formatName = (name: string) =>
+  name
+    .trim()
+    .replace(/[^a-zA-Z\s.'-]/g, "")
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 3)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase())
+    .join(" ");
+
+const getIntroducedName = (question: string) => {
+  const introMatch = question
+    .trim()
+    .match(/^(?:hi[, ]+|hello[, ]+|hey[, ]+)?(?:i am|i'm|my name is|this is|it is|it's)\s+([a-zA-Z][a-zA-Z\s.'-]{1,40})$/i);
+
+  if (!introMatch?.[1]) return "";
+
+  return formatName(introMatch[1]);
+};
+
+const getIntroReply = (name: string) =>
+  `Nice to meet you, ${name}. I can help you plan your study abroad next step. Which stage are you in right now: choosing a country, shortlisting universities, preparing applications, visa prep, or pre-departure?`;
+
 const isGreetingOnly = (question: string) =>
   /^(hi|hello|hey|good morning|good afternoon|good evening|namaste|thanks|thank you)\b/i.test(question.trim());
 
@@ -139,7 +173,21 @@ const isStudyAbroadQuestion = (question: string) => {
 };
 
 const getOutOfScopeReply = () =>
-  "I can help with study abroad planning, destinations, universities, applications, visas, fees, accommodation and pre-departure support. For that question, I would rather keep Mimi focused on your study abroad next step.";
+  "I can help with study abroad planning, destinations, universities, applications, visas, fees, accommodation and pre-departure support. For general shopping, food, music, travel or culture questions, I will keep Mimi focused on your study abroad next step.";
+
+const getSiteUrl = () => {
+  const explicitSiteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+
+  if (explicitSiteUrl) return explicitSiteUrl;
+
+  const vercelUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL ?? process.env.VERCEL_URL;
+
+  if (vercelUrl) {
+    return vercelUrl.startsWith("http") ? vercelUrl : `https://${vercelUrl}`;
+  }
+
+  return "http://localhost:3000";
+};
 
 export async function POST(request: Request) {
   const body = await request.json() as { messages?: ChatMessage[] };
@@ -147,9 +195,14 @@ export async function POST(request: Request) {
   const latestUserMessage = [...messages].reverse().find((message) => message.role === "user");
   const question = latestUserMessage?.content ?? "";
   const apiKey = process.env.OPENAI_API_KEY;
-  const apiUrl = process.env.OPENAI_CHAT_API_URL ?? "https://api.openai.com/v1/chat/completions";
-  const model = process.env.OPENAI_MODEL ?? "gpt-4o-mini";
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  const apiUrl = process.env.OPENAI_CHAT_API_URL ?? "https://openrouter.ai/api/v1/chat/completions";
+  const model = process.env.OPENAI_MODEL ?? "openai/gpt-4o-mini";
+  const siteUrl = getSiteUrl();
+  const introducedName = getIntroducedName(question);
+
+  if (introducedName) {
+    return Response.json({ reply: getIntroReply(introducedName), source: "site-intro" });
+  }
 
   if (!isStudyAbroadQuestion(question)) {
     return Response.json({ reply: getOutOfScopeReply(), source: "site-scope" });
