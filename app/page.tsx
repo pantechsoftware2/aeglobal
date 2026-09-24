@@ -15,6 +15,7 @@ import DestinationTabs from "./components/DestinationTabs";
 import ProcessSteps, { type ProcessStepItem } from "./components/ProcessSteps";
 import StoryTestimonials from "./components/StoryTestimonials";
 import TestimonialCarousel from "./components/TestimonialCarousel";
+import LeadEnquiry from "./components/LeadEnquiry";
 
 const trustPoints = [
   {
@@ -96,7 +97,7 @@ export default function HomePage() {
           <a href="#about">About Us</a>
         </nav>
         <div className="header-actions">
-          <a className="journey-link" href="#contact">I&apos;m Ready to Start</a>
+          <LeadEnquiry className="journey-link">I&apos;m Ready to Start</LeadEnquiry>
         </div>
       </header>
 
@@ -111,7 +112,7 @@ export default function HomePage() {
             <a className="primary-button" href="#destinations">
               Show Me My Options <ArrowRight size={16} />
             </a>
-            <a className="secondary-button" href="#contact">I&apos;m Ready to Start</a>
+            <LeadEnquiry className="secondary-button">I&apos;m Ready to Start</LeadEnquiry>
           </div>
         </div>
         <div className="hero-image" aria-hidden="true">
@@ -244,7 +245,7 @@ export default function HomePage() {
           <h2>Ready to stop guessing?<br /><span>Let&apos;s map the next step.</span></h2>
         </div>
         <div className="button-row">
-          <a className="primary-button" href="#">I&apos;m Ready to Start <ArrowRight size={16} /></a>
+          <LeadEnquiry className="primary-button">I&apos;m Ready to Start <ArrowRight size={16} /></LeadEnquiry>
           <a className="secondary-button" href="#destinations">Show Me My Options</a>
         </div>
       </section>
