@@ -19,6 +19,14 @@ const icons: Record<ProcessStepIcon, LucideIcon> = {
   plane: Plane
 };
 
+const stepDetails: Record<ProcessStepIcon, { focus: string; outcome: string }> = {
+  search: { focus: "Your starting point", outcome: "A clear picture of your profile and priorities." },
+  file: { focus: "Your best-fit options", outcome: "A focused shortlist built around you." },
+  mail: { focus: "Your application plan", outcome: "Organized documents and clear application deadlines." },
+  globe: { focus: "Your visa preparation", outcome: "A practical checklist for the visa stage." },
+  plane: { focus: "Your next chapter", outcome: "Travel and arrival essentials planned ahead." }
+};
+
 const clamp = (value: number) => Math.min(1, Math.max(0, value));
 const easeOutCubic = (value: number) => 1 - Math.pow(1 - value, 3);
 const easeInOutCubic = (value: number) =>
@@ -116,6 +124,13 @@ export default function ProcessSteps({ items }: { items: ProcessStepItem[] }) {
 
     const render = (progress: number) => {
       const position = clamp(progress) * maxIndex;
+      const activeIndex = Math.round(position);
+      containerRef.current?.style.setProperty("--process-progress", String(clamp(progress)));
+      containerRef.current?.querySelectorAll<HTMLElement>(".process-stage").forEach((stage, index) => {
+        stage.dataset.state = index === activeIndex ? "active" : index < activeIndex ? "complete" : "upcoming";
+        if (index === activeIndex) stage.setAttribute("aria-current", "step");
+        else stage.removeAttribute("aria-current");
+      });
 
       steps.forEach((_, index) => {
         const offset = index - position;
@@ -255,7 +270,9 @@ export default function ProcessSteps({ items }: { items: ProcessStepItem[] }) {
   }, [items.length]);
 
   return (
-    <div className="process-steps" ref={containerRef}>
+    <div className="process-story" ref={containerRef}>
+      <div className="process-story-caption"><span>Your journey, step by step</span><span>{String(items.length).padStart(2, "0")} stages</span></div>
+      <div className="process-steps">
       {items.map((step, index) => {
         const Icon = icons[step.icon];
 
@@ -267,13 +284,23 @@ export default function ProcessSteps({ items }: { items: ProcessStepItem[] }) {
               stepsRef.current[index] = node;
             }}
           >
-            <div className="step-icon"><Icon size={26} /></div>
+            <div className="step-icon"><Icon size={26} aria-hidden="true" /></div>
             <strong>{String(index + 1).padStart(2, "0")}</strong>
+            <span className="step-focus">{stepDetails[step.icon].focus}</span>
             <h3>{step.title}</h3>
             <p>{step.copy}</p>
+            <div className="step-outcome"><span>What you leave with</span><div>{stepDetails[step.icon].outcome}</div></div>
           </article>
         );
       })}
+      </div>
+      <ol className="process-stage-list" aria-label="Your study abroad journey">
+        {items.map((step, index) => (
+          <li className="process-stage" key={step.title} data-state={index === 0 ? "active" : "upcoming"} aria-current={index === 0 ? "step" : undefined}>
+            <span>{String(index + 1).padStart(2, "0")}</span><span>{step.title}</span>
+          </li>
+        ))}
+      </ol>
     </div>
   );
 }

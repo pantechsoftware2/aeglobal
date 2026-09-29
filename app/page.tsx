@@ -18,6 +18,7 @@ import ProcessSteps, { type ProcessStepItem } from "./components/ProcessSteps";
 import StoryTestimonials from "./components/StoryTestimonials";
 import TestimonialCarousel from "./components/TestimonialCarousel";
 import LeadEnquiry from "./components/LeadEnquiry";
+import SupportServiceList from "./components/SupportServiceList";
 
 const trustPoints = [
   {
@@ -186,11 +187,12 @@ export default function HomePage() {
       <section className="process-support-scroll">
         <div className="process-support-sticky">
           <section className="process process-scroll" id="courses">
-            <div className="process-sticky">
+            <div className="process-sticky process-redesign">
               <div className="section-intro">
                 <p className="eyebrow">How we work</p>
                 <h2>One process.<br />No scattered advice.</h2>
                 <p>Every student journey is different. We keep the work clear, practical and requirement-led.</p>
+                <div className="process-scroll-note"><span aria-hidden="true">↓</span> Scroll through your next steps</div>
               </div>
               <ProcessSteps items={process} />
             </div>
@@ -201,18 +203,18 @@ export default function HomePage() {
               <p className="eyebrow">Student Support</p>
               <h2>You don&apos;t have to manage<br />every step alone.</h2>
               <p>Get help with the real work: requirements, timelines, documents, visa preparation and departure planning.</p>
-              <div className="service-grid">
+              <SupportServiceList>
                 {services.map((service) => {
                   const Icon = service.icon;
                   return (
-                    <div className="service" key={service.label}>
+                    <div className="service" key={service.label} role="listitem">
                       <Icon size={22} />
                       <span>{service.label}</span>
                       <small>{service.copy}</small>
                     </div>
                   );
                 })}
-              </div>
+              </SupportServiceList>
               <a className="teal-button" href="#contact">
                 Get Study Abroad Support <ArrowRight size={16} />
               </a>
