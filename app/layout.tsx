@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import ChatBot from "./components/ChatBot";
+import SocialMediaDock from "./components/SocialMediaDock";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://aeglobal-teal.vercel.app"),
@@ -20,7 +22,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {children}
+        <SocialMediaDock />
+        <ChatBot />
+      </body>
     </html>
   );
 }

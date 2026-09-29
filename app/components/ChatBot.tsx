@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { ChevronRight, Send, X } from "lucide-react";
+import { ChevronRight, Send, Trash2, X } from "lucide-react";
 import { Fragment, type FormEvent, type SyntheticEvent, useEffect, useRef, useState } from "react";
 
 type ChatMessage = {
@@ -191,6 +191,7 @@ export default function ChatBot() {
   const [hasLoadedStoredChat, setHasLoadedStoredChat] = useState(false);
   const messagesRef = useRef<HTMLDivElement | null>(null);
   const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const activeRequestRef = useRef(0);
 
   const keepScrollInsideChat = (event: SyntheticEvent<HTMLElement>) => {
     event.stopPropagation();
@@ -205,7 +206,7 @@ export default function ChatBot() {
       setMessages(storedMessages);
       setInput(storedInput);
       setIsOpen(storedOpen);
-      setCanShowChat(storedOpen || storedMessages.length > 1);
+      setCanShowChat(true);
       setHasLoadedStoredChat(true);
     });
 
@@ -231,31 +232,6 @@ export default function ChatBot() {
   }, [hasLoadedStoredChat, input]);
 
   useEffect(() => {
-    if (!hasLoadedStoredChat) return;
-
-    const updateChatVisibility = () => {
-      const destinations = document.getElementById("destinations");
-
-      if (!destinations) {
-        setCanShowChat(true);
-        return;
-      }
-
-      const showAfter = destinations.offsetTop + destinations.offsetHeight - window.innerHeight * 0.15;
-      setCanShowChat((wasVisible) => wasVisible || isOpen || messages.length > 1 || window.scrollY >= showAfter);
-    };
-
-    updateChatVisibility();
-    window.addEventListener("scroll", updateChatVisibility, { passive: true });
-    window.addEventListener("resize", updateChatVisibility);
-
-    return () => {
-      window.removeEventListener("scroll", updateChatVisibility);
-      window.removeEventListener("resize", updateChatVisibility);
-    };
-  }, [hasLoadedStoredChat, isOpen, messages.length]);
-
-  useEffect(() => {
     return () => {
       if (closeTimeoutRef.current) {
         clearTimeout(closeTimeoutRef.current);
@@ -267,6 +243,9 @@ export default function ChatBot() {
     const trimmedQuestion = question.trim();
 
     if (!trimmedQuestion || isSending) return;
+
+    const requestId = activeRequestRef.current + 1;
+    activeRequestRef.current = requestId;
 
     const nextMessages: ChatMessage[] = [
       ...messages.map(({ role, content }) => ({ role, content })),
@@ -290,6 +269,8 @@ export default function ChatBot() {
       const data = await response.json() as { reply?: string };
       const nextOptions = getContextualOptions(trimmedQuestion);
 
+      if (activeRequestRef.current !== requestId) return;
+
       setMessages([
         ...nextMessages,
         {
@@ -303,6 +284,8 @@ export default function ChatBot() {
     } catch {
       const nextOptions = getContextualOptions(trimmedQuestion);
 
+      if (activeRequestRef.current !== requestId) return;
+
       setMessages([
         ...nextMessages,
         {
@@ -313,7 +296,9 @@ export default function ChatBot() {
         }
       ]);
     } finally {
-      setIsSending(false);
+      if (activeRequestRef.current === requestId) {
+        setIsSending(false);
+      }
     }
   };
 
@@ -343,6 +328,15 @@ export default function ChatBot() {
     }, 230);
   };
 
+  const clearChat = () => {
+    activeRequestRef.current += 1;
+    setMessages([welcomeMessage]);
+    setInput("");
+    setIsSending(false);
+    window.localStorage.setItem(chatStorageKey, JSON.stringify([welcomeMessage]));
+    window.localStorage.removeItem(chatInputStorageKey);
+  };
+
   useEffect(() => {
     if (!isOpen) return;
 
@@ -366,7 +360,7 @@ export default function ChatBot() {
   ), -1);
 
   return (
-    <div className="chat-widget">
+    <div className={`chat-widget${isOpen ? " is-open" : ""}`}>
       {isOpen ? (
         <section
           className={`chat-panel ${isClosing ? "is-closing" : ""}`}
@@ -388,9 +382,14 @@ export default function ChatBot() {
               <strong>Mimi</strong>
               <small>Study abroad assistant</small>
             </div>
-            <button type="button" aria-label="Close chat" onClick={closeChat}>
-              <X size={18} />
-            </button>
+            <div className="chat-header-actions">
+              <button type="button" aria-label="Clear chat history" onClick={clearChat}>
+                <Trash2 size={17} />
+              </button>
+              <button type="button" aria-label="Close chat" onClick={closeChat}>
+                <X size={18} />
+              </button>
+            </div>
           </header>
 
           <div className="chat-messages" aria-live="polite" ref={messagesRef}>

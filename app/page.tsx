@@ -12,13 +12,13 @@ import {
   ShieldCheck
 } from "lucide-react";
 import AtomicGlobe from "./components/AtomicGlobe";
-import ChatBot from "./components/ChatBot";
 import DestinationTabs from "./components/DestinationTabs";
 import ProcessSteps, { type ProcessStepItem } from "./components/ProcessSteps";
 import StoryTestimonials from "./components/StoryTestimonials";
 import TestimonialCarousel from "./components/TestimonialCarousel";
 import LeadEnquiry from "./components/LeadEnquiry";
 import SupportServiceList from "./components/SupportServiceList";
+import { destinations } from "./data/destinations";
 
 const trustPoints = [
   {
@@ -39,16 +39,17 @@ const trustPoints = [
   }
 ];
 
-const universityLogos = [
-  { name: "University of Oxford", logo: "/university-logos/oxford.svg", width: 240 },
-  { name: "University of Toronto", logo: "/university-logos/toronto.svg", width: 250 },
-  { name: "University of Melbourne", logo: "/university-logos/melbourne.svg", width: 270 },
-  { name: "University of Manchester", logo: "/university-logos/manchester.svg", width: 285 },
-  { name: "Trinity College Dublin", logo: "/university-logos/trinity-dublin.svg", width: 285 },
-  { name: "Technical University of Munich", logo: "/university-logos/tum.svg", width: 330 },
-  { name: "University of British Columbia", logo: "/university-logos/ubc.svg", width: 320 },
-  { name: "Monash University", logo: "/university-logos/monash.svg", width: 250 }
-];
+const institutionLogos = destinations
+  .flatMap((destination) => destination.institutions)
+  .filter((institution, index, list) => list.findIndex((item) => item.logo === institution.logo) === index)
+  .map((institution) => ({
+    name: institution.name,
+    logo: institution.logo,
+    tone: institution.logoTone
+  }));
+
+const firstMarqueeLogos = institutionLogos.filter((_, index) => index % 2 === 0);
+const secondMarqueeLogos = institutionLogos.filter((_, index) => index % 2 === 1);
 
 const shortlistCriteria = [
   "Course fit",
@@ -143,12 +144,27 @@ export default function HomePage() {
           <p className="showcase-label">Universities our students compare</p>
           <div className="university-marquee" aria-label="Universities our students compare">
             <div className="marquee-track">
-              {[...universityLogos, ...universityLogos].map((university, index) => (
-                <div className="university-logo" key={`${university.name}-${index}`} aria-hidden={index >= universityLogos.length}>
+              {[...firstMarqueeLogos, ...firstMarqueeLogos].map((university, index) => (
+                <div className={`university-logo ${university.tone === "dark" ? "university-logo-dark" : ""}`} key={`${university.name}-${index}`} aria-hidden={index >= firstMarqueeLogos.length}>
                   <Image
                     src={university.logo}
-                    alt={index < universityLogos.length ? university.name : ""}
-                    width={university.width}
+                    alt={index < firstMarqueeLogos.length ? university.name : ""}
+                    width={240}
+                    height={64}
+                    unoptimized
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="university-marquee university-marquee-reverse" aria-label="More priority institutions our students compare">
+            <div className="marquee-track marquee-track-reverse">
+              {[...secondMarqueeLogos, ...secondMarqueeLogos].map((university, index) => (
+                <div className={`university-logo ${university.tone === "dark" ? "university-logo-dark" : ""}`} key={`${university.name}-${index}`} aria-hidden={index >= secondMarqueeLogos.length}>
+                  <Image
+                    src={university.logo}
+                    alt={index < secondMarqueeLogos.length ? university.name : ""}
+                    width={240}
                     height={64}
                     unoptimized
                   />
@@ -261,7 +277,6 @@ export default function HomePage() {
           <span>Privacy Policy&nbsp;&nbsp;&nbsp;&nbsp; Terms &amp; Conditions</span>
         </div>
       </footer>
-      <ChatBot />
     </main>
   );
 }
