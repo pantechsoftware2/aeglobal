@@ -2,15 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 import LeadEnquiry from "./LeadEnquiry";
 
-export default function SiteHeader({ contactPage = false }: { contactPage?: boolean }) {
+export default function SiteHeader({ contactPage = false, destinationPage = false }: { contactPage?: boolean; destinationPage?: boolean }) {
   return (
-    <header className={`site-header${contactPage ? " contact-header" : ""}`}>
+    <header className={`site-header${contactPage || destinationPage ? " contact-header" : ""}`}>
       <Link className="brand" href="/" aria-label="AE Global Group home">
         <Image src="/brand/mark.png" alt="" width={50} height={44} preload />
         <span>AE Global Group</span>
       </Link>
       <nav className="desktop-nav" aria-label="Primary navigation">
-        <Link href="/#destinations">Study Destinations</Link>
+        <Link href="/#destinations" aria-current={destinationPage ? "page" : undefined}>Study Destinations</Link>
         <Link href="/#partners">Universities</Link>
         <Link href="/#courses">Courses</Link>
         <Link href="/#scholarships">Scholarships</Link>

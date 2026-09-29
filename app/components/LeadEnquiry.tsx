@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, ReactNode, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { Check, X } from "lucide-react";
 
 type LeadFormData = {
@@ -16,6 +17,8 @@ type LeadFormData = {
 type LeadEnquiryProps = {
   className: string;
   children: ReactNode;
+  country?: string;
+  institution?: string;
 };
 
 const initialForm: LeadFormData = {
@@ -65,7 +68,7 @@ function validate(form: LeadFormData) {
   return { errors, trimmed };
 }
 
-export default function LeadEnquiry({ className, children }: LeadEnquiryProps) {
+export default function LeadEnquiry({ className, children, country, institution }: LeadEnquiryProps) {
   const [open, setOpen] = useState(false);
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState<Partial<Record<keyof LeadFormData, string>>>({});
@@ -114,59 +117,66 @@ export default function LeadEnquiry({ className, children }: LeadEnquiryProps) {
     }
   };
 
+  const modal = open && typeof document !== "undefined" ? createPortal(
+    <div className="lead-modal-backdrop" role="presentation" onMouseDown={(event) => {
+      if (event.target === event.currentTarget && status !== "submitting") setOpen(false);
+    }}>
+      <section className="lead-modal" role="dialog" aria-modal="true" aria-labelledby="lead-modal-title">
+        <div className="lead-modal-header">
+          <div>
+            <p className="eyebrow">Start with clarity</p>
+            <h2 id="lead-modal-title">Tell us where you want to go.</h2>
+            <p>Share a few details and our team will help map your next step.</p>
+          </div>
+          <button ref={closeButtonRef} type="button" className="lead-modal-close" onClick={() => setOpen(false)} disabled={status === "submitting"} aria-label="Close enquiry form">
+            <X size={20} />
+          </button>
+        </div>
+
+        {status === "success" ? (
+          <div className="lead-success" role="status">
+            <span><Check size={24} /></span>
+            <h3>Thank you!</h3>
+            <p>Your enquiry has been submitted successfully. Our team will contact you shortly.</p>
+            <button type="button" className="teal-button" onClick={() => setOpen(false)}>Close</button>
+          </div>
+        ) : (
+          <form className="lead-form" onSubmit={submit} noValidate>
+            <div className="lead-form-grid">
+              <LeadField label="Full Name" name="name" value={form.name} onChange={updateField} error={errors.name} required />
+              <LeadField label="Email Address" name="email" type="email" value={form.email} onChange={updateField} error={errors.email} />
+              <LeadField label="Phone Number" name="phone" type="tel" value={form.phone} onChange={updateField} error={errors.phone} />
+              <LeadField label="Study Destination / Country" name="country" value={form.country} onChange={updateField} error={errors.country} />
+              <LeadField label="Course / Program" name="course" value={form.course} onChange={updateField} error={errors.course} />
+              <LeadField label="Preferred Intake" name="intake" value={form.intake} onChange={updateField} error={errors.intake} />
+            </div>
+            <label className="lead-field lead-field-full">
+              <span>Message</span>
+              <textarea name="message" value={form.message} maxLength={limits.message} onChange={(event) => updateField("message", event.target.value)} aria-invalid={Boolean(errors.message)} />
+              {errors.message && <small className="lead-field-error">{errors.message}</small>}
+            </label>
+            <p className="lead-form-note">Required: full name and an email address or phone number.</p>
+            {status === "error" && <p className="lead-submit-error" role="alert">Something went wrong while submitting your enquiry. Please try again.</p>}
+            <button className="teal-button lead-submit" type="submit" disabled={status === "submitting"}>
+              {status === "submitting" ? "Submitting..." : "Send Enquiry"}
+            </button>
+          </form>
+        )}
+      </section>
+    </div>,
+    document.body
+  ) : null;
+
   return (
     <>
-      <button type="button" className={className} onClick={() => { setOpen(true); setStatus("idle"); }}>
+      <button type="button" className={className} onClick={() => {
+        setForm((current) => ({ ...current, ...(country ? { country } : {}), ...(institution ? { message: `I would like to enquire about ${institution}.` } : {}) }));
+        setOpen(true);
+        setStatus("idle");
+      }}>
         {children}
       </button>
-      {open && (
-        <div className="lead-modal-backdrop" role="presentation" onMouseDown={(event) => {
-          if (event.target === event.currentTarget && status !== "submitting") setOpen(false);
-        }}>
-          <section className="lead-modal" role="dialog" aria-modal="true" aria-labelledby="lead-modal-title">
-            <div className="lead-modal-header">
-              <div>
-                <p className="eyebrow">Start with clarity</p>
-                <h2 id="lead-modal-title">Tell us where you want to go.</h2>
-                <p>Share a few details and our team will help map your next step.</p>
-              </div>
-              <button ref={closeButtonRef} type="button" className="lead-modal-close" onClick={() => setOpen(false)} disabled={status === "submitting"} aria-label="Close enquiry form">
-                <X size={20} />
-              </button>
-            </div>
-
-            {status === "success" ? (
-              <div className="lead-success" role="status">
-                <span><Check size={24} /></span>
-                <h3>Thank you!</h3>
-                <p>Your enquiry has been submitted successfully. Our team will contact you shortly.</p>
-                <button type="button" className="teal-button" onClick={() => setOpen(false)}>Close</button>
-              </div>
-            ) : (
-              <form className="lead-form" onSubmit={submit} noValidate>
-                <div className="lead-form-grid">
-                  <LeadField label="Full Name" name="name" value={form.name} onChange={updateField} error={errors.name} required />
-                  <LeadField label="Email Address" name="email" type="email" value={form.email} onChange={updateField} error={errors.email} />
-                  <LeadField label="Phone Number" name="phone" type="tel" value={form.phone} onChange={updateField} error={errors.phone} />
-                  <LeadField label="Study Destination / Country" name="country" value={form.country} onChange={updateField} error={errors.country} />
-                  <LeadField label="Course / Program" name="course" value={form.course} onChange={updateField} error={errors.course} />
-                  <LeadField label="Preferred Intake" name="intake" value={form.intake} onChange={updateField} error={errors.intake} />
-                </div>
-                <label className="lead-field lead-field-full">
-                  <span>Message</span>
-                  <textarea name="message" value={form.message} maxLength={limits.message} onChange={(event) => updateField("message", event.target.value)} aria-invalid={Boolean(errors.message)} />
-                  {errors.message && <small className="lead-field-error">{errors.message}</small>}
-                </label>
-                <p className="lead-form-note">Required: full name and an email address or phone number.</p>
-                {status === "error" && <p className="lead-submit-error" role="alert">Something went wrong while submitting your enquiry. Please try again.</p>}
-                <button className="teal-button lead-submit" type="submit" disabled={status === "submitting"}>
-                  {status === "submitting" ? "Submitting..." : "Send Enquiry"}
-                </button>
-              </form>
-            )}
-          </section>
-        </div>
-      )}
+      {modal}
     </>
   );
 }
