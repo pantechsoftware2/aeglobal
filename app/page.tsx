@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Link from "next/link";
+import SiteHeader from "./components/SiteHeader";
 import {
   ArrowRight,
   Award,
@@ -76,30 +78,14 @@ const services = [
 const footerGroups = [
   ["Explore", "Study Destinations", "Universities", "Courses", "Scholarships", "Services"],
   ["Students", "Application Support", "Visa Guidance", "Accommodation", "Pre-Departure", "Counseling"],
-  ["Company", "About Us", "Careers", "Contact Us", "Partners"],
+  ["Company", "Contact Us", "Careers", "Partners"],
   ["Resources", "Blog", "Study Guides", "FAQs", "News & Updates"]
 ];
 
 export default function HomePage() {
   return (
     <main>
-      <header className="site-header">
-        <a className="brand" href="#" aria-label="AE Global Group home">
-          <Image src="/brand/mark.png" alt="" width={50} height={44} preload />
-          <span>AE Global Group</span>
-        </a>
-        <nav className="desktop-nav" aria-label="Primary navigation">
-          <a href="#destinations">Study Destinations</a>
-          <a href="#partners">Universities</a>
-          <a href="#courses">Courses</a>
-          <a href="#scholarships">Scholarships</a>
-          <a href="#services">Services</a>
-          <a href="#about">About Us</a>
-        </nav>
-        <div className="header-actions">
-          <LeadEnquiry className="journey-link">I&apos;m Ready to Start</LeadEnquiry>
-        </div>
-      </header>
+      <SiteHeader />
 
       <section className="hero">
         <div className="hero-copy">
@@ -263,7 +249,7 @@ export default function HomePage() {
             <div key={title}>
               <h3>{title}</h3>
               {links.map((link) => (
-                <a href="#" key={link}>{link}</a>
+                <Link href={link === "Contact Us" ? "/contact" : "#"} key={link}>{link}</Link>
               ))}
             </div>
           ))}

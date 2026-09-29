@@ -2928,3 +2928,101 @@ blockquote {
     width: 100%;
   }
 }
+
+/* Contact page shares the homepage palette, typography and enquiry flow. */
+.mobile-contact-link { display: none; }
+.desktop-nav a[aria-current="page"] { color: var(--teal); }
+.contact-page { background: var(--wash); }
+.contact-header { position: relative; background: #fff; }
+.contact-hero {
+  padding: 32px var(--page-gutter) 62px;
+  background-color: var(--wash);
+  background-image:
+    linear-gradient(90deg, #f8fbfd 0%, rgba(248, 251, 253, 0.98) 34%, rgba(248, 251, 253, 0.92) 49%, rgba(235, 246, 249, 0.42) 73%, rgba(224, 240, 244, 0.2) 100%),
+    url("/images/contact/contact-support.webp");
+  background-size: cover, 62% auto;
+  background-position: center, right 35%;
+  background-repeat: no-repeat;
+  border-bottom: 1px solid var(--line);
+}
+.contact-breadcrumb { display: flex; gap: 12px; margin-bottom: 44px; color: var(--muted); font-size: 12px; }
+.contact-hero h1 { margin: 16px 0 24px; font-size: clamp(42px, 5.2vw, 72px); line-height: 1.06; }
+.contact-hero h1 span { color: var(--teal); }
+.contact-intro { max-width: 620px; font-size: 16px; }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; padding: 48px var(--page-gutter); }
+.contact-office, .contact-enquiry { padding: clamp(26px, 3.4vw, 48px); border: 1px solid var(--line); border-radius: 20px; background: #fff; }
+.contact-enquiry { background: var(--deep); color: #fff; border-color: var(--deep); }
+.contact-icon { display: inline-flex; padding: 13px; border-radius: 16px; background: #e8f5f4; color: var(--teal); margin-bottom: 26px; }
+.contact-enquiry .contact-icon { background: #143850; color: #7cdee0; }
+.contact-grid h2 { font-size: clamp(32px, 3vw, 42px); line-height: 1.12; margin: 12px 0 18px; }
+.contact-enquiry p { color: #c3d1df; }
+.contact-enquiry .eyebrow { color: #7cdee0; }
+.contact-details { display: grid; gap: 23px; margin-top: 28px; padding-top: 26px; border-top: 1px solid var(--line); }
+.contact-details > div { display: flex; align-items: flex-start; gap: 14px; }
+.contact-details svg { margin-top: 3px; color: var(--teal); flex-shrink: 0; }
+.contact-details h3 { margin: 0 0 7px; font-size: 13px; }
+.contact-details a { display: block; width: fit-content; color: var(--muted); line-height: 1.8; overflow-wrap: anywhere; }
+.contact-details p { font-size: 14px; }
+.contact-topics { display: grid; gap: 18px; list-style: none; padding: 0; margin: 30px 0 34px; font-size: 14px; line-height: 1.6; }
+.contact-topics li { display: flex; gap: 12px; align-items: flex-start; }
+.contact-topics svg { flex-shrink: 0; color: #7cdee0; margin-top: 2px; }
+.contact-enquiry .teal-button { min-height: 50px; border: 0; cursor: pointer; }
+.contact-enquiry .contact-note { margin-top: 16px; font-size: 12px; }
+.contact-locations { padding: 12px var(--page-gutter) 64px; }
+.contact-locations h2, .contact-next h2 { font-size: clamp(32px, 3vw, 42px); line-height: 1.15; margin: 12px 0 30px; }
+.contact-location-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+.contact-location { border: 1px solid var(--line); border-radius: 16px; padding: 28px; background: #fff; }
+.contact-location > svg { color: var(--teal); }
+.contact-location h3 { font-size: 18px; margin: 18px 0; }
+.contact-address + .contact-address { border-top: 1px solid var(--line); margin-top: 20px; padding-top: 20px; }
+.contact-address address { font-style: normal; color: var(--muted); font-size: 14px; line-height: 1.8; }
+.contact-address .text-link { margin-top: 18px; font-size: 13px; }
+.contact-next {
+  padding: 48px var(--page-gutter) 58px;
+  background-color: #fff;
+  background-image:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.98), rgba(245, 250, 252, 0.94) 50%, rgba(239, 248, 250, 0.85)),
+    url("/images/contact/contact-desk.webp");
+  background-size: cover;
+  background-position: center, center 55%;
+  border-top: 1px solid var(--line);
+}
+.contact-next h2 { max-width: 620px; }
+.contact-next ol { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; list-style: none; padding: 0; margin: 36px 0 0; }
+.contact-next li { display: flex; gap: 16px; }
+.contact-next li > span { font-family: Georgia, serif; font-size: 28px; color: var(--teal); }
+.contact-next h3 { margin: 3px 0 10px; font-size: 15px; }
+.contact-next li p { font-size: 14px; }
+.contact-footer { padding: 30px var(--page-gutter); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; border-top: 1px solid var(--line); background: #fff; }
+.contact-footer > a { font-weight: 700; }
+.contact-footer p, .contact-footer small { color: var(--muted); font-size: 12px; }
+.contact-page a:hover { color: var(--teal); }
+.contact-page a:focus-visible, .contact-page button:focus-visible, .mobile-contact-link:focus-visible { outline: 3px solid var(--teal-bright); outline-offset: 5px; }
+@media (max-width: 1100px) {
+  .mobile-contact-link { display: inline-flex; grid-column: 1 / -1; justify-self: end; font-size: 13px; font-weight: 700; color: var(--teal); }
+  .site-header { row-gap: 12px; }
+  .contact-location-grid { gap: 14px; }
+  .contact-location { padding: 22px; }
+}
+@media (max-width: 760px) {
+  .contact-grid, .contact-location-grid, .contact-next ol { grid-template-columns: 1fr; }
+  .contact-hero {
+    padding: 24px 20px 40px;
+    background-image:
+      linear-gradient(90deg, rgba(248, 251, 253, 0.97), rgba(248, 251, 253, 0.86)),
+      url("/images/contact/contact-support.webp");
+    background-size: cover;
+    background-position: center, 65% center;
+  }
+  .contact-breadcrumb { margin-bottom: 30px; }
+  .contact-grid { padding: 28px 20px; gap: 20px; }
+  .contact-locations { padding: 16px 20px 40px; }
+  .contact-next { padding: 36px 20px; }
+  .contact-footer { padding: 26px 20px; flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 390px) {
+  .site-header { column-gap: 8px; }
+  .site-header .brand { gap: 8px; font-size: 14px; }
+  .site-header .brand img { width: 36px; height: auto; }
+  .site-header .journey-link { padding: 0 10px; font-size: 10px; }
+}
