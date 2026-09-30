@@ -28,6 +28,7 @@ export const metadata: Metadata = {
 
 const mainPages = [
   { label: "Home", href: "/", copy: "Start from the main study abroad guidance page." },
+  { label: "Blog", href: "/blog", copy: "Read practical study abroad guides and checklists." },
   { label: "Contact Us", href: "/contact", copy: "Find phone, email, office addresses and enquiry options." },
   { label: "XML Sitemap", href: "/sitemap.xml", copy: "Search engine sitemap generated for crawlers." }
 ];

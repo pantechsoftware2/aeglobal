@@ -5,3 +5,4 @@ SEO-003,sitewide,No generated robots route was present,app route inventory,high,
 SEO-004,destination pages,Destination pages had basic metadata but no canonical or structured data,app/destinations/[slug]/page.tsx,high,P2,Add route metadata breadcrumbs and CollectionPage JSON-LD,fixed
 SEO-005,operations,No durable SEO run state existed,ops/search absent before this run,high,P2,Create ops/search baseline config report and monthly prompt,fixed
 SEO-006,analytics and indexing,Search Console analytics and AI visibility evidence unavailable,no connected access,high,P2,Request access before claiming search or AI outcomes,blocked
+BLOG-001,/blog and /blog/[slug],No blog section existed for practical study abroad guides,footer showed Blog but routed to placeholder,high,P2,Add blog index article template starter guides schema and sitemap entries,fixed

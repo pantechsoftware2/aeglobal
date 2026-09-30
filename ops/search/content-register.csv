@@ -2,3 +2,8 @@ id,url,title,status,primary_intent,evidence,next_review
 HOME,https://aeglobal.study,Study Abroad Guidance,updated,study abroad counseling brand and service overview,repository content,2026-10-30
 CONTACT,https://aeglobal.study/contact,Contact Us,updated,student enquiry and office contact details,repository contact page,2026-10-30
 DESTINATIONS,https://aeglobal.study/destinations/*,Study destination pages,updated,destination shortlist and priority institution exploration,repository destination data,2026-10-30
+BLOG,https://aeglobal.study/blog,Study Abroad Blog,published,study abroad planning guides,repository-authored practical guides,2026-10-30
+BLOG-001,https://aeglobal.study/blog/how-to-build-a-study-abroad-shortlist,How to build a study abroad shortlist that actually fits you,published,university shortlisting guidance,source-backed by site service scope and advisor workflow,2026-10-30
+BLOG-002,https://aeglobal.study/blog/study-abroad-application-documents-checklist,Study abroad application documents: what to prepare first,published,application document preparation,source-backed by site service scope and advisor workflow,2026-10-30
+BLOG-003,https://aeglobal.study/blog/compare-study-destinations-before-applying,How to compare study destinations before you apply,published,destination comparison guidance,source-backed by site destination and counseling scope,2026-10-30
+BLOG-004,https://aeglobal.study/blog/visa-preparation-starts-before-the-offer,Why visa preparation starts before the offer letter,published,visa preparation guidance,source-backed by site visa guidance scope,2026-10-30

@@ -109,6 +109,7 @@ const footerGroups = [
 const getFooterLink = (link: string) => {
   if (link === "Contact Us") return "/contact";
   if (link === "Sitemap") return "/sitemap";
+  if (link === "Blog") return "/blog";
   return "#";
 };
 
