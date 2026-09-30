@@ -1,0 +1,13 @@
+{
+  "status": "deployment_stale_or_unverified",
+  "reason": "The domain https://aeglobal.study is live, but production fetches on 2026-09-30 returned the older SEO output. /robots.txt and /sitemap.xml returned 404.",
+  "tested_artifact": null,
+  "rollback_reference": null,
+  "changed_public_routes": [
+    "/",
+    "/contact",
+    "/destinations/[slug]",
+    "/sitemap.xml",
+    "/robots.txt"
+  ]
+}

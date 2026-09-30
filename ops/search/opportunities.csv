@@ -1,0 +1,7 @@
+id,affected_urls_or_template,observation,evidence,confidence,severity,proposed_fix,status
+SEO-001,all pages,Shared metadata was minimal and lacked social preview defaults,app/layout.tsx,high,P1,Add title template default description Open Graph and Twitter metadata,fixed
+SEO-002,sitewide,No visible sitemap.xml file was present in the project,app route inventory,high,P1,Add static app/sitemap.xml covering home contact sitemap and destination pages,fixed
+SEO-003,sitewide,No generated robots route was present,app route inventory,high,P2,Add app/robots.ts allowing public pages and linking sitemap,fixed
+SEO-004,destination pages,Destination pages had basic metadata but no canonical or structured data,app/destinations/[slug]/page.tsx,high,P2,Add route metadata breadcrumbs and CollectionPage JSON-LD,fixed
+SEO-005,operations,No durable SEO run state existed,ops/search absent before this run,high,P2,Create ops/search baseline config report and monthly prompt,fixed
+SEO-006,analytics and indexing,Search Console analytics and AI visibility evidence unavailable,no connected access,high,P2,Request access before claiming search or AI outcomes,blocked

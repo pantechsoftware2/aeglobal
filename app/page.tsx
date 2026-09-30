@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import SiteHeader from "./components/SiteHeader";
@@ -19,6 +20,27 @@ import TestimonialCarousel from "./components/TestimonialCarousel";
 import LeadEnquiry from "./components/LeadEnquiry";
 import SupportServiceList from "./components/SupportServiceList";
 import { destinations } from "./data/destinations";
+import { brandName, defaultDescription, defaultOpenGraph, jsonLd, siteUrl } from "./lib/seo";
+
+export const metadata: Metadata = {
+  title: `${brandName} | Study Abroad Guidance`,
+  description: defaultDescription,
+  alternates: {
+    canonical: "/"
+  },
+  openGraph: {
+    ...defaultOpenGraph,
+    title: `${brandName} | Study Abroad Guidance`,
+    description: defaultDescription,
+    url: "/"
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${brandName} | Study Abroad Guidance`,
+    description: defaultDescription,
+    images: ["/images/generated-destinations-landmarks-v2.webp"]
+  }
+};
 
 const trustPoints = [
   {
@@ -81,12 +103,35 @@ const footerGroups = [
   ["Explore", "Study Destinations", "Universities", "Courses", "Scholarships", "Services"],
   ["Students", "Application Support", "Visa Guidance", "Accommodation", "Pre-Departure", "Counseling"],
   ["Company", "Contact Us", "Careers", "Partners"],
-  ["Resources", "Blog", "Study Guides", "FAQs", "News & Updates"]
+  ["Resources", "Sitemap", "Blog", "Study Guides", "FAQs", "News & Updates"]
 ];
 
+const getFooterLink = (link: string) => {
+  if (link === "Contact Us") return "/contact";
+  if (link === "Sitemap") return "/sitemap";
+  return "#";
+};
+
 export default function HomePage() {
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${siteUrl}/#study-abroad-counseling`,
+    name: "Study abroad counseling",
+    serviceType: "Study abroad counseling and application guidance",
+    provider: { "@id": `${siteUrl}/#organization` },
+    areaServed: destinations.map((destination) => destination.name),
+    audience: {
+      "@type": "Audience",
+      audienceType: "Students planning international study"
+    },
+    description:
+      "Course selection, applications, visa preparation and pre-departure planning for students comparing study abroad options."
+  };
+
   return (
     <main>
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(serviceSchema)} />
       <SiteHeader />
 
       <section className="hero">
@@ -267,14 +312,14 @@ export default function HomePage() {
             <div key={title}>
               <h3>{title}</h3>
               {links.map((link) => (
-                <Link href={link === "Contact Us" ? "/contact" : "#"} key={link}>{link}</Link>
+                <Link href={getFooterLink(link)} key={link}>{link}</Link>
               ))}
             </div>
           ))}
         </div>
         <div className="footer-bottom">
           <span>© 2026 AE Global Group. All rights reserved.</span>
-          <span>Privacy Policy&nbsp;&nbsp;&nbsp;&nbsp; Terms &amp; Conditions</span>
+          <span><Link href="/sitemap">Sitemap</Link>&nbsp;&nbsp;&nbsp;&nbsp; Privacy Policy&nbsp;&nbsp;&nbsp;&nbsp; Terms &amp; Conditions</span>
         </div>
       </footer>
     </main>

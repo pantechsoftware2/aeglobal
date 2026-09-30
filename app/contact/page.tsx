@@ -3,10 +3,37 @@ import Link from "next/link";
 import { ArrowRight, Check, Clock, Mail, MapPin, MessageSquare, Phone } from "lucide-react";
 import SiteHeader from "../components/SiteHeader";
 import LeadEnquiry from "../components/LeadEnquiry";
+import { brandName, contactPoints, defaultOpenGraph, jsonLd, offices as schemaOffices, siteUrl } from "../lib/seo";
+
+const contactDescription =
+  "Talk to AE Global Group about course selection, applications, visa preparation and your next study abroad step.";
 
 export const metadata: Metadata = {
-  title: "Contact Us | AE Global Group",
-  description: "Talk to AE Global Group about course selection, applications and your next step towards studying abroad."
+  title: "Contact Us",
+  description: contactDescription,
+  alternates: {
+    canonical: "/contact"
+  },
+  openGraph: {
+    ...defaultOpenGraph,
+    title: `Contact Us | ${brandName}`,
+    description: contactDescription,
+    url: "/contact",
+    images: [
+      {
+        url: "/images/contact/contact-support.webp",
+        width: 1200,
+        height: 630,
+        alt: "AE Global Group student enquiry support"
+      }
+    ]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Contact Us | ${brandName}`,
+    description: contactDescription,
+    images: ["/images/contact/contact-support.webp"]
+  }
 };
 
 const offices = [
@@ -16,8 +43,35 @@ const offices = [
 ];
 
 export default function ContactPage() {
+  const contactSchema = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "@id": `${siteUrl}/contact#contact`,
+    url: `${siteUrl}/contact`,
+    name: `Contact ${brandName}`,
+    description: contactDescription,
+    about: { "@id": `${siteUrl}/#organization` },
+    mainEntity: {
+      "@type": "EducationalOrganization",
+      "@id": `${siteUrl}/#organization`,
+      name: brandName,
+      email: contactPoints.email,
+      telephone: contactPoints.phone,
+      openingHours: contactPoints.hours,
+      address: schemaOffices.map((office) => ({
+        "@type": "PostalAddress",
+        streetAddress: office.streetAddress,
+        addressLocality: office.addressLocality,
+        addressRegion: office.addressRegion,
+        postalCode: office.postalCode,
+        addressCountry: office.addressCountry
+      }))
+    }
+  };
+
   return (
     <div className="contact-page">
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(contactSchema)} />
       <SiteHeader contactPage />
       <main id="main-content">
         <section className="contact-hero" aria-labelledby="contact-title">
@@ -83,7 +137,7 @@ export default function ContactPage() {
           </ol>
         </section>
       </main>
-      <footer className="contact-footer"><Link href="/">AE Global Group</Link><p>Clear options. Careful preparation. No guesswork.</p><small>© 2026 AE Global Group. All rights reserved.</small></footer>
+      <footer className="contact-footer"><Link href="/">AE Global Group</Link><p>Clear options. Careful preparation. No guesswork.</p><small>© 2026 AE Global Group. All rights reserved.</small><Link href="/sitemap">Sitemap</Link></footer>
     </div>
   );
 }

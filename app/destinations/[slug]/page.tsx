@@ -7,6 +7,7 @@ import { destinations, featuredDestinations } from "../../data/destinations";
 import SiteHeader from "../../components/SiteHeader";
 import InstitutionDirectory from "../../components/InstitutionDirectory";
 import LeadEnquiry from "../../components/LeadEnquiry";
+import { brandName, defaultOpenGraph, jsonLd, siteUrl, toAbsoluteUrl } from "../../lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -18,7 +19,37 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const destination = destinations.find((item) => item.slug === slug);
   if (!destination) return { title: "Destination not found | AE Global Group" };
-  return { title: `Study in ${destination.label} | AE Global Group`, description: `Explore institutions and study pathways in ${destination.name}. Get guidance on your shortlist, applications and next steps with AE Global Group.` };
+
+  const description = `Explore study pathways in ${destination.name}. Get guidance on your shortlist, applications, documents and next steps with AE Global Group.`;
+  const image = destination.institutions[0]?.image ?? "/images/generated-destinations-landmarks-v2.webp";
+
+  return {
+    title: `Study in ${destination.label}`,
+    description,
+    alternates: {
+      canonical: `/destinations/${destination.slug}`
+    },
+    openGraph: {
+      ...defaultOpenGraph,
+      title: `Study in ${destination.label} | ${brandName}`,
+      description,
+      url: `/destinations/${destination.slug}`,
+      images: [
+        {
+          url: image,
+          width: 1200,
+          height: 630,
+          alt: `Study in ${destination.label} with AE Global Group`
+        }
+      ]
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Study in ${destination.label} | ${brandName}`,
+      description,
+      images: [image]
+    }
+  };
 }
 
 export default async function DestinationPage({ params }: Props) {
@@ -26,8 +57,67 @@ export default async function DestinationPage({ params }: Props) {
   const destination = destinations.find((item) => item.slug === slug);
   if (!destination) notFound();
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: siteUrl
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Study destinations",
+        item: `${siteUrl}/#destinations`
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: destination.label,
+        item: `${siteUrl}/destinations/${destination.slug}`
+      }
+    ]
+  };
+  const destinationSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": `${siteUrl}/destinations/${destination.slug}#page`,
+    url: `${siteUrl}/destinations/${destination.slug}`,
+    name: `Study in ${destination.label}`,
+    description: `Study destination guidance for ${destination.name}, including shortlist, application and document planning support.`,
+    about: {
+      "@type": "Place",
+      name: destination.name
+    },
+    publisher: { "@id": `${siteUrl}/#organization` },
+    mainEntity: destination.institutions.length
+      ? {
+          "@type": "ItemList",
+          name: `Priority institutions for ${destination.label}`,
+          itemListElement: destination.institutions.map((institution, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            item: {
+              "@type": "EducationalOrganization",
+              name: institution.name,
+              url: institution.website,
+              image: toAbsoluteUrl(institution.image),
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: institution.location
+              }
+            }
+          }))
+        }
+      : undefined
+  };
+
   return (
     <div className="study-page">
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd([breadcrumbSchema, destinationSchema])} />
       <SiteHeader destinationPage />
       <main>
         <section className="study-hero">
@@ -51,7 +141,7 @@ export default async function DestinationPage({ params }: Props) {
           <ul>{["Compare course and institution fit", "Understand entry requirements", "Plan documents and application timelines"].map((text) => <li key={text}><Check size={19} aria-hidden="true" />{text}</li>)}</ul>
         </section>
       </main>
-      <footer className="study-footer"><Link href="/">AE Global Group</Link><p>Clear options. Careful preparation. No guesswork.</p><Link href="/contact">Contact Us <ArrowRight size={14} /></Link></footer>
+      <footer className="study-footer"><Link href="/">AE Global Group</Link><p>Clear options. Careful preparation. No guesswork.</p><Link href="/sitemap">Sitemap <ArrowRight size={14} /></Link><Link href="/contact">Contact Us <ArrowRight size={14} /></Link></footer>
     </div>
   );
 }

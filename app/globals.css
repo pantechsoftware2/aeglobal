@@ -1976,6 +1976,11 @@ blockquote {
   font-size: 12px;
 }
 
+.footer-bottom a {
+  color: var(--ink);
+  font-weight: 700;
+}
+
 .chat-widget {
   position: fixed;
   right: 0;
@@ -3230,6 +3235,171 @@ blockquote {
 .contact-footer p, .contact-footer small { color: var(--muted); font-size: 12px; }
 .contact-page a:hover { color: var(--teal); }
 .contact-page a:focus-visible, .contact-page button:focus-visible, .mobile-contact-link:focus-visible { outline: 3px solid var(--teal-bright); outline-offset: 5px; }
+
+.sitemap-page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #fff 0%, var(--wash) 100%);
+}
+
+.sitemap-page main {
+  padding: 68px var(--page-gutter) 92px;
+}
+
+.sitemap-hero {
+  max-width: 780px;
+  margin-bottom: 44px;
+}
+
+.sitemap-hero h1 {
+  margin: 14px 0 18px;
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(46px, 6vw, 84px);
+  font-weight: 400;
+  line-height: 0.96;
+}
+
+.sitemap-hero h1 span {
+  color: var(--teal);
+}
+
+.sitemap-hero p {
+  max-width: 640px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.sitemap-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(280px, .7fr);
+  gap: 24px;
+}
+
+.sitemap-card {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 28px;
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: 0 18px 48px rgba(6, 26, 64, 0.06);
+}
+
+.sitemap-card-wide {
+  grid-column: 1 / -1;
+}
+
+.sitemap-card h2 {
+  margin: 18px 0 16px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(30px, 3vw, 44px);
+  font-weight: 400;
+}
+
+.sitemap-card p {
+  margin: -6px 0 22px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.sitemap-icon {
+  display: grid;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  border-radius: 12px;
+  color: var(--teal);
+  background: #e9f7f7;
+}
+
+.sitemap-link-list,
+.sitemap-simple-list {
+  display: grid;
+  gap: 12px;
+}
+
+.sitemap-link-list a,
+.sitemap-simple-list a,
+.sitemap-destination,
+.sitemap-country-list a {
+  border: 1px solid rgba(184, 205, 226, 0.76);
+  color: var(--ink);
+  background: #fff;
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+.sitemap-link-list a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.sitemap-link-list span,
+.sitemap-destination span {
+  display: grid;
+  gap: 5px;
+}
+
+.sitemap-link-list small,
+.sitemap-destination small {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.sitemap-simple-list a {
+  border-radius: 10px;
+  padding: 13px 14px;
+  font-weight: 800;
+}
+
+.sitemap-destination-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.sitemap-destination {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 84px;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.sitemap-country-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.sitemap-country-list a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 999px;
+  padding: 9px 12px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.sitemap-link-list a:hover,
+.sitemap-link-list a:focus-visible,
+.sitemap-simple-list a:hover,
+.sitemap-simple-list a:focus-visible,
+.sitemap-destination:hover,
+.sitemap-destination:focus-visible,
+.sitemap-country-list a:hover,
+.sitemap-country-list a:focus-visible {
+  border-color: rgba(0, 127, 136, 0.38);
+  box-shadow: 0 12px 28px rgba(6, 26, 64, 0.08);
+  transform: translateY(-2px);
+}
+
 @media (max-width: 1100px) {
   .mobile-contact-link { display: inline-flex; grid-column: 1 / -1; justify-self: end; font-size: 13px; font-weight: 700; color: var(--teal); }
   .site-header { row-gap: 12px; }
@@ -3251,6 +3421,9 @@ blockquote {
   .contact-locations { padding: 16px 20px 40px; }
   .contact-next { padding: 36px 20px; }
   .contact-footer { padding: 26px 20px; flex-direction: column; align-items: flex-start; }
+  .sitemap-page main { padding: 42px 20px 64px; }
+  .sitemap-grid, .sitemap-destination-grid { grid-template-columns: 1fr; }
+  .sitemap-card { padding: 22px; }
 }
 @media (max-width: 390px) {
   .site-header { column-gap: 8px; }

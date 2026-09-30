@@ -1,0 +1,6 @@
+id,affected_urls_or_template,observation,evidence,confidence,severity,business_effect,proposed_fix,status,blocker_or_na_reason
+SEO-001,all pages,Shared metadata was minimal and lacked consistent social preview defaults,app/layout.tsx,high,P1,Pages may render less useful snippets and previews,Add shared metadata defaults,fixed,
+SEO-002,sitewide,No visible sitemap.xml file was present in the project,route inventory,high,P1,Search engines have less explicit URL discovery support,Add static app/sitemap.xml,fixed,
+SEO-003,sitewide,No generated robots route was present,route inventory,high,P2,Sitemap not declared through robots.txt,Add generated robots route,fixed,
+SEO-004,destination pages,No canonical or JSON-LD was present for destination templates,app/destinations/[slug]/page.tsx,high,P2,Lower machine-readable clarity for destination and institution pages,Add canonical Open Graph Twitter BreadcrumbList CollectionPage and ItemList schema,fixed,
+SEO-006,search and conversion evidence,No Search Console analytics or CRM access was available,access inventory,high,P2,No rankings clicks or lead impact can be measured from this session,Request access and run monthly measurement,blocked,Owner access required

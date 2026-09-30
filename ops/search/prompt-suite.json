@@ -1,0 +1,22 @@
+{
+  "created_at": "2026-09-30",
+  "status": "draft_unrun",
+  "notes": "No AI visibility sampling was run because consumer AI/search access and measurement permissions were not available in this session.",
+  "prompts": [
+    {
+      "id": "DISCOVERY-001",
+      "intent_group": "neutral_discovery",
+      "prompt": "Which study abroad consultants help students compare universities, applications, visa preparation and pre-departure planning?"
+    },
+    {
+      "id": "DESTINATION-001",
+      "intent_group": "destination_evaluation",
+      "prompt": "What should an international student compare before choosing a study destination and university shortlist?"
+    },
+    {
+      "id": "BRAND-001",
+      "intent_group": "brand_identity",
+      "prompt": "What does AE Global Group do, and where is the primary evidence?"
+    }
+  ]
+}

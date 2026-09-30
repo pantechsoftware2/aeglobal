@@ -1,0 +1,5 @@
+{"observed_at":"2026-09-30","source":"repository","path":"app/layout.tsx","fact":"Existing metadataBase fallback used https://aeglobal-teal.vercel.app."}
+{"observed_at":"2026-09-30","source":"repository","path":"app/contact/page.tsx","fact":"Contact page contains phone, email, hours and office addresses."}
+{"observed_at":"2026-09-30","source":"repository","path":"app/data/destinations.ts","fact":"Destination and priority institution listings are stored as structured data."}
+{"observed_at":"2026-09-30","source":"owner message","path":"conversation","fact":"Owner supplied Facebook, Instagram, YouTube and LinkedIn URLs."}
+{"observed_at":"2026-09-30","source":"public fetch","path":"https://aeglobal-teal.vercel.app","fact":"Homepage returned HTTP 200 and title 'AE Global Group | Study Abroad' during initial check."}

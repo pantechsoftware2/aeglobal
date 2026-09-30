@@ -1,0 +1,25 @@
+{
+  "observed_at": "2026-09-30",
+  "brand": "AE Global Group",
+  "site_url": "https://aeglobal.study",
+  "offer": "Study abroad counseling, university shortlisting, application support, visa guidance, accommodation and pre-departure planning.",
+  "primary_conversion": "student enquiry submission",
+  "contact": {
+    "phone": ["9831216414", "033-48095556"],
+    "email": "contact@abroadedus.com",
+    "hours": ["Monday-Friday 09:00-20:00", "Saturday-Sunday 10:30-22:00"]
+  },
+  "offices": [
+    "1228 Hibiscus Way, Livermore, CA 94551",
+    "16, Strand Road, Diamond Heritage, 1st Floor, Suite No. 201E, Kolkata 700001",
+    "257, Lalkuthi Bazar, Mazer road, Mirpur 1, Dhaka, Bangladesh"
+  ],
+  "verified_access": {
+    "source_repository": "available",
+    "public_site_fetch": "available",
+    "search_console": "unavailable",
+    "analytics": "unavailable",
+    "hosting_project": "unavailable",
+    "cms": "not_applicable"
+  }
+}

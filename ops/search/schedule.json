@@ -1,0 +1,8 @@
+{
+  "schedule_status": "not_active",
+  "reason": "No supported scheduler, hosting project access, Search Console access or Codex scheduled task setup was available in this session.",
+  "desired_cadence": "monthly",
+  "timezone": "Asia/Calcutta",
+  "suggested_time": "09:00",
+  "next_manual_review": "2026-10-30"
+}
