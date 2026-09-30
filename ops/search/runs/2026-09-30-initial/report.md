@@ -1,6 +1,6 @@
 # Initial SEO/AEO Implementation Report
 
-Status: implemented locally and verified in a production build. Production domain is live, but it appears to be serving an older deployment.
+Status: fixed_live on `https://aeglobal.study`.
 
 ## Diagnosed
 
@@ -28,10 +28,16 @@ Status: implemented locally and verified in a production build. Production domai
 - Local production fetch verified `/`, `/contact`, `/destinations/united-kingdom`, `/robots.txt` and `/sitemap.xml`.
 - Static sitemap contains 31 URLs.
 
+## Production Verification
+
+- `https://aeglobal.study/` returned 200 with title `AE Global Group | Study Abroad Guidance`.
+- `https://aeglobal.study/sitemap.xml` returned 200 and includes destination URLs.
+- `https://aeglobal.study/robots.txt` returned 200 and points to `https://aeglobal.study/sitemap.xml`.
+- Homepage HTML includes JSON-LD structured data.
+
 ## Not Completed
 
 - No Search Console, analytics or AI visibility sampling was run.
-- Production verification did not pass: `https://aeglobal.study/robots.txt` and `https://aeglobal.study/sitemap.xml` returned 404 on 2026-09-30, and fetched HTML did not include the latest canonical/schema output.
 - No monthly scheduler was activated.
 
 ## Next Required Access

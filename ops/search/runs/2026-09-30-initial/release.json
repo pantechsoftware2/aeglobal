@@ -1,8 +1,8 @@
 {
-  "status": "deployment_stale_or_unverified",
-  "reason": "The domain https://aeglobal.study is live, but production fetches on 2026-09-30 returned the older SEO output. /robots.txt and /sitemap.xml returned 404.",
-  "tested_artifact": null,
-  "rollback_reference": null,
+  "status": "fixed_live",
+  "reason": "Production fetches on 2026-09-30 verified the latest SEO output on https://aeglobal.study. /robots.txt and /sitemap.xml returned 200.",
+  "tested_artifact": "git commit ee90adf",
+  "rollback_reference": "previous GitHub/Vercel deployment before ee90adf",
   "changed_public_routes": [
     "/",
     "/contact",

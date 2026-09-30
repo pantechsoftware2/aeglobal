@@ -34,14 +34,14 @@ No independent subagent review was used. No production deployment or live post-d
 
 ## Production Check
 
-Checked `https://aeglobal.study` on 2026-09-30 after the owner reported production was live.
+Checked `https://aeglobal.study` on 2026-09-30 after pushing commit `ee90adf` to `origin/main`.
 
 | route | status | observation |
 | --- | ---: | --- |
-| `/` | 200 | Page loaded, but the title was the older `AE Global Group | Study Abroad` and the fetched HTML did not show the latest canonical/schema output. |
+| `/` | 200 | Title is `AE Global Group | Study Abroad Guidance`; HTML includes JSON-LD schema and final-domain canonical data. |
 | `/contact` | 200 | Page loaded. |
 | `/destinations/united-kingdom` | 200 | Page loaded. |
-| `/robots.txt` | 404 | Missing on production. |
-| `/sitemap.xml` | 404 | Missing on production. |
+| `/robots.txt` | 200 | Points to `https://aeglobal.study/sitemap.xml`. |
+| `/sitemap.xml` | 200 | Includes destination URLs, including `/destinations/united-kingdom`. |
 
-Conclusion: production is reachable, but the latest SEO build is not live yet or the deployment output is stale.
+Conclusion: production is serving the latest SEO build.
