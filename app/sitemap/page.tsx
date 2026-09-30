@@ -28,16 +28,22 @@ export const metadata: Metadata = {
 
 const mainPages = [
   { label: "Home", href: "/", copy: "Start from the main study abroad guidance page." },
+  { label: "Study Destinations", href: "/study-destinations", copy: "Compare countries, intakes, costs and visa paths before you choose." },
+  { label: "Universities", href: "/universities", copy: "Understand how AE Global Group builds a practical shortlist." },
+  { label: "Courses", href: "/courses", copy: "Review course-fit planning before applications begin." },
+  { label: "Scholarships", href: "/scholarships", copy: "Plan funding, aid and scholarship questions early." },
+  { label: "Services", href: "/services", copy: "See the full support process from counselling to departure." },
   { label: "Blog", href: "/blog", copy: "Read practical study abroad guides and checklists." },
+  { label: "FAQs", href: "/faq", copy: "Find answers about destinations, applications, visas and next steps." },
   { label: "Contact Us", href: "/contact", copy: "Find phone, email, office addresses and enquiry options." },
   { label: "XML Sitemap", href: "/sitemap.xml", copy: "Search engine sitemap generated for crawlers." }
 ];
 
 const homeSections = [
-  { label: "Study Destinations", href: "/#destinations" },
-  { label: "Universities", href: "/#universities" },
-  { label: "Courses", href: "/#courses" },
-  { label: "Services", href: "/#services" },
+  { label: "Study Destinations section", href: "/#destinations" },
+  { label: "Universities section", href: "/#partners" },
+  { label: "Courses section", href: "/#courses" },
+  { label: "Services section", href: "/#services" },
   { label: "Contact section", href: "/#contact" }
 ];
 

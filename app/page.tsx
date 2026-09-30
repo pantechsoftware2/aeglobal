@@ -110,6 +110,17 @@ const getFooterLink = (link: string) => {
   if (link === "Contact Us") return "/contact";
   if (link === "Sitemap") return "/sitemap";
   if (link === "Blog") return "/blog";
+  if (link === "FAQs") return "/faq";
+  if (link === "Study Destinations") return "/study-destinations";
+  if (link === "Universities") return "/universities";
+  if (link === "Courses") return "/courses";
+  if (link === "Scholarships") return "/scholarships";
+  if (link === "Services") return "/services";
+  if (link === "Application Support") return "/services";
+  if (link === "Visa Guidance") return "/services";
+  if (link === "Accommodation") return "/services";
+  if (link === "Pre-Departure") return "/services";
+  if (link === "Counseling") return "/services";
   return "#";
 };
 
@@ -143,7 +154,7 @@ export default function HomePage() {
             in one clear study abroad process built for students who want straight answers.
           </p>
           <div className="button-row">
-            <a className="primary-button" href="#destinations">
+            <a className="primary-button" href="/study-destinations">
               Show Me My Options <ArrowRight size={16} />
             </a>
             <LeadEnquiry className="secondary-button">I&apos;m Ready to Start</LeadEnquiry>
@@ -169,7 +180,7 @@ export default function HomePage() {
             <p className="eyebrow">Study Destinations</p>
             <h2>Don&apos;t pick a country<br />because everyone else is.</h2>
             <p>Compare course fit, budget, intakes, visa rules and post-study plans before you commit.</p>
-            <a className="text-link" href="#">
+            <a className="text-link" href="/study-destinations">
               Compare destinations <ArrowRight size={15} />
             </a>
           </div>
@@ -223,7 +234,7 @@ export default function HomePage() {
           <p className="eyebrow">University Guidance</p>
           <h2>Your shortlist should<br />make sense on paper.</h2>
           <p>We help you compare universities and courses using your academic record, budget, intake preference and career goals.</p>
-          <a className="text-link" href="#">
+          <a className="text-link" href="/universities">
             Build my shortlist <ArrowRight size={15} />
           </a>
         </div>
@@ -296,7 +307,7 @@ export default function HomePage() {
         </div>
         <div className="button-row">
           <LeadEnquiry className="primary-button">I&apos;m Ready to Start <ArrowRight size={16} /></LeadEnquiry>
-          <a className="secondary-button" href="#destinations">Show Me My Options</a>
+          <a className="secondary-button" href="/study-destinations">Show Me My Options</a>
         </div>
       </section>
 

@@ -30,7 +30,7 @@ export default function InstitutionDirectory({ institutions, country }: { instit
                 <div className="institution-media">
                   <Image className="institution-photo" src={institution.image} alt="" fill sizes="(max-width: 760px) 100vw, (max-width: 1000px) 50vw, 33vw" />
                   <span className={`institution-logo ${institution.logoTone === "dark" ? "institution-logo-dark" : ""}`}>
-                    <Image src={institution.logo} alt={`${institution.name} logo`} width={132} height={66} unoptimized />
+                    <Image className="institution-logo-image" src={institution.logo} alt={`${institution.name} logo`} width={150} height={76} unoptimized />
                   </span>
                 </div>
                 <div className="institution-card-body">

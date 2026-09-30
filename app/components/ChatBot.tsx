@@ -239,6 +239,22 @@ export default function ChatBot() {
     };
   }, []);
 
+  useEffect(() => {
+    const handleOpenChat = () => {
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
+        closeTimeoutRef.current = null;
+      }
+
+      setIsClosing(false);
+      setIsOpen(true);
+    };
+
+    window.addEventListener("ae-global-open-chat", handleOpenChat);
+
+    return () => window.removeEventListener("ae-global-open-chat", handleOpenChat);
+  }, []);
+
   const askQuestion = async (question: string) => {
     const trimmedQuestion = question.trim();
 

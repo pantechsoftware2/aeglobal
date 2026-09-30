@@ -71,7 +71,7 @@ export default async function DestinationPage({ params }: Props) {
         "@type": "ListItem",
         position: 2,
         name: "Study destinations",
-        item: `${siteUrl}/#destinations`
+        item: `${siteUrl}/study-destinations`
       },
       {
         "@type": "ListItem",
@@ -121,7 +121,7 @@ export default async function DestinationPage({ params }: Props) {
       <SiteHeader destinationPage />
       <main>
         <section className="study-hero">
-          <nav className="contact-breadcrumb" aria-label="Breadcrumb"><Link href="/">Home</Link><span aria-hidden="true">/</span><Link href="/#destinations">Study destinations</Link><span aria-hidden="true">/</span><span aria-current="page">{destination.label}</span></nav>
+          <nav className="contact-breadcrumb" aria-label="Breadcrumb"><Link href="/">Home</Link><span aria-hidden="true">/</span><Link href="/study-destinations">Study destinations</Link><span aria-hidden="true">/</span><span aria-current="page">{destination.label}</span></nav>
           <div className="study-hero-grid">
             <div><p className="eyebrow">Your destination. Your direction.</p><h1>Study in<br /><span>{destination.label}.</span></h1><p className="study-hero-copy">Find the right fit for your next chapter. Explore institutions in {destination.name} and get clear guidance on where to begin.</p><div className="button-row"><a className="primary-button" href="#institutions">{destination.institutions.length ? "Explore institutions" : "Explore your options"} <ArrowDown size={16} /></a><LeadEnquiry className="study-advisor-link" country={destination.name}>Talk to an advisor <ArrowRight size={16} /></LeadEnquiry></div></div>
             <aside className="study-destination-summary" aria-label={`${destination.label} at a glance`}>
