@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-export const siteUrl = "https://aeglobal.study";
+export const siteUrl = "https://www.aeglobal.study";
 
 export const brandName = "AE Global Group";
 
