@@ -137,7 +137,6 @@ export default function ContactPage() {
           </ol>
         </section>
       </main>
-      <footer className="contact-footer"><Link href="/">AE Global Group</Link><p>Clear options. Careful preparation. No guesswork.</p><small>© 2026 AE Global Group. All rights reserved.</small><Link href="/sitemap">Sitemap</Link></footer>
     </div>
   );
 }

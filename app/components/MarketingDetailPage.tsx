@@ -1,16 +1,20 @@
-import Image from "next/image";
 import Link from "next/link";
+import type { CSSProperties } from "react";
 import { ArrowRight, Check, Sparkles } from "lucide-react";
 import type { MarketingPage } from "../data/marketingPages";
 import LeadEnquiry from "./LeadEnquiry";
 import SiteHeader from "./SiteHeader";
 
 export default function MarketingDetailPage({ page }: { page: MarketingPage }) {
+  const heroStyle = {
+    "--marketing-hero-image": `url(${page.heroImage})`
+  } as CSSProperties & Record<"--marketing-hero-image", string>;
+
   return (
     <div className="marketing-detail-page">
       <SiteHeader activePage={page.key} />
       <main>
-        <section className="marketing-hero">
+        <section className="marketing-hero" style={heroStyle}>
           <div className="marketing-hero-copy">
             <nav className="contact-breadcrumb" aria-label="Breadcrumb">
               <Link href="/">Home</Link>
@@ -28,7 +32,6 @@ export default function MarketingDetailPage({ page }: { page: MarketingPage }) {
             </div>
           </div>
           <div className="marketing-hero-visual">
-            <Image src={page.heroImage} alt={page.heroAlt} fill sizes="(max-width: 900px) 100vw, 42vw" priority />
             <div className="marketing-stat-card">
               <strong>{page.stat.value}</strong>
               <span>{page.stat.label}</span>

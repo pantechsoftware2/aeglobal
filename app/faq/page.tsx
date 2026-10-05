@@ -19,13 +19,21 @@ export const metadata: Metadata = {
     ...defaultOpenGraph,
     title: `FAQs | ${brandName}`,
     description: faqDescription,
-    url: "/faq"
+    url: "/faq",
+    images: [
+      {
+        url: "/images/faq-ai-hero.webp",
+        width: 1200,
+        height: 630,
+        alt: "Study abroad FAQ support background"
+      }
+    ]
   },
   twitter: {
     card: "summary_large_image",
     title: `FAQs | ${brandName}`,
     description: faqDescription,
-    images: ["/images/generated-destinations-landmarks-v2.webp"]
+    images: ["/images/faq-ai-hero.webp"]
   }
 };
 

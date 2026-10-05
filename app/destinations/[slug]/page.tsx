@@ -141,7 +141,6 @@ export default async function DestinationPage({ params }: Props) {
           <ul>{["Compare course and institution fit", "Understand entry requirements", "Plan documents and application timelines"].map((text) => <li key={text}><Check size={19} aria-hidden="true" />{text}</li>)}</ul>
         </section>
       </main>
-      <footer className="study-footer"><Link href="/">AE Global Group</Link><p>Clear options. Careful preparation. No guesswork.</p><Link href="/sitemap">Sitemap <ArrowRight size={14} /></Link><Link href="/contact">Contact Us <ArrowRight size={14} /></Link></footer>
     </div>
   );
 }

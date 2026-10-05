@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import ChatBot from "./components/ChatBot";
 import SocialMediaDock from "./components/SocialMediaDock";
+import SiteFooter from "./components/SiteFooter";
 import {
   brandName,
   defaultDescription,
@@ -55,6 +56,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={jsonLd([organizationSchema, websiteSchema])}
         />
         {children}
+        <SiteFooter />
         <SocialMediaDock />
         <ChatBot />
       </body>
