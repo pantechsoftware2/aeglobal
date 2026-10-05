@@ -116,7 +116,7 @@ export default function HomePage() {
   };
 
   return (
-    <main>
+    <main id="top">
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(serviceSchema)} />
       <SiteHeader />
 

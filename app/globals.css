@@ -129,7 +129,7 @@
   --brand-light-blue: #b9d7dc;
   --brand-red: #e64444;
   --page-gutter: clamp(28px, 7vw, 112px);
-  --site-header-height: 82px;
+  --site-header-height: 80px;
 }
 
 * {
@@ -223,9 +223,9 @@ p {
   align-items: center;
   gap: 30px;
   padding: 18px var(--page-gutter);
-  border-bottom: 1px solid rgba(220, 228, 236, 0.72);
+  border-bottom: 1px solid rgba(220, 228, 236, 0.38);
   background: rgba(255, 255, 255, 0.92);
-  box-shadow: 0 10px 30px rgba(0, 27, 63, 0.06);
+  box-shadow: 0 4px 16px rgba(0, 27, 63, 0.035);
   backdrop-filter: blur(18px);
 }
 
