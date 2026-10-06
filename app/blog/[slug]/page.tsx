@@ -93,7 +93,7 @@ export default async function BlogPostPage({ params }: Props) {
           </header>
 
           <div className="blog-post-image">
-            <Image src={post.heroImage} alt="" fill sizes="(max-width: 900px) 100vw, 880px" priority />
+            <Image src={post.heroImage} alt={`${post.title} guide image`} fill sizes="(max-width: 900px) 100vw, 880px" priority />
           </div>
 
           <section className="blog-takeaway">

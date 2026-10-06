@@ -154,7 +154,7 @@ export default function StudyDestinationsPage() {
           <div className="destination-route-grid">
             {heroDestinations.map((destination) => (
               <Link className="destination-route-card" href={`/destinations/${destination.slug}`} key={destination.slug}>
-                <Image src={destination.flag} alt="" width={38} height={38} unoptimized />
+                <Image src={destination.flag} alt={`${destination.label} flag`} width={38} height={38} unoptimized />
                 <span>{destination.label}</span>
                 <small>{destination.meta}</small>
                 <ArrowRight className="destination-route-card-arrow" size={17} aria-hidden="true" />
@@ -179,7 +179,7 @@ export default function StudyDestinationsPage() {
                 <div className="destination-chip-grid">
                   {section.destinations.map((destination) => (
                     <Link href={`/destinations/${destination.slug}`} key={destination.slug}>
-                      <Image src={destination.flag} alt="" width={24} height={24} unoptimized />
+                      <Image src={destination.flag} alt={`${destination.label} flag`} width={24} height={24} unoptimized />
                       <span>{destination.label}</span>
                     </Link>
                   ))}

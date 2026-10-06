@@ -133,7 +133,7 @@ export default async function DestinationPage({ params }: Props) {
           </div>
         </section>
         <nav className="study-country-nav" aria-label="Featured study destinations">
-          {featuredDestinations.map((item) => <Link key={item.slug} href={`/destinations/${item.slug}`} aria-current={item.slug === slug ? "page" : undefined}><Image src={item.flag} width={22} height={22} alt="" unoptimized />{item.label}</Link>)}
+          {featuredDestinations.map((item) => <Link key={item.slug} href={`/destinations/${item.slug}`} aria-current={item.slug === slug ? "page" : undefined}><Image src={item.flag} width={22} height={22} alt={`${item.label} flag`} unoptimized />{item.label}</Link>)}
         </nav>
         <InstitutionDirectory key={destination.slug} institutions={destination.institutions} country={destination.name} />
         <section className="study-advice">

@@ -65,7 +65,7 @@ export default function BlogPage() {
           {blogPosts.map((post, index) => (
             <article className={index === 0 ? "blog-card blog-card-large" : "blog-card"} key={post.slug}>
               <Link className="blog-card-image" href={`/blog/${post.slug}`} aria-label={post.title}>
-                <Image src={post.heroImage} alt="" fill sizes={index === 0 ? "60vw" : "33vw"} />
+                <Image src={post.heroImage} alt={`${post.title} guide image`} fill sizes={index === 0 ? "60vw" : "33vw"} />
               </Link>
               <div className="blog-card-body">
                 <div className="blog-meta">

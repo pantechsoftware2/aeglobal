@@ -31,7 +31,7 @@ export default function SiteFooter() {
     <footer className="footer" id="about">
       <div className="footer-brand">
         <Link className="brand" href="/" aria-label="AE Global Group home">
-          <Image src="/brand/mark.png" alt="" width={58} height={52} />
+          <Image src="/brand/mark.png" alt="AE Global Group logo" width={58} height={52} />
           <span>AE Global Group</span>
         </Link>
         <p>Study abroad counseling for students who want clear options, careful preparation and no guesswork.</p>

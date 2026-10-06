@@ -388,7 +388,7 @@ export default function ChatBot() {
             <span className="chat-avatar" aria-hidden="true">
               <Image
                 src="/images/mimi-chatbot.webp"
-                alt=""
+                alt="Mimi study abroad chat assistant"
                 width={58}
                 height={58}
                 sizes="58px"
@@ -451,7 +451,7 @@ export default function ChatBot() {
         <button className="chat-toggle" type="button" aria-label="Open Mimi chat" onClick={openChat}>
           <Image
             src="/images/mimi-chatbot.webp"
-            alt=""
+            alt="Mimi study abroad chat assistant"
             width={128}
             height={150}
             sizes="128px"

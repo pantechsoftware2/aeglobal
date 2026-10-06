@@ -98,7 +98,7 @@ export default function SitemapPage() {
             <div className="sitemap-destination-grid">
               {priorityDestinations.map((destination) => (
                 <Link className="sitemap-destination" href={`/destinations/${destination.slug}`} key={destination.slug}>
-                  <Image src={destination.flag} width={28} height={28} alt="" unoptimized />
+                  <Image src={destination.flag} width={28} height={28} alt={`${destination.label} flag`} unoptimized />
                   <span>
                     <strong>{destination.label}</strong>
                     <small>{destination.meta}</small>
@@ -109,7 +109,7 @@ export default function SitemapPage() {
             <div className="sitemap-country-list" aria-label="More study destination pages">
               {moreDestinations.map((destination) => (
                 <Link href={`/destinations/${destination.slug}`} key={destination.slug}>
-                  <Image src={destination.flag} width={18} height={18} alt="" unoptimized />
+                  <Image src={destination.flag} width={18} height={18} alt={`${destination.label} flag`} unoptimized />
                   {destination.label}
                 </Link>
               ))}

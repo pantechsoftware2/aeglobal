@@ -16,7 +16,7 @@ export default function SiteHeader({
   return (
     <header className={`site-header${contactPage || destinationPage || faqPage || activePage ? " contact-header" : ""}`}>
       <Link className="brand" href="/#top" aria-label="AE Global Group home">
-        <Image src="/brand/mark.png" alt="" width={50} height={44} preload />
+        <Image src="/brand/mark.png" alt="AE Global Group logo" width={50} height={44} preload />
         <span>AE Global Group</span>
       </Link>
       <nav className="desktop-nav" aria-label="Primary navigation">

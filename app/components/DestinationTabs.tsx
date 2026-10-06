@@ -24,7 +24,7 @@ export default function DestinationTabs() {
       <div className="destination-grid featured-country-grid" id="country-list">
         {visibleDestinations.map((item) => (
           <Link className="country-option" href={`/destinations/${item.slug}`} key={item.slug}>
-            <span className="destination-flag" aria-hidden="true"><Image src={item.flag} alt="" width={36} height={36} unoptimized /></span>
+            <span className="destination-flag" aria-hidden="true"><Image src={item.flag} alt={`${item.label} flag`} width={36} height={36} unoptimized /></span>
             <span>{item.label}</span>
             <small>{item.institutions.length ? "Explore featured institutions" : item.meta}</small>
             <ArrowUpRight className="country-option-arrow" size={17} aria-hidden="true" />

@@ -124,8 +124,9 @@ export default function HomePage() {
         <div className="hero-copy">
           <h1>Stop guessing.<br /><span>Start applying with clarity.</span></h1>
           <p>
-            Course selection, applications, visa prep and pre-departure planning
-            in one clear study abroad process built for students who want straight answers.
+            Stop guessing about course selection, applications, visa prep and
+            pre-departure planning. Start applying with clarity through one
+            clear study abroad process built for students who want straight answers.
           </p>
           <div className="button-row">
             <a className="primary-button" href="/study-destinations">
@@ -179,7 +180,7 @@ export default function HomePage() {
                 <div className={`university-logo ${university.tone === "dark" ? "university-logo-dark" : ""}`} key={`${university.name}-${index}`} aria-hidden={index >= firstMarqueeLogos.length}>
                   <Image
                     src={university.logo}
-                    alt={index < firstMarqueeLogos.length ? university.name : ""}
+                    alt={`${university.name} logo`}
                     width={240}
                     height={64}
                     unoptimized
@@ -194,7 +195,7 @@ export default function HomePage() {
                 <div className={`university-logo ${university.tone === "dark" ? "university-logo-dark" : ""}`} key={`${university.name}-${index}`} aria-hidden={index >= secondMarqueeLogos.length}>
                   <Image
                     src={university.logo}
-                    alt={index < secondMarqueeLogos.length ? university.name : ""}
+                    alt={`${university.name} logo`}
                     width={240}
                     height={64}
                     unoptimized

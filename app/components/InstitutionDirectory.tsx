@@ -28,7 +28,7 @@ export default function InstitutionDirectory({ institutions, country }: { instit
             {filtered.map((institution) => (
               <article className="institution-card" key={institution.name}>
                 <div className="institution-media">
-                  <Image className="institution-photo" src={institution.image} alt="" fill sizes="(max-width: 760px) 100vw, (max-width: 1000px) 50vw, 33vw" />
+                  <Image className="institution-photo" src={institution.image} alt={`${institution.name} campus or student setting`} fill sizes="(max-width: 760px) 100vw, (max-width: 1000px) 50vw, 33vw" />
                   <span className={`institution-logo ${institution.logoTone === "dark" ? "institution-logo-dark" : ""}`}>
                     <Image className="institution-logo-image" src={institution.logo} alt={`${institution.name} logo`} width={150} height={76} unoptimized />
                   </span>

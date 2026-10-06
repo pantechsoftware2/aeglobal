@@ -62,7 +62,7 @@ export default function TestimonialCarousel() {
         <div className="testimonial-initials" aria-hidden="true">
           <Image
             src={activeTestimonial.image}
-            alt=""
+            alt="Student feedback portrait"
             fill
             sizes="78px"
           />
