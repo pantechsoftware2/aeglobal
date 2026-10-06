@@ -3,7 +3,7 @@ import { blogPosts } from "./data/blogPosts";
 import { destinations } from "./data/destinations";
 import { siteUrl } from "./lib/seo";
 
-const lastModified = new Date("2026-10-05T00:00:00.000Z");
+const lastModified = new Date("2026-10-06T00:00:00.000Z");
 
 const mainRoutes = [
   { path: "", priority: 1 },
@@ -15,7 +15,9 @@ const mainRoutes = [
   { path: "/contact", priority: 0.8 },
   { path: "/faq", priority: 0.75 },
   { path: "/blog", priority: 0.7 },
-  { path: "/sitemap", priority: 0.6 }
+  { path: "/sitemap", priority: 0.6 },
+  { path: "/privacy-policy", priority: 0.45 },
+  { path: "/terms-and-conditions", priority: 0.45 }
 ];
 
 function route(path: string, priority: number): MetadataRoute.Sitemap[number] {

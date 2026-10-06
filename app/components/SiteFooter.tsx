@@ -56,7 +56,13 @@ export default function SiteFooter() {
       </div>
       <div className="footer-bottom">
         <span>© 2026 AE Global Group. All rights reserved.</span>
-        <span><Link href="/sitemap">HTML sitemap</Link>&nbsp;&nbsp;&nbsp;&nbsp; Privacy Policy&nbsp;&nbsp;&nbsp;&nbsp; Terms &amp; Conditions</span>
+        <span>
+          <Link href="/sitemap">HTML sitemap</Link>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <Link href="/privacy-policy">Privacy Policy</Link>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <Link href="/terms-and-conditions">Terms &amp; Conditions</Link>
+        </span>
       </div>
     </footer>
   );

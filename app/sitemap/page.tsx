@@ -36,6 +36,8 @@ const mainPages = [
   { label: "Blog", href: "/blog", copy: "Read practical study abroad guides and checklists." },
   { label: "FAQs", href: "/faq", copy: "Find answers about destinations, applications, visas and next steps." },
   { label: "Contact Us", href: "/contact", copy: "Find phone, email, office addresses and enquiry options." },
+  { label: "Privacy Policy", href: "/privacy-policy", copy: "Understand how AE Global Group handles student information." },
+  { label: "Terms and Conditions", href: "/terms-and-conditions", copy: "Read the terms for using the website and student support services." },
   { label: "XML Sitemap", href: "/sitemap.xml", copy: "Search engine sitemap generated for crawlers." }
 ];
 
