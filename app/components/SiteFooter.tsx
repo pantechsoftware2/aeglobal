@@ -2,22 +2,22 @@ import Image from "next/image";
 import Link from "next/link";
 
 const footerGroups = [
-  ["Explore", "Study Destinations", "Universities", "Courses", "Scholarships", "Services"],
+  ["Explore", "Destination Guide", "University Guidance", "Course Guidance", "Scholarship Guidance", "Student Services"],
   ["Students", "Application Support", "Visa Guidance", "Accommodation", "Pre-Departure", "Counseling"],
-  ["Company", "Contact Us", "Careers", "Partners"],
-  ["Resources", "Sitemap", "Blog", "Study Guides", "FAQs", "News & Updates"]
+  ["Company", "Contact AE Global", "Careers", "Partners"],
+  ["Resources", "Website Sitemap", "Blog", "Study Guides", "FAQs", "News & Updates"]
 ];
 
 const getFooterLink = (link: string) => {
-  if (link === "Contact Us") return "/contact";
-  if (link === "Sitemap") return "/sitemap";
+  if (link === "Contact AE Global") return "/contact";
+  if (link === "Website Sitemap") return "/sitemap";
   if (link === "Blog") return "/blog";
   if (link === "FAQs") return "/faq";
-  if (link === "Study Destinations") return "/study-destinations";
-  if (link === "Universities") return "/universities";
-  if (link === "Courses") return "/courses";
-  if (link === "Scholarships") return "/scholarships";
-  if (link === "Services") return "/services";
+  if (link === "Destination Guide") return "/study-destinations";
+  if (link === "University Guidance") return "/universities";
+  if (link === "Course Guidance") return "/courses";
+  if (link === "Scholarship Guidance") return "/scholarships";
+  if (link === "Student Services") return "/services";
   if (link === "Application Support") return "/services";
   if (link === "Visa Guidance") return "/services";
   if (link === "Accommodation") return "/services";
@@ -32,7 +32,7 @@ export default function SiteFooter() {
       <div className="footer-brand">
         <Link className="brand" href="/" aria-label="AE Global Group home">
           <Image src="/brand/mark.png" alt="AE Global Group logo" width={58} height={52} />
-          <span>AE Global Group</span>
+          <span>AE Global Group website</span>
         </Link>
         <p>Study abroad counseling for students who want clear options, careful preparation and no guesswork.</p>
       </div>
@@ -56,7 +56,7 @@ export default function SiteFooter() {
       </div>
       <div className="footer-bottom">
         <span>© 2026 AE Global Group. All rights reserved.</span>
-        <span><Link href="/sitemap">Sitemap</Link>&nbsp;&nbsp;&nbsp;&nbsp; Privacy Policy&nbsp;&nbsp;&nbsp;&nbsp; Terms &amp; Conditions</span>
+        <span><Link href="/sitemap">HTML sitemap</Link>&nbsp;&nbsp;&nbsp;&nbsp; Privacy Policy&nbsp;&nbsp;&nbsp;&nbsp; Terms &amp; Conditions</span>
       </div>
     </footer>
   );

@@ -282,7 +282,7 @@ export default function HomePage() {
         </div>
         <div className="button-row">
           <LeadEnquiry className="primary-button">I&apos;m Ready to Start <ArrowRight size={16} /></LeadEnquiry>
-          <a className="secondary-button" href="/study-destinations">Show Me My Options</a>
+          <a className="secondary-button" href="/study-destinations">Compare Study Destinations</a>
         </div>
       </section>
 

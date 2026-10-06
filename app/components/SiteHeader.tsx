@@ -30,7 +30,7 @@ export default function SiteHeader({
       <div className="header-actions">
         <LeadEnquiry className="journey-link">I&apos;m Ready to Start</LeadEnquiry>
       </div>
-      <Link className="mobile-contact-link" href="/contact" aria-current={contactPage ? "page" : undefined}>Contact Us</Link>
+      <Link className="mobile-contact-link" href="/contact" aria-current={contactPage ? "page" : undefined}>Contact advisor</Link>
     </header>
   );
 }
