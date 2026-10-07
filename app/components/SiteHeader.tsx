@@ -21,6 +21,7 @@ export default function SiteHeader({
         <span>AE Global Group</span>
       </Link>
       <nav className="desktop-nav" aria-label="Primary navigation">
+        <Link href="/#top">Home</Link>
         <div className="nav-dropdown">
           <Link href="/study-destinations" aria-current={destinationPage || activePage === "destinations" ? "page" : undefined}>Study Destinations</Link>
           <div className="nav-dropdown-panel" aria-label="Study destination country pages">

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Check, Compass, FileSearch, GraduationCap, MapPinned, Plane } from "lucide-react";
 import LeadEnquiry from "../components/LeadEnquiry";
@@ -152,11 +151,11 @@ export default function StudyDestinationsPage() {
             <p>Begin with a few strong options, then compare them against your profile instead of chasing every possibility.</p>
           </div>
           <div className="destination-route-grid">
-            {heroDestinations.map((destination) => (
+            {heroDestinations.map((destination, index) => (
               <Link className="destination-route-card" href={`/destinations/${destination.slug}`} key={destination.slug}>
-                <Image src={destination.flag} alt={`${destination.label} flag`} width={38} height={38} unoptimized />
+                <small className="destination-route-card-index">{String(index + 1).padStart(2, "0")}</small>
                 <span>{destination.label}</span>
-                <small>{destination.meta}</small>
+                <small className="destination-route-card-detail">{destination.meta}</small>
                 <ArrowRight className="destination-route-card-arrow" size={17} aria-hidden="true" />
               </Link>
             ))}
@@ -166,8 +165,8 @@ export default function StudyDestinationsPage() {
         <section className="destination-category-section" id="destination-categories" aria-labelledby="destination-categories-title">
           <div className="destination-category-intro">
             <p className="eyebrow">Destination categories</p>
-            <h2 id="destination-categories-title">Choose by pathway, not just by place.</h2>
-            <p>These groups make the search easier: classic choices, faster-growing routes, Europe, and specialist options.</p>
+            <h2 id="destination-categories-title">Compare routes that fit your plan.</h2>
+            <p>Start with the kind of study experience you want, then open the countries that match the route.</p>
           </div>
           <div className="destination-category-stack">
             {categorySections.map((section) => (
@@ -179,7 +178,6 @@ export default function StudyDestinationsPage() {
                 <div className="destination-chip-grid">
                   {section.destinations.map((destination) => (
                     <Link href={`/destinations/${destination.slug}`} key={destination.slug}>
-                      <Image src={destination.flag} alt={`${destination.label} flag`} width={24} height={24} unoptimized />
                       <span>{destination.label}</span>
                     </Link>
                   ))}
