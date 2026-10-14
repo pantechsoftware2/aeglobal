@@ -2,7 +2,7 @@
 
 import { FormEvent, ReactNode, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { Check, X } from "lucide-react";
+import { ArrowRight, Check, Clock3, LoaderCircle, ShieldCheck, Sparkles, X } from "lucide-react";
 
 type LeadFormData = {
   name: string;
@@ -48,14 +48,14 @@ function validate(form: LeadFormData) {
   ) as LeadFormData;
 
   if (!trimmed.name) errors.name = "Please enter your full name.";
-  if (trimmed.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed.email)) {
+  if (!trimmed.email) {
+    errors.email = "Please enter your email address.";
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed.email)) {
     errors.email = "Please enter a valid email address.";
   }
-  if (!trimmed.email && !trimmed.phone) {
-    errors.email = "Please provide an email address or phone number.";
-    errors.phone = "Please provide an email address or phone number.";
-  }
-  if (trimmed.phone && !/^[+()\d][\d\s().-]{6,28}$/.test(trimmed.phone)) {
+  if (!trimmed.phone) {
+    errors.phone = "Please enter your phone number.";
+  } else if (!/^[+()\d][\d\s().-]{6,28}$/.test(trimmed.phone)) {
     errors.phone = "Please enter a valid phone number.";
   }
 
@@ -121,47 +121,63 @@ export default function LeadEnquiry({ className, children, country, institution 
     <div className="lead-modal-backdrop" role="presentation" onMouseDown={(event) => {
       if (event.target === event.currentTarget && status !== "submitting") setOpen(false);
     }}>
-      <section className="lead-modal" role="dialog" aria-modal="true" aria-labelledby="lead-modal-title">
-        <div className="lead-modal-header">
+      <section className="lead-modal" role="dialog" aria-modal="true" aria-labelledby="lead-modal-title" aria-describedby="lead-modal-description">
+        <button ref={closeButtonRef} type="button" className="lead-modal-close" onClick={() => setOpen(false)} disabled={status === "submitting"} aria-label="Close enquiry form">
+          <X size={19} aria-hidden="true" />
+        </button>
+
+        <div className="lead-modal-intro">
           <div>
-            <p className="eyebrow">Start with clarity</p>
-            <h2 id="lead-modal-title">Tell us where you want to go.</h2>
-            <p>Share a few details and our team will help map your next step.</p>
+            <p className="lead-modal-kicker"><Sparkles size={14} aria-hidden="true" /> Personal study guidance</p>
+            <h2 id="lead-modal-title">Let&apos;s shape your next move.</h2>
+            <p id="lead-modal-description">Tell us what you&apos;re considering. An AE Global advisor will help you turn it into a clear, practical shortlist.</p>
           </div>
-          <button ref={closeButtonRef} type="button" className="lead-modal-close" onClick={() => setOpen(false)} disabled={status === "submitting"} aria-label="Close enquiry form">
-            <X size={20} />
-          </button>
+          <div className="lead-modal-benefits" aria-label="What to expect">
+            <span><Clock3 size={17} aria-hidden="true" /><strong>Quick to complete</strong><small>Usually under two minutes</small></span>
+            <span><ShieldCheck size={17} aria-hidden="true" /><strong>Private and secure</strong><small>Your details stay with our team</small></span>
+          </div>
         </div>
 
-        {status === "success" ? (
-          <div className="lead-success" role="status">
-            <span><Check size={24} /></span>
-            <h3>Thank you!</h3>
-            <p>Your enquiry has been submitted successfully. Our team will contact you shortly.</p>
-            <button type="button" className="teal-button" onClick={() => setOpen(false)}>Close</button>
-          </div>
-        ) : (
-          <form className="lead-form" onSubmit={submit} noValidate>
-            <div className="lead-form-grid">
-              <LeadField label="Full Name" name="name" value={form.name} onChange={updateField} error={errors.name} required />
-              <LeadField label="Email Address" name="email" type="email" value={form.email} onChange={updateField} error={errors.email} />
-              <LeadField label="Phone Number" name="phone" type="tel" value={form.phone} onChange={updateField} error={errors.phone} />
-              <LeadField label="Study Destination / Country" name="country" value={form.country} onChange={updateField} error={errors.country} />
-              <LeadField label="Course / Program" name="course" value={form.course} onChange={updateField} error={errors.course} />
-              <LeadField label="Preferred Intake" name="intake" value={form.intake} onChange={updateField} error={errors.intake} />
+        <div className="lead-modal-content">
+          {status === "success" ? (
+            <div className="lead-success" role="status">
+              <span><Check size={25} aria-hidden="true" /></span>
+              <p className="lead-success-kicker">Enquiry received</p>
+              <h3>Thank you!</h3>
+              <p>Your details are with our advisory team. We&apos;ll be in touch shortly to discuss your next step.</p>
+              <button type="button" className="teal-button" onClick={() => setOpen(false)}>Done</button>
             </div>
-            <label className="lead-field lead-field-full">
-              <span>Message</span>
-              <textarea name="message" value={form.message} maxLength={limits.message} onChange={(event) => updateField("message", event.target.value)} aria-invalid={Boolean(errors.message)} />
-              {errors.message && <small className="lead-field-error">{errors.message}</small>}
-            </label>
-            <p className="lead-form-note">Required: full name and an email address or phone number.</p>
-            {status === "error" && <p className="lead-submit-error" role="alert">Something went wrong while submitting your enquiry. Please try again.</p>}
-            <button className="teal-button lead-submit" type="submit" disabled={status === "submitting"}>
-              {status === "submitting" ? "Submitting..." : "Send Enquiry"}
-            </button>
-          </form>
-        )}
+          ) : (
+            <>
+              <div className="lead-form-heading">
+                <div><span>Enquiry details</span><p>Start with the essentials—we&apos;ll discuss the rest together.</p></div>
+                <small><em>*</em> Required</small>
+              </div>
+              <form className="lead-form" onSubmit={submit} noValidate>
+                <div className="lead-form-grid">
+                  <LeadField label="Full name" name="name" value={form.name} onChange={updateField} error={errors.name} placeholder="Your full name" autoComplete="name" required />
+                  <LeadField label="Email address" name="email" type="email" value={form.email} onChange={updateField} error={errors.email} placeholder="you@example.com" autoComplete="email" required />
+                  <LeadField label="Phone number" name="phone" type="tel" value={form.phone} onChange={updateField} error={errors.phone} placeholder="Include country code" autoComplete="tel" required />
+                  <LeadField label="Study destination" name="country" value={form.country} onChange={updateField} error={errors.country} placeholder="Country you are considering" autoComplete="country-name" />
+                  <LeadField label="Course or programme" name="course" value={form.course} onChange={updateField} error={errors.course} placeholder="e.g. MSc Data Science" />
+                  <LeadField label="Preferred intake" name="intake" value={form.intake} onChange={updateField} error={errors.intake} placeholder="e.g. September 2027" />
+                </div>
+                <label className="lead-field lead-field-full">
+                  <span>Anything else we should know?</span>
+                  <textarea name="message" value={form.message} maxLength={limits.message} placeholder="Tell us about your goals, qualifications or questions (optional)" onChange={(event) => updateField("message", event.target.value)} aria-invalid={Boolean(errors.message)} />
+                  {errors.message && <small className="lead-field-error">{errors.message}</small>}
+                </label>
+                {status === "error" && <p className="lead-submit-error" role="alert">We couldn&apos;t send your enquiry. Please try again.</p>}
+                <div className="lead-form-footer">
+                  <p><ShieldCheck size={14} aria-hidden="true" /> Full name, email address and phone number are required.</p>
+                  <button className="teal-button lead-submit" type="submit" disabled={status === "submitting"}>
+                    {status === "submitting" ? <><LoaderCircle className="lead-submit-spinner" size={17} aria-hidden="true" /> Sending</> : <>Send enquiry <ArrowRight size={17} aria-hidden="true" /></>}
+                  </button>
+                </div>
+              </form>
+            </>
+          )}
+        </div>
       </section>
     </div>,
     document.body
@@ -181,7 +197,7 @@ export default function LeadEnquiry({ className, children, country, institution 
   );
 }
 
-function LeadField({ label, name, type = "text", value, onChange, error, required = false }: {
+function LeadField({ label, name, type = "text", value, onChange, error, required = false, placeholder, autoComplete }: {
   label: string;
   name: keyof LeadFormData;
   type?: string;
@@ -189,11 +205,13 @@ function LeadField({ label, name, type = "text", value, onChange, error, require
   onChange: (field: keyof LeadFormData, value: string) => void;
   error?: string;
   required?: boolean;
+  placeholder?: string;
+  autoComplete?: string;
 }) {
   return (
     <label className="lead-field">
       <span>{label}{required && <em> *</em>}</span>
-      <input name={name} type={type} value={value} maxLength={limits[name]} onChange={(event) => onChange(name, event.target.value)} aria-invalid={Boolean(error)} required={required} />
+      <input name={name} type={type} value={value} maxLength={limits[name]} placeholder={placeholder} autoComplete={autoComplete} onChange={(event) => onChange(name, event.target.value)} aria-invalid={Boolean(error)} required={required} />
       {error && <small className="lead-field-error">{error}</small>}
     </label>
   );

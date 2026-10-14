@@ -186,7 +186,7 @@ const getSiteUrl = () => {
     return vercelUrl.startsWith("http") ? vercelUrl : `https://${vercelUrl}`;
   }
 
-  return "http://localhost:3000";
+  return "http://localhost:3001";
 };
 
 export async function POST(request: Request) {

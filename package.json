@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3001",
     "build": "next build",
-    "start": "next start",
-    "lint": "eslint ."
+    "prestart": "next build",
+    "start": "next start -p 3001",
+    "lint": "eslint .",
+    "courses:sync": "node scripts/sync-official-courses.mjs",
+    "courses:verify": "node scripts/verify-course-catalogue.mjs"
   },
   "dependencies": {
     "gsap": "^3.15.0",

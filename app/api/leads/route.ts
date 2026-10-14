@@ -44,8 +44,8 @@ export async function POST(request: Request) {
     message: cleanString(payload.message, fieldLimits.message)
   };
 
-  if (!lead.name || (!lead.email && !lead.phone)) {
-    return NextResponse.json({ error: "Name and email or phone are required." }, { status: 400 });
+  if (!lead.name || !lead.email || !lead.phone) {
+    return NextResponse.json({ error: "Name, email and phone are required." }, { status: 400 });
   }
   if (lead.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lead.email)) {
     return NextResponse.json({ error: "Invalid contact details." }, { status: 400 });
