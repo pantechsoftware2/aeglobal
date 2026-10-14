@@ -9,28 +9,28 @@ const studentStories = [
     quote: "I stopped guessing and finally understood which options matched my profile.",
     student: "Student admit story",
     video: "/video/story-course-fit.mp4",
-    poster: "/images/testimonials/student-1.webp"
+    poster: "/images/testimonials/indian-student-1.webp"
   },
   {
     label: "Application Ready",
     quote: "The application steps became clear, organized and much easier to follow.",
     student: "Application support",
     video: "/video/story-arrival.mp4",
-    poster: "/images/testimonials/student-2.webp"
+    poster: "/images/testimonials/indian-student-2.webp"
   },
   {
     label: "Visa Guidance",
     quote: "I knew what to prepare next and why each document mattered.",
     student: "Pre-departure planning",
     video: "/video/story-guidance.mp4",
-    poster: "/images/testimonials/student-4.webp"
+    poster: "/images/testimonials/indian-student-4.webp"
   },
   {
     label: "Achievement",
     quote: "From aspiration to achievement, the whole path felt possible.",
     student: "Student success story",
     video: "/video/story-achievement.mp4",
-    poster: "/images/testimonials/student-3.webp"
+    poster: "/images/testimonials/indian-student-3.webp"
   }
 ];
 

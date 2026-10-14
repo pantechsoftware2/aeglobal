@@ -4,10 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import { Facebook, Instagram, Linkedin, Share2, X, Youtube } from "lucide-react";
 
 const socialLinks = [
-  { name: "Facebook", href: "https://www.facebook.com/abroadeduversity/", icon: Facebook, className: "is-facebook" },
-  { name: "Instagram", href: "https://www.instagram.com/abroad_eduversity/", icon: Instagram, className: "is-instagram" },
+  { name: "Facebook", href: "https://www.facebook.com/share/19PxrqMTYA/?mibextid=wwXIfr", icon: Facebook, className: "is-facebook" },
+  { name: "Instagram", href: "https://instagram.com/ae_globalgroup?rpxt=MTI2b3BlbDgxNzJ3Zw%3D%3D&utm_source=qr", icon: Instagram, className: "is-instagram" },
   { name: "YouTube", href: "https://www.youtube.com/@Abroad_Eduversity", icon: Youtube, className: "is-youtube" },
-  { name: "LinkedIn", href: "https://www.linkedin.com/company/abroad-eduversity", icon: Linkedin, className: "is-linkedin" }
+  { name: "LinkedIn", href: "https://www.linkedin.com/company/aeglobalgroup/", icon: Linkedin, className: "is-linkedin" }
 ];
 
 export default function SocialMediaDock() {

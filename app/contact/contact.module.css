@@ -1,0 +1,224 @@
+.page {
+  min-height: 100vh;
+  color: var(--ink);
+  background: linear-gradient(180deg, #fbfdff 0%, #f3f8fa 54%, #edf6f6 100%);
+}
+
+.page main { padding-bottom: 88px; }
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  min-height: 600px;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, .995) 0%, rgba(255, 255, 255, .96) 36%, rgba(255, 255, 255, .69) 52%, rgba(255, 255, 255, .08) 76%),
+    url("/images/contact/contact-guidance-v2.webp") center / cover no-repeat;
+}
+
+.hero::after {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: -1;
+  height: 135px;
+  background: linear-gradient(180deg, transparent, rgba(248, 251, 252, .98));
+  content: "";
+}
+
+.heroInner,
+.contactRail,
+.intro,
+.enquiryGrid,
+.locations,
+.process,
+.finalCta {
+  width: min(1600px, calc(100% - clamp(40px, 9vw, 144px)));
+  margin-inline: auto;
+}
+
+.heroInner {
+  display: flex;
+  align-items: center;
+  min-height: 600px;
+  padding-block: 54px 76px;
+}
+
+.heroCopy { max-width: 770px; }
+.heroCopy :global(.contact-breadcrumb) { margin-bottom: 30px; }
+
+.eyebrow {
+  color: var(--teal);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .085em;
+  text-transform: uppercase;
+}
+
+.hero h1,
+.intro h2,
+.enquiryCard h2,
+.directCard h2,
+.sectionHeading h2,
+.processHeading h2,
+.finalCta h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  letter-spacing: -.028em;
+}
+
+.hero h1 {
+  max-width: 760px;
+  margin: 12px 0 23px;
+  font-size: clamp(48px, 5.45vw, 76px);
+  line-height: .98;
+}
+
+.hero h1 span { color: var(--teal); }
+
+.heroText {
+  max-width: 610px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+.heroActions { display: flex; align-items: center; gap: 25px; margin-top: 28px; }
+.textLink { display: inline-flex; align-items: center; gap: 8px; color: var(--teal); font-size: 13px; font-weight: 800; }
+.heroNote { display: flex; align-items: center; gap: 8px; margin-top: 22px; color: #5c6d81; font-size: 11px; font-weight: 650; }
+.heroNote svg { flex: 0 0 auto; color: var(--teal); }
+
+.contactRail {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: -31px;
+  border: 1px solid rgba(184, 205, 226, .78);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, .97);
+  box-shadow: 0 18px 50px rgba(6, 26, 64, .08);
+}
+
+.contactRail > a,
+.contactRail > div { display: grid; grid-template-columns: 42px 1fr 18px; align-items: center; gap: 13px; min-width: 0; padding: 18px 22px; border-right: 1px solid var(--line); }
+.contactRail > :last-child { grid-template-columns: 42px 1fr; border-right: 0; }
+.contactRail > a > span,
+.contactRail > div > span { display: grid; width: 42px; height: 42px; place-items: center; border-radius: 11px; color: var(--teal); background: #e7f5f5; }
+.contactRail div div { display: grid; gap: 3px; min-width: 0; }
+.contactRail small { color: var(--muted); font-size: 9px; font-weight: 750; letter-spacing: .04em; text-transform: uppercase; }
+.contactRail strong { overflow-wrap: anywhere; font-size: 12px; }
+.contactRail > a > svg { color: var(--teal); }
+
+.intro { display: grid; grid-template-columns: minmax(300px, .9fr) minmax(0, 1fr); gap: clamp(48px, 8vw, 120px); padding-block: 94px 58px; }
+.intro h2,
+.sectionHeading h2,
+.processHeading h2,
+.finalCta h2 { margin-top: 12px; font-size: clamp(36px, 4vw, 56px); line-height: 1.06; }
+.intro > p { align-self: end; max-width: 680px; color: var(--muted); font-size: 15px; line-height: 1.8; }
+
+.enquiryGrid { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(350px, .92fr); gap: 22px; }
+.enquiryCard,
+.directCard { padding: clamp(32px, 4vw, 50px); border-radius: 24px; box-shadow: 0 20px 55px rgba(6, 26, 64, .07); }
+.enquiryCard { border: 1px solid rgba(184, 205, 226, .78); background: rgba(255, 255, 255, .94); }
+.directCard { color: #fff; background: radial-gradient(circle at 100% 0%, rgba(0, 158, 169, .34), transparent 43%), #08264f; }
+.cardIcon { display: grid; width: 48px; height: 48px; margin-bottom: 27px; place-items: center; border-radius: 13px; color: var(--teal); background: #e8f6f6; }
+.directCard .cardIcon { color: #7ae0e0; background: rgba(255, 255, 255, .1); }
+.enquiryCard h2,
+.directCard h2 { margin: 10px 0 17px; font-size: clamp(34px, 3.5vw, 49px); line-height: 1.04; }
+.enquiryCard > p:not(.eyebrow),
+.directCard > p:not(.eyebrow) { color: var(--muted); font-size: 14px; line-height: 1.75; }
+.directCard > p:not(.eyebrow) { color: rgba(255, 255, 255, .7); }
+.directCard .eyebrow { color: #79dfe0; }
+.enquiryCard ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 26px 0 30px; padding: 0; list-style: none; }
+.enquiryCard li { display: flex; align-items: flex-start; gap: 9px; padding: 12px; border: 1px solid rgba(184, 205, 226, .66); border-radius: 10px; color: #283d58; background: #f9fcfd; font-size: 11px; font-weight: 700; line-height: 1.45; }
+.enquiryCard li svg { flex: 0 0 auto; color: var(--teal); }
+.enquiryCard :global(.teal-button) { border: 0; cursor: pointer; }
+
+.directDetails { display: grid; margin-top: 28px; border-top: 1px solid rgba(255, 255, 255, .14); }
+.directDetails a { display: flex; align-items: center; gap: 14px; padding: 15px 0; border-bottom: 1px solid rgba(255, 255, 255, .14); color: #fff; }
+.directDetails a > svg { flex: 0 0 auto; color: #79dfe0; }
+.directDetails a span { display: grid; gap: 2px; }
+.directDetails small { color: rgba(255, 255, 255, .58); font-size: 9px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+.directDetails strong { overflow-wrap: anywhere; font-size: 12px; }
+.hours { display: flex; align-items: flex-start; gap: 14px; margin-top: 20px; padding: 15px; border-radius: 12px; color: #fff; background: rgba(255, 255, 255, .08); }
+.hours > svg { flex: 0 0 auto; margin-top: 2px; color: #79dfe0; }
+.hours p { display: grid; gap: 5px; font-size: 11px; line-height: 1.55; }
+.hours span { color: rgba(255, 255, 255, .66); }
+
+.locations { margin-top: 36px; padding: clamp(36px, 4.4vw, 56px); border: 1px solid rgba(184, 205, 226, .75); border-radius: 25px; background: rgba(255, 255, 255, .88); }
+.sectionHeading { display: flex; align-items: end; justify-content: space-between; gap: 42px; margin-bottom: 34px; }
+.sectionHeading > div { max-width: 760px; }
+.sectionHeading > p { max-width: 400px; color: var(--muted); font-size: 13px; line-height: 1.75; }
+.locationGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 15px; }
+.locationCard { padding: 25px; border: 1px solid rgba(184, 205, 226, .72); border-radius: 17px; background: #f9fcfd; }
+.locationTop { display: flex; align-items: center; justify-content: space-between; }
+.locationTop > span { display: grid; width: 43px; height: 43px; place-items: center; border-radius: 12px; color: var(--teal); background: #e6f4f4; }
+.locationTop > small { color: #93a1b3; font-family: Georgia, "Times New Roman", serif; font-size: 19px; }
+.locationEyebrow { margin-top: 23px; color: var(--teal); font-size: 9px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+.locationCard h3 { margin: 6px 0 18px; font-size: 18px; }
+.address + .address { margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--line); }
+.address address { min-height: 51px; color: var(--muted); font-size: 12px; font-style: normal; line-height: 1.65; }
+.address a { display: inline-flex; align-items: center; gap: 7px; margin-top: 13px; color: var(--teal); font-size: 11px; font-weight: 800; }
+
+.process { display: grid; grid-template-columns: minmax(300px, .8fr) minmax(0, 1.2fr); gap: clamp(45px, 7vw, 100px); margin-top: 36px; padding: clamp(40px, 5vw, 64px); border-radius: 25px; color: #fff; background: radial-gradient(ellipse at 96% 0%, rgba(0, 158, 169, .4), transparent 50%), linear-gradient(140deg, #061a40, #07375c); box-shadow: 0 24px 60px rgba(6, 26, 64, .15); }
+.process .eyebrow { color: #77dddf; }
+.processHeading h2 { color: #fff; }
+.processHeading > p:last-child { margin-top: 20px; color: rgba(255, 255, 255, .68); font-size: 13px; line-height: 1.75; }
+.process ol { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 0; padding: 0; list-style: none; }
+.process li { padding: 22px; border: 1px solid rgba(255, 255, 255, .14); border-radius: 15px; background: rgba(255, 255, 255, .06); }
+.process li > span { display: grid; width: 40px; height: 40px; margin-bottom: 23px; place-items: center; border-radius: 11px; color: #78dfe0; background: rgba(255, 255, 255, .09); }
+.process li > small { color: #78dfe0; font-family: Georgia, "Times New Roman", serif; font-size: 17px; }
+.process h3 { margin: 9px 0 10px; font-size: 14px; line-height: 1.4; }
+.process li p { color: rgba(255, 255, 255, .65); font-size: 11px; line-height: 1.65; }
+
+.finalCta { display: flex; align-items: center; justify-content: space-between; gap: 36px; margin-top: 36px; padding: clamp(38px, 5vw, 58px); border: 1px solid rgba(184, 205, 226, .74); border-radius: 25px; background: rgba(255, 255, 255, .94); box-shadow: 0 18px 50px rgba(6, 26, 64, .055); }
+.finalCta h2 { max-width: 850px; font-size: clamp(35px, 3.8vw, 53px); }
+.finalCta :global(.teal-button) { flex: 0 0 auto; border: 0; cursor: pointer; }
+.page a:hover { color: var(--teal); }
+.page a:focus-visible,
+.page button:focus-visible { outline: 3px solid var(--teal-bright); outline-offset: 5px; }
+
+@media (max-width: 1080px) {
+  .intro,
+  .enquiryGrid,
+  .process { grid-template-columns: 1fr; }
+  .intro { gap: 18px; }
+  .intro > p { align-self: start; }
+  .locationGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 760px) {
+  .page main { padding-bottom: 60px; }
+  .hero { min-height: auto; background: linear-gradient(180deg, rgba(255, 255, 255, .99) 0%, rgba(255, 255, 255, .94) 60%, rgba(247, 251, 252, .75) 100%), url("/images/contact/contact-guidance-v2.webp") 65% top / auto 58% no-repeat, #f7fbfc; }
+  .heroInner,
+  .contactRail,
+  .intro,
+  .enquiryGrid,
+  .locations,
+  .process,
+  .finalCta { width: calc(100% - 28px); }
+  .heroInner { min-height: auto; padding-block: 42px 58px; }
+  .hero h1 { font-size: clamp(39px, 11vw, 51px); }
+  .heroText { font-size: 14px; }
+  .heroActions { align-items: stretch; flex-direction: column; gap: 15px; max-width: 340px; }
+  .heroActions :global(.primary-button) { width: 100%; }
+  .heroNote { align-items: flex-start; line-height: 1.45; }
+  .contactRail { grid-template-columns: 1fr; margin-top: -22px; }
+  .contactRail > a,
+  .contactRail > div { border-right: 0; border-bottom: 1px solid var(--line); }
+  .contactRail > :last-child { border-bottom: 0; }
+  .intro { padding-block: 66px 42px; }
+  .enquiryCard,
+  .directCard,
+  .locations,
+  .process,
+  .finalCta { padding: 25px; border-radius: 20px; }
+  .enquiryCard ul,
+  .locationGrid,
+  .process ol { grid-template-columns: 1fr; }
+  .sectionHeading { align-items: flex-start; flex-direction: column; gap: 14px; }
+  .address address { min-height: 0; }
+  .process { gap: 32px; }
+  .finalCta { align-items: stretch; flex-direction: column; }
+  .finalCta :global(.teal-button) { width: 100%; }
+}

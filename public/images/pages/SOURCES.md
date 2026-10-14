@@ -6,6 +6,7 @@ These images are saved for the standalone marketing pages added to the site.
 - universities.jpg: copied from `public/images/institutions/cccu-campus.jpg`.
 - courses.webp: copied from `public/images/contact/contact-desk.webp`.
 - scholarships.webp: copied from `public/images/generated-support-mountains.webp`.
+- scholarships-v2.webp: original scholarship-planning hero generated for this project with OpenAI image generation on 2026-10-14.
 - services.webp: copied from `public/images/contact/contact-support.webp`.
 
 Original source records for contact and institution media remain in their existing source files where available.

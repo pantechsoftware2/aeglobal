@@ -8,10 +8,10 @@ export const defaultDescription =
   "Study abroad counseling for students who want clear options, careful preparation and no guesswork.";
 
 export const socialProfiles = [
-  "https://www.facebook.com/abroadeduversity/",
-  "https://www.instagram.com/abroad_eduversity/",
+  "https://www.facebook.com/share/19PxrqMTYA/?mibextid=wwXIfr",
+  "https://instagram.com/ae_globalgroup?rpxt=MTI2b3BlbDgxNzJ3Zw%3D%3D&utm_source=qr",
   "https://www.youtube.com/@Abroad_Eduversity",
-  "https://www.linkedin.com/company/abroad-eduversity"
+  "https://www.linkedin.com/company/aeglobalgroup/"
 ];
 
 export const contactPoints = {

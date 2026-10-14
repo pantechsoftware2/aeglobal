@@ -191,8 +191,8 @@ export const marketingPages: Record<MarketingPageKey, MarketingPage> = {
     accent: "Apply stronger.",
     description:
       "Review scholarship possibilities, financial aid routes, budget fit and document timing before relying on funding assumptions.",
-    heroImage: "/images/pages/scholarships.webp",
-    heroAlt: "Student looking across mountains before a study journey",
+    heroImage: "/images/pages/scholarships-v2.webp",
+    heroAlt: "Student reviewing scholarship applications and a study budget in a university library",
     stat: { value: "Early", label: "funding review" },
     intro: {
       eyebrow: "Financial planning",
