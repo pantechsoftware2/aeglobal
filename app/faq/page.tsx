@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, HelpCircle, MessageCircle, SearchCheck } from "lucide-react";
+import { ArrowRight, CheckCircle2, HelpCircle, ShieldCheck } from "lucide-react";
 import OpenChatButton from "../components/OpenChatButton";
 import SiteHeader from "../components/SiteHeader";
 import { faqCategories, faqItems } from "../data/faqs";
@@ -73,13 +73,18 @@ export default function FAQPage() {
             <span aria-current="page">FAQs</span>
           </nav>
           <div className="faq-hero-grid">
-            <div>
+            <div className="faq-hero-copy">
               <p className="eyebrow">Student questions</p>
-              <h1 id="faq-title">Clear answers before you apply.</h1>
+              <h1 id="faq-title">Clear answers.<br /><span>Practical next steps.</span></h1>
               <p>
-                Browse common questions about destinations, universities, applications,
-                visa preparation and what happens after you contact AE Global Group.
+                Start with straightforward information about choosing a destination,
+                preparing an application and understanding the support AE Global Group provides.
               </p>
+              <div className="faq-overview" aria-label="FAQ overview">
+                <span><strong>{faqItems.length}</strong> practical answers</span>
+                <span><strong>{faqCategories.length}</strong> planning topics</span>
+                <span><strong>No</strong> approval guarantees</span>
+              </div>
               <div className="faq-topic-nav" aria-label="FAQ categories">
                 {faqCategories.map((category) => (
                   <a href={`#faq-${category.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`} key={category.title}>
@@ -94,16 +99,6 @@ export default function FAQPage() {
                 <OpenChatButton className="secondary-button faq-chat-button" />
               </div>
             </div>
-            <aside className="faq-help-card" aria-label="Ask Mimi for help">
-              <span className="faq-help-icon"><MessageCircle size={24} aria-hidden="true" /></span>
-              <p className="eyebrow">Need a quick answer?</p>
-              <h2>Ask Mimi, AE Global Group&apos;s study abroad chat assistant.</h2>
-              <p>
-                If your question is not listed, open the chat and ask about your destination,
-                course shortlist, documents, visa preparation or next step.
-              </p>
-              <OpenChatButton />
-            </aside>
           </div>
         </section>
 
@@ -116,19 +111,14 @@ export default function FAQPage() {
           ))}
         </section>
 
-        <section className="faq-layout" id="faq-list" aria-label="Frequently asked questions">
-          <aside className="faq-side-card">
-            <span className="faq-help-icon"><SearchCheck size={24} aria-hidden="true" /></span>
-            <h2>How to use this page</h2>
-            <p>
-              Start with the category closest to your question. If your case is personal,
-              use Mimi for a quick answer or send an enquiry so the team can review your details.
-            </p>
-            <Link className="text-link" href="/contact">
-              Contact the team <ArrowRight size={15} aria-hidden="true" />
-            </Link>
-          </aside>
+        <p className="faq-information-note">
+          <ShieldCheck size={18} aria-hidden="true" />
+          These answers explain AE Global Group&apos;s services and general planning steps. Admission,
+          scholarship and visa requirements can change; confirm them with the relevant university,
+          funding provider or official immigration authority before acting.
+        </p>
 
+        <section className="faq-layout" id="faq-list" aria-label="Frequently asked questions">
           <div className="faq-category-list">
             {faqCategories.map((category) => (
               <section className="faq-category" key={category.title} aria-labelledby={`faq-${category.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}>

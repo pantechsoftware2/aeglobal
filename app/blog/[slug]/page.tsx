@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, Check, Clock } from "lucide-react";
 import SiteHeader from "../../components/SiteHeader";
 import LeadEnquiry from "../../components/LeadEnquiry";
+import BlogShare from "../../components/BlogShare";
 import { blogPosts, getBlogPost } from "../../data/blogPosts";
 import { brandName, defaultOpenGraph, jsonLd, siteUrl, toAbsoluteUrl } from "../../lib/seo";
 
@@ -108,7 +109,7 @@ export default async function BlogPostPage({ params }: Props) {
     <div className="blog-post-page">
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(articleSchema)} />
       {faqSchema ? <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(faqSchema)} /> : null}
-      <SiteHeader />
+      <SiteHeader activePage="blog" />
       <main>
         <div className="blog-shell">
           <article className="blog-post">
@@ -126,6 +127,8 @@ export default async function BlogPostPage({ params }: Props) {
             <div className="blog-post-image">
               <Image src={post.heroImage} alt={post.heroImageAlt} fill sizes="(max-width: 900px) 100vw, 1120px" priority />
             </div>
+
+            <BlogShare title={post.title} url={`${siteUrl}/blog/${post.slug}`} />
 
             <section className="blog-takeaway">
               <h2>Quick answer</h2>

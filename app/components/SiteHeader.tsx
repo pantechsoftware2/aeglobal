@@ -12,7 +12,7 @@ export default function SiteHeader({
   contactPage?: boolean;
   destinationPage?: boolean;
   faqPage?: boolean;
-  activePage?: "destinations" | "universities" | "courses" | "scholarships" | "services";
+  activePage?: "destinations" | "universities" | "courses" | "scholarships" | "services" | "blog";
 }) {
   return (
     <header className={`site-header${contactPage || destinationPage || faqPage || activePage ? " contact-header" : ""}`}>
@@ -43,12 +43,16 @@ export default function SiteHeader({
         <Link href="/courses" aria-current={activePage === "courses" ? "page" : undefined}>Courses</Link>
         <Link href="/scholarships" aria-current={activePage === "scholarships" ? "page" : undefined}>Scholarships</Link>
         <Link href="/services" aria-current={activePage === "services" ? "page" : undefined}>Services</Link>
+        <Link href="/blog" aria-current={activePage === "blog" ? "page" : undefined}>Blog</Link>
         <Link href="/contact" aria-current={contactPage ? "page" : undefined}>Contact Us</Link>
       </nav>
       <div className="header-actions">
         <LeadEnquiry className="journey-link">I&apos;m Ready to Start</LeadEnquiry>
       </div>
-      <Link className="mobile-contact-link" href="/contact" aria-current={contactPage ? "page" : undefined}>Contact advisor</Link>
+      <nav className="mobile-nav-links" aria-label="Mobile quick links">
+        <Link href="/blog" aria-current={activePage === "blog" ? "page" : undefined}>Blog</Link>
+        <Link href="/contact" aria-current={contactPage ? "page" : undefined}>Contact advisor</Link>
+      </nav>
     </header>
   );
 }

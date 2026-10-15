@@ -24,7 +24,7 @@ export const faqCategories: FAQCategory[] = [
       {
         question: "When should I start planning my study abroad application?",
         answer:
-          "Start as early as possible, especially if you need time for course research, documents, English tests, financial planning or visa preparation. A clear shortlist and document plan usually make the process easier."
+          "Start early enough to compare courses, check each institution's published deadlines, prepare documents and plan your budget. Timelines differ by country, institution, course and intake, so there is no single deadline that applies to every student."
       },
       {
         question: "Can I speak with someone before choosing a country?",
@@ -41,17 +41,17 @@ export const faqCategories: FAQCategory[] = [
       {
         question: "Which countries can I compare?",
         answer:
-          "You can compare destinations such as the United Kingdom, Dubai and UAE, Malta, Spain, France, Poland and other study destinations shown on the website. The team can also discuss wider options based on your profile."
+          "The Study Destinations page shows the countries currently covered by this website. The suitable options depend on your course, academic profile, budget, preferred intake and current admission and immigration requirements."
       },
       {
         question: "Are the universities shown on the website the full list?",
         answer:
-          "No. The website shows priority universities, colleges and pathway providers. AE Global Group can compare these with many more options after reviewing your course, budget, intake and academic profile."
+          "No. The website presents selected universities, colleges and pathway providers for comparison. Course availability, intakes and institutional relationships can change, so confirm the current options with the team and the institution before applying or paying a deposit."
       },
       {
         question: "How do you help me choose the right university?",
         answer:
-          "The team compares course fit, entry requirements, fees, intake timing, location, visa pathway and career direction. The goal is to create a shortlist that makes sense for your situation."
+          "The team can compare course content, published entry requirements, tuition, intake timing, location and your academic and budget profile. The university makes the admission decision, and immigration requirements must be checked separately with the relevant government authority."
       }
     ]
   },
@@ -63,12 +63,12 @@ export const faqCategories: FAQCategory[] = [
       {
         question: "What documents should I prepare first?",
         answer:
-          "Common starting documents include academic transcripts, certificates, passport, CV, English test details if available, recommendation letters if required and a draft statement of purpose for relevant applications."
+          "A practical starting set is your passport, academic transcripts and certificates, current CV and any available English-language test results. Statements, references, portfolios, financial evidence and other documents are course- and institution-specific, so prepare them only after checking the published requirements."
       },
       {
         question: "Can AE Global Group help with application forms and timelines?",
         answer:
-          "Yes. The team helps students understand application requirements, organize forms, prepare supporting documents and keep track of intake timelines."
+          "Yes. The team can help you interpret published application requirements, organise forms and supporting documents, and plan around known intake deadlines. You remain responsible for providing complete and truthful information and approving the final submission."
       },
       {
         question: "Do I need to know my exact course before contacting you?",
@@ -85,17 +85,17 @@ export const faqCategories: FAQCategory[] = [
       {
         question: "Do you guarantee visa approval?",
         answer:
-          "No. AE Global Group can guide students through visa preparation, document organization and practical next steps, but no advisor can guarantee a visa outcome."
+          "No. AE Global Group can help you understand published requirements and organise your preparation, but only the relevant government authority decides a visa or study-permit application. No education advisor can guarantee approval."
       },
       {
         question: "When should I start visa preparation?",
         answer:
-          "Visa preparation should start before the final stage. Understanding financial documents, timelines and country-specific requirements early helps reduce last-minute pressure."
+          "Review the official immigration guidance for your destination early, then build the application timeline around your offer, required documents, financial evidence and permitted application window. Requirements and processing times can change, so recheck the official government website before applying."
       },
       {
         question: "Can you help with accommodation and pre-departure planning?",
         answer:
-          "Yes. AE Global Group supports students with practical accommodation and pre-departure planning, including travel basics, arrival preparation and settling-in guidance."
+          "AE Global Group can provide practical guidance on accommodation research, travel preparation and arrival planning. Housing remains subject to availability, price and the provider's terms, so students should verify the property and contract before making a payment."
       }
     ]
   },
@@ -112,12 +112,12 @@ export const faqCategories: FAQCategory[] = [
       {
         question: "What happens after I submit an enquiry?",
         answer:
-          "The team reviews your details and gets in touch to understand your study plans, preferred destination, course interest, intake and current stage."
+          "The team uses the information you provide to understand your study plans, destination and course interests, intended intake and current stage, then follows up using the contact details in your enquiry."
       },
       {
         question: "What if my question is not listed here?",
         answer:
-          "Use Mimi, the AE Global Group chat assistant, to ask a quick study abroad question. For personal planning, share your details through the enquiry form so the team can follow up."
+          "Mimi can help you find general information from the website. It does not replace official university or immigration guidance. For advice based on your personal documents or circumstances, submit an enquiry for the team to review."
       }
     ]
   }

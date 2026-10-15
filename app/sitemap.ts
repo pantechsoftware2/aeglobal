@@ -4,7 +4,7 @@ import { destinations, getDestinationHero } from "./data/destinations";
 import { siteUrl, toAbsoluteUrl } from "./lib/seo";
 
 const defaultLastModified = "2026-10-06";
-const destinationLastModified = "2026-10-15";
+const recentContentLastModified = "2026-10-15";
 const latestBlogDate = blogPosts.reduce(
   (latest, post) => (post.publishedAt > latest ? post.publishedAt : latest),
   defaultLastModified
@@ -15,7 +15,7 @@ const mainRoutes = [
   {
     path: "/study-destinations",
     priority: 0.85,
-    lastModified: destinationLastModified,
+    lastModified: recentContentLastModified,
     images: ["/images/study-destinations-ai-hero.webp"]
   },
   { path: "/universities", priority: 0.85, lastModified: defaultLastModified },
@@ -23,7 +23,7 @@ const mainRoutes = [
   { path: "/scholarships", priority: 0.85, lastModified: defaultLastModified },
   { path: "/services", priority: 0.85, lastModified: defaultLastModified },
   { path: "/contact", priority: 0.8, lastModified: defaultLastModified },
-  { path: "/faq", priority: 0.75, lastModified: defaultLastModified },
+  { path: "/faq", priority: 0.75, lastModified: recentContentLastModified },
   {
     path: "/blog",
     priority: 0.7,
@@ -74,7 +74,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       const hero = getDestinationHero(destination);
 
       return route(`/destinations/${destination.slug}`, destination.institutions.length > 0 ? 0.75 : 0.55, {
-        lastModified: destinationLastModified,
+        lastModified: recentContentLastModified,
         changeFrequency: "monthly",
         images: [hero.image]
       });

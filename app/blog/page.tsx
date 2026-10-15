@@ -50,7 +50,7 @@ export default function BlogPage() {
   return (
     <div className="blog-page">
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(blogSchema)} />
-      <SiteHeader />
+      <SiteHeader activePage="blog" />
       <main>
         <div className="blog-shell">
           <section className="blog-hero">
