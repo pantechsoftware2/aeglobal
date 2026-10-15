@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import type { CSSProperties } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowDown, ArrowRight, Check, Compass, GraduationCap } from "lucide-react";
+import { ArrowDown, ArrowRight, Check } from "lucide-react";
 import { destinations, getDestinationGuide, getDestinationHero } from "../../data/destinations";
 import SiteHeader from "../../components/SiteHeader";
 import InstitutionDirectory from "../../components/InstitutionDirectory";
@@ -129,11 +129,6 @@ export default async function DestinationPage({ params }: Props) {
           <nav className="contact-breadcrumb" aria-label="Breadcrumb"><Link href="/">Home</Link><span aria-hidden="true">/</span><Link href="/study-destinations">Study destinations</Link><span aria-hidden="true">/</span><span aria-current="page">{destination.label}</span></nav>
           <div className="study-hero-grid">
             <div><p className="eyebrow">{hero.eyebrow}</p><h1>{hero.title}<br /><span>{hero.accent}</span></h1><p className="study-hero-copy">{hero.copy}</p><div className="button-row"><a className="primary-button" href="#destination-guide">{destination.institutions.length ? "Explore country guide" : "Explore your options"} <ArrowDown size={16} /></a><LeadEnquiry className="study-advisor-link" country={destination.name}>Talk to an advisor <ArrowRight size={16} /></LeadEnquiry></div></div>
-            <aside className="study-destination-summary" aria-label={`${destination.label} study planning focus`}>
-              <div className="study-summary-top"><span>{hero.focusLabel}</span><Compass size={20} aria-hidden="true" /></div>
-              <h2>{hero.cardTitle}</h2><p>{guide.studentFit}</p>
-              <div className="study-summary-stat"><GraduationCap size={25} aria-hidden="true" /><div><strong>{destination.institutions.length ? "Priority options" : "Let's talk"}</strong><span>{destination.institutions.length ? hero.cardStat : `about ${destination.label} institution options`}</span></div></div>
-            </aside>
           </div>
         </section>
         <section className="destination-guide-section" id="destination-guide" aria-labelledby="destination-guide-title">

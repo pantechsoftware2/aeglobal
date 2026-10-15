@@ -4,12 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 3001",
-    "build": "next build",
+    "build": "node scripts/verify-blog-images.mjs && next build",
     "prestart": "next build",
     "start": "next start -p 3001",
     "lint": "eslint .",
     "courses:sync": "node scripts/sync-official-courses.mjs",
-    "courses:verify": "node scripts/verify-course-catalogue.mjs"
+    "courses:verify": "node scripts/verify-course-catalogue.mjs",
+    "blog:verify": "node scripts/verify-blog-images.mjs"
   },
   "dependencies": {
     "gsap": "^3.15.0",

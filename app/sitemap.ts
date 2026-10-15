@@ -20,10 +20,10 @@ const mainRoutes = [
   { path: "/terms-and-conditions", priority: 0.45 }
 ];
 
-function route(path: string, priority: number): MetadataRoute.Sitemap[number] {
+function route(path: string, priority: number, modified = lastModified): MetadataRoute.Sitemap[number] {
   return {
     url: `${siteUrl}${path}`,
-    lastModified,
+    lastModified: modified,
     changeFrequency: "monthly",
     priority
   };
@@ -32,7 +32,7 @@ function route(path: string, priority: number): MetadataRoute.Sitemap[number] {
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...mainRoutes.map((item) => route(item.path, item.priority)),
-    ...blogPosts.map((post) => route(`/blog/${post.slug}`, 0.65)),
+    ...blogPosts.map((post) => route(`/blog/${post.slug}`, 0.65, new Date(`${post.publishedAt}T00:00:00.000Z`))),
     ...destinations.map((destination) =>
       route(`/destinations/${destination.slug}`, destination.institutions.length > 0 ? 0.75 : 0.55)
     )

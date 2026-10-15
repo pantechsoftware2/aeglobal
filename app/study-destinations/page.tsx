@@ -1,30 +1,38 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Check, Compass, FileSearch, GraduationCap, MapPinned, Plane } from "lucide-react";
+import {
+  ArrowRight,
+  BadgeCheck,
+  CalendarClock,
+  Compass,
+  FileSearch,
+  GraduationCap,
+  MapPinned,
+  Plane,
+  WalletCards
+} from "lucide-react";
 import LeadEnquiry from "../components/LeadEnquiry";
 import SiteHeader from "../components/SiteHeader";
 import { destinations, type StudyDestination } from "../data/destinations";
 import { brandName, defaultDescription, defaultOpenGraph } from "../lib/seo";
+import styles from "./study-destinations.module.css";
 
 export const metadata: Metadata = {
   title: `Study Destinations | ${brandName}`,
   description: "Compare study destinations by course fit, budget, intakes, visa pathway and long-term plans before you commit.",
-  alternates: {
-    canonical: "/study-destinations"
-  },
+  alternates: { canonical: "/study-destinations" },
   openGraph: {
     ...defaultOpenGraph,
     title: `Study Destinations | ${brandName}`,
     description: defaultDescription,
     url: "/study-destinations",
-    images: [
-      {
-        url: "/images/study-destinations-ai-hero.webp",
-        width: 1200,
-        height: 630,
-        alt: "Study abroad destination planning background"
-      }
-    ]
+    images: [{
+      url: "/images/study-destinations-ai-hero.webp",
+      width: 2048,
+      height: 768,
+      alt: "A study abroad planning desk with an illustrated international skyline"
+    }]
   },
   twitter: {
     card: "summary_large_image",
@@ -38,147 +46,119 @@ const destinationBySlug = new Map(destinations.map((destination) => [destination
 
 const categorySections = [
   {
-    title: "Big decision destinations",
-    copy: "Popular study routes where the right shortlist matters more than following the crowd.",
+    title: "Major English-speaking routes",
+    kicker: "High-choice destinations",
+    copy: "Popular routes where program depth, city choice and the total study budget need careful comparison.",
     slugs: ["united-states-of-america", "canada", "australia", "new-zealand", "united-kingdom", "ireland"]
   },
   {
-    title: "Fast-growing routes",
-    copy: "Options students compare when they want practical campuses, flexible entry points and clear cost planning.",
-    slugs: ["united-arab-emirates", "malta", "malaysia", "singapore", "cyprus", "georgia"]
+    title: "Fast-growing & specialist routes",
+    kicker: "Focused alternatives",
+    copy: "Practical options for students comparing branch campuses, flexible intakes, value or a distinct academic culture.",
+    slugs: ["united-arab-emirates", "malta", "malaysia", "singapore", "cyprus", "georgia", "japan"]
   },
   {
-    title: "Europe study routes",
-    copy: "Country choices for students comparing affordability, English-taught programs and long-term plans.",
+    title: "European study routes",
+    kicker: "Course and value range",
+    copy: "Compare language, deadlines, public and private routes, city costs and English-taught availability across Europe.",
     slugs: ["germany", "france", "spain", "poland", "italy", "netherlands", "finland", "sweden", "lithuania", "denmark", "austria", "belgium", "hungary", "switzerland", "greece"]
-  },
-  {
-    title: "Asia and specialist options",
-    copy: "Focused routes for students who want region-specific programs, career links or a different academic culture.",
-    slugs: ["japan"]
   }
 ].map((section) => ({
   ...section,
   destinations: section.slugs.map((slug) => destinationBySlug.get(slug)).filter(Boolean) as StudyDestination[]
 }));
 
-const heroDestinations = ["united-kingdom", "united-arab-emirates", "malta", "spain"]
+const featuredDestinations = ["united-kingdom", "united-arab-emirates", "malta", "spain"]
   .map((slug) => destinationBySlug.get(slug))
   .filter(Boolean) as StudyDestination[];
 
-const planningPoints = [
-  {
-    title: "Course fit",
-    copy: "Start with the subject, entry requirements and teaching style, then compare countries."
-  },
-  {
-    title: "Budget reality",
-    copy: "Look at fees, living costs, deposits and what needs to be ready before the visa stage."
-  },
-  {
-    title: "Timing",
-    copy: "Match intakes, documents and decision dates before you fall in love with one option."
-  },
-  {
-    title: "After arrival",
-    copy: "Think about accommodation, travel, support and what the first month actually looks like."
-  }
+const comparisonFactors = [
+  { title: "Course fit", copy: "Start with subject depth, entry requirements and how the course supports your next move.", icon: GraduationCap },
+  { title: "Budget reality", copy: "Compare tuition, deposits, living costs and the funds needed before the visa stage.", icon: WalletCards },
+  { title: "Intake timing", copy: "Align deadlines, documents and decision windows before committing to one route.", icon: CalendarClock },
+  { title: "Life after arrival", copy: "Plan housing, travel, local support and what the first weeks will realistically involve.", icon: MapPinned }
 ];
 
-const routeSteps = [
-  { title: "Profile", copy: "We review academics, budget, English level and timing.", icon: FileSearch },
-  { title: "Compare", copy: "You see country routes through fit, requirements and cost.", icon: Compass },
-  { title: "Shortlist", copy: "We narrow the options before applications begin.", icon: MapPinned },
-  { title: "Apply", copy: "Documents, forms and next steps are handled in order.", icon: Plane }
+const journeySteps = [
+  { title: "Profile", copy: "Academics, budget, English level and timing.", icon: FileSearch },
+  { title: "Compare", copy: "Countries reviewed through course, cost and requirements.", icon: Compass },
+  { title: "Shortlist", copy: "A focused set of routes you can defend and afford.", icon: MapPinned },
+  { title: "Apply", copy: "Documents, applications and next steps handled in order.", icon: Plane }
 ];
 
 export default function StudyDestinationsPage() {
   const totalInstitutions = destinations.reduce((count, destination) => count + destination.institutions.length, 0);
 
   return (
-    <div className="destinations-landing">
+    <div className={styles.page}>
       <SiteHeader activePage="destinations" />
       <main>
-        <section className="destination-landing-hero">
-          <div className="destination-landing-copy">
-            <nav className="contact-breadcrumb" aria-label="Breadcrumb">
-              <Link href="/">Home</Link>
-              <span aria-hidden="true">/</span>
-              <span aria-current="page">Study Destinations</span>
-            </nav>
-            <p className="eyebrow">Study destinations</p>
-            <h1>Choose a country<br />with clarity.<br /><span>Not pressure.</span></h1>
-            <p>
-              Compare destination fit using course availability, budget, intakes,
-              visa path, lifestyle and long-term plans before you commit.
-            </p>
-            <div className="button-row">
-              <LeadEnquiry className="primary-button">Start my plan <ArrowRight size={16} /></LeadEnquiry>
-              <a className="study-advisor-link" href="#destination-categories">Explore countries <ArrowRight size={16} /></a>
+        <section className={styles.hero}>
+          <div className={styles.heroInner}>
+            <div className={styles.heroCopy}>
+              <nav className={styles.breadcrumb} aria-label="Breadcrumb">
+                <Link href="/">Home</Link><span aria-hidden="true">/</span><span aria-current="page">Study Destinations</span>
+              </nav>
+              <p className={styles.eyebrow}>Study destinations</p>
+              <h1>Choose a country with clarity. <span>Not pressure.</span></h1>
+              <p className={styles.heroText}>Compare course fit, total cost, intake timing, visa preparation and everyday student life before you commit.</p>
+              <div className={styles.heroActions}>
+                <LeadEnquiry className="primary-button">Start my plan <ArrowRight size={16} aria-hidden="true" /></LeadEnquiry>
+                <a href="#all-destinations">Explore every destination <ArrowRight size={15} aria-hidden="true" /></a>
+              </div>
+              <p className={styles.heroAssurance}><BadgeCheck size={16} aria-hidden="true" /> Profile-led guidance—not a popularity ranking.</p>
             </div>
-          </div>
-          <div className="destination-landing-visual">
-            <div className="destination-hero-stat">
-              <strong>{destinations.length}+</strong>
-              <span>destinations compared by fit</span>
-            </div>
-            <div className="destination-hero-panel" aria-label="Destination comparison factors">
-              <span>Compare by</span>
-              <ul>
-                <li>Course fit</li>
-                <li>Budget range</li>
-                <li>Intake timing</li>
-                <li>Visa pathway</li>
-              </ul>
-            </div>
-            <div className="destination-hero-microstats" aria-label="Destination planning summary">
-              <span>
-                <strong>{totalInstitutions}+</strong>
-                institution options
-              </span>
-              <span>
-                <strong>4</strong>
-                planning stages
-              </span>
-            </div>
+
           </div>
         </section>
 
-        <section className="destination-featured-routes" aria-labelledby="featured-routes-title">
-          <div className="destination-section-heading">
-            <p className="eyebrow">Start with the route</p>
-            <h2 id="featured-routes-title">Not every popular country is the right country.</h2>
-            <p>Begin with a few strong options, then compare them against your profile instead of chasing every possibility.</p>
+        <section className={styles.proofBar} aria-label="Destination planning overview">
+          <div><MapPinned size={20} aria-hidden="true" /><span><strong>{destinations.length}+</strong> destination guides</span></div>
+          <div><GraduationCap size={20} aria-hidden="true" /><span><strong>{totalInstitutions}+</strong> institution options</span></div>
+          <div><Compass size={20} aria-hidden="true" /><span><strong>1:1</strong> profile-led shortlisting</span></div>
+        </section>
+
+        <section className={`${styles.section} ${styles.featured}`} aria-labelledby="featured-destinations-title">
+          <div className={styles.sectionHeading}>
+            <div><p className={styles.eyebrow}>Popular starting points</p><h2 id="featured-destinations-title">Start focused. Expand only when it helps.</h2></div>
+            <p>These are common comparison routes—not automatic recommendations. Open a guide to understand who each destination may suit.</p>
           </div>
-          <div className="destination-route-grid">
-            {heroDestinations.map((destination, index) => (
-              <Link className="destination-route-card" href={`/destinations/${destination.slug}`} key={destination.slug}>
-                <small className="destination-route-card-index">{String(index + 1).padStart(2, "0")}</small>
-                <span>{destination.label}</span>
-                <small className="destination-route-card-detail">{destination.meta}</small>
-                <ArrowRight className="destination-route-card-arrow" size={17} aria-hidden="true" />
+          <div className={styles.featuredGrid}>
+            {featuredDestinations.map((destination, index) => (
+              <Link className={styles.featuredCard} href={`/destinations/${destination.slug}`} key={destination.slug}>
+                <div className={styles.featuredCardTop}>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <Image src={destination.flag} alt="" width={44} height={32} />
+                </div>
+                <div><h3>{destination.label}</h3><p>{destination.meta}</p></div>
+                <span className={styles.cardAction}>View destination <ArrowRight size={15} aria-hidden="true" /></span>
               </Link>
             ))}
           </div>
         </section>
 
-        <section className="destination-category-section" id="destination-categories" aria-labelledby="destination-categories-title">
-          <div className="destination-category-intro">
-            <p className="eyebrow">Destination categories</p>
-            <h2 id="destination-categories-title">Compare routes that fit your plan.</h2>
-            <p>Start with the kind of study experience you want, then open the countries that match the route.</p>
+        <section className={`${styles.section} ${styles.directory}`} id="all-destinations" aria-labelledby="all-destinations-title">
+          <div className={styles.directoryIntro}>
+            <p className={styles.eyebrow}>Explore all routes</p>
+            <h2 id="all-destinations-title">Find the region that fits the plan.</h2>
+            <p>Use these groups as a starting point, then compare individual country guides by course, cost and timing.</p>
+            <div className={styles.directoryCount}><strong>{destinations.length}</strong><span>country guides<br />in one place</span></div>
           </div>
-          <div className="destination-category-stack">
+
+          <div className={styles.categoryGrid}>
             {categorySections.map((section) => (
-              <article className="destination-category-band" key={section.title}>
-                <div>
-                  <h3>{section.title}</h3>
-                  <p>{section.copy}</p>
+              <article className={styles.categoryCard} key={section.title}>
+                <div className={styles.categoryHeader}>
+                  <div><span>{section.kicker}</span><h3>{section.title}</h3></div>
+                  <small>{section.destinations.length} destinations</small>
                 </div>
-                <div className="destination-chip-grid">
+                <p>{section.copy}</p>
+                <div className={styles.destinationLinks}>
                   {section.destinations.map((destination) => (
                     <Link href={`/destinations/${destination.slug}`} key={destination.slug}>
+                      <Image src={destination.flag} alt="" width={22} height={16} />
                       <span>{destination.label}</span>
+                      <ArrowRight size={13} aria-hidden="true" />
                     </Link>
                   ))}
                 </div>
@@ -187,50 +167,46 @@ export default function StudyDestinationsPage() {
           </div>
         </section>
 
-        <section className="destination-planning-panel">
-          <div className="destination-section-heading">
-            <p className="eyebrow">What we compare</p>
-            <h2>A destination should make sense on paper.</h2>
+        <section className={`${styles.section} ${styles.framework}`} aria-labelledby="comparison-framework-title">
+          <div className={styles.frameworkHeading}>
+            <div><p className={styles.eyebrow}>A practical comparison</p><h2 id="comparison-framework-title">A destination should work on paper—and in real life.</h2></div>
+            <p>Good decisions come from comparing the details that change your application, budget and arrival experience.</p>
           </div>
-          <div className="destination-planning-grid">
-            {planningPoints.map((point) => (
-              <article key={point.title}>
-                <Check size={18} aria-hidden="true" />
-                <h3>{point.title}</h3>
-                <p>{point.copy}</p>
+          <div className={styles.factorGrid}>
+            {comparisonFactors.map(({ title, copy, icon: Icon }, index) => (
+              <article key={title}>
+                <div><Icon size={20} aria-hidden="true" /><span>{String(index + 1).padStart(2, "0")}</span></div>
+                <h3>{title}</h3>
+                <p>{copy}</p>
               </article>
             ))}
           </div>
-        </section>
 
-        <section className="destination-process-strip">
-          <div>
-            <p className="eyebrow">How the decision gets clearer</p>
-            <h2>From where should I go to a shortlist you can act on.</h2>
-          </div>
-          <ol>
-            {routeSteps.map((step, index) => {
-              const Icon = step.icon;
-              return (
-                <li key={step.title}>
+          <div className={styles.processPanel}>
+            <div className={styles.processIntro}>
+              <p className={styles.eyebrow}>Your route to a decision</p>
+              <h2>Four steps. One shortlist you can act on.</h2>
+              <p>We move from your profile to an application plan without skipping the practical checks in between.</p>
+            </div>
+            <ol>
+              {journeySteps.map(({ title, copy, icon: Icon }, index) => (
+                <li key={title}>
                   <span>{String(index + 1).padStart(2, "0")}</span>
-                  <Icon size={22} aria-hidden="true" />
-                  <h3>{step.title}</h3>
-                  <p>{step.copy}</p>
+                  <Icon size={20} aria-hidden="true" />
+                  <h3>{title}</h3>
+                  <p>{copy}</p>
                 </li>
-              );
-            })}
-          </ol>
+              ))}
+            </ol>
+          </div>
         </section>
 
-        <section className="destination-final-cta">
-          <div>
-            <p className="eyebrow">Ready to compare properly?</p>
-            <h2>Tell us what you want to study. We&apos;ll help map the countries worth your time.</h2>
+        <section className={`${styles.section} ${styles.cta}`}>
+          <div><p className={styles.eyebrow}>Ready to compare properly?</p><h2>Tell us what you want to study. We&apos;ll map the countries worth your time.</h2></div>
+          <div className={styles.ctaAction}>
+            <p>Start with your course, budget and target intake.</p>
+            <LeadEnquiry className="teal-button">Build my destination plan <GraduationCap size={16} aria-hidden="true" /></LeadEnquiry>
           </div>
-          <LeadEnquiry className="teal-button">
-            Build my destination plan <GraduationCap size={16} aria-hidden="true" />
-          </LeadEnquiry>
         </section>
       </main>
     </div>
