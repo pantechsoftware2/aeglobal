@@ -248,24 +248,38 @@ export default function HomePage() {
 
           <section className="support" id="services">
             <div className="support-content">
-              <p className="eyebrow">Student Support</p>
-              <h2>You don&apos;t have to manage<br />every step alone.</h2>
-              <p>Get help with the real work: requirements, timelines, documents, visa preparation and departure planning.</p>
+              <div className="support-heading">
+                <p className="eyebrow"><span aria-hidden="true">06</span> Student Support</p>
+                <div className="support-heading-grid">
+                  <div>
+                    <h2>Expert support.<br /><span>At every stage.</span></h2>
+                    <p className="support-lede">From your first shortlist to the day you depart, get practical guidance for the decisions, documents and deadlines that matter.</p>
+                  </div>
+                  <ul className="support-principles" aria-label="Our approach to student support">
+                    <li>Profile-led planning</li>
+                    <li>Requirement-based guidance</li>
+                    <li>Clear next steps</li>
+                  </ul>
+                </div>
+              </div>
               <SupportServiceList>
                 {services.map((service) => {
                   const Icon = service.icon;
                   return (
                     <div className="service" key={service.label} role="listitem">
-                      <Icon size={22} />
+                      <span className="service-icon" aria-hidden="true"><Icon size={21} /></span>
                       <span>{service.label}</span>
                       <small>{service.copy}</small>
                     </div>
                   );
                 })}
               </SupportServiceList>
-              <a className="teal-button" href="#contact">
-                Get Study Abroad Support <ArrowRight size={16} />
-              </a>
+              <div className="support-footer-row">
+                <a className="teal-button" href="#contact">
+                  Talk to a Study Advisor <ArrowRight size={16} />
+                </a>
+                <p><ShieldCheck size={17} aria-hidden="true" /> Practical advice. No false guarantees.</p>
+              </div>
             </div>
           </section>
         </div>

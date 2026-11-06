@@ -202,7 +202,10 @@ export default async function BlogPostPage({ params }: Props) {
                 {post.sources?.length ? (
                   <section className="blog-sources">
                     <h2>Official sources</h2>
-                    <p>Checked on 15 October 2026. Immigration rules can change, so review the official guidance before applying.</p>
+                    <p>
+                      Checked on {new Date(`${post.sourcesCheckedAt ?? "2026-10-15"}T00:00:00`).toLocaleDateString("en", { day: "numeric", month: "long", year: "numeric" })}.
+                      {" "}Admissions, testing and immigration requirements can change, so review the official guidance before applying.
+                    </p>
                     <ol>
                       {post.sources.map((source) => <li key={source.href}><a href={source.href} target="_blank" rel="noopener noreferrer">{source.label}<span aria-hidden="true"> ↗</span></a></li>)}
                     </ol>
