@@ -47,6 +47,174 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "new-zealand-student-visa-changes-2026",
+    title: "New Zealand student visa changes 2026: what Indian students need to know",
+    metaTitle: "New Zealand Student Visa Changes 2026",
+    metaDescription:
+      "New Zealand changed student visa rules from 27 October 2026 and graduate work options from 16 November. See what Indian students should do.",
+    description:
+      "A practical guide to New Zealand's new student work limits, English evidence, visa expiry rules and graduate work options for Indian students.",
+    category: "New Zealand visa update",
+    publishedAt: "2026-11-12",
+    readingTime: "10 min read",
+    heroImage: "/images/blog/new-zealand-student-visa-changes-2026.webp",
+    heroImageAlt: "Indian postgraduate student reviewing a New Zealand study and work timeline in a university lounge",
+    heroImagePrompt:
+      "A premium wide editorial photograph of a young Indian postgraduate student reviewing a New Zealand study-and-work timeline beside a laptop in a modern university lounge, with subtle green hills and water outside, using refined navy, teal and light-neutral tones, without logos, readable text, passports or dominant flags.",
+    takeaway:
+      "New Zealand changed four student-visa settings from 27 October 2026: new Master's applications now normally carry a 25-hour weekly in-study work limit, English ability has greater weight, processing can be suspended in more provider-compliance situations, and some visas extend to two months after the course ends. Separate graduate-work changes start on 16 November. Check your own eVisa because the application date, qualification and visa type matter.",
+    keywords: [
+      "New Zealand student visa changes 2026",
+      "New Zealand student visa for Indian students",
+      "New Zealand student work hours",
+      "New Zealand post-study work visa 2026",
+      "New Zealand graduate work visa",
+      "study in New Zealand 2027"
+    ],
+    sections: [
+      {
+        heading: "What changed on 27 October 2026?",
+        body: [
+          "Immigration New Zealand announced four changes that took effect on 27 October 2026. They cover work rights for Master's students, how English ability is considered, the circumstances in which student-visa processing can be suspended, and the period some students receive after their course ends.",
+          "These are immigration settings, not university admission rules. A university offer does not guarantee a visa, and a visa does not guarantee part-time work. Your eVisa or visa letter remains the final record of the conditions that apply to you."
+        ],
+        table: {
+          headers: ["Change", "Who it affects", "Practical meaning"],
+          rows: [
+            ["Master's in-study work rights", "New student visa applications made on or after 27 October 2026", "Up to 25 hours a week during study and full-time in eligible holidays, subject to visa conditions"],
+            ["English-language assessment", "Student visa applicants", "INZ may ask for evidence that your English is sufficient for the proposed course"],
+            ["Processing suspension powers", "Applications linked to a provider under compliance review", "INZ can pause processing in a broader range of provider non-compliance situations"],
+            ["Post-course visa period", "Students whose visa would use the course-end-date calculation", "The former one-month period becomes two months; the separate 31 March expiry rule remains"]
+          ]
+        }
+      },
+      {
+        heading: "The new work limit for Master's students",
+        body: [
+          "The headline change is the end of unlimited in-study work rights for new Master's-by-research student visa applications. New Master's students are now generally placed on the same settings: up to 25 hours of work a week while studying and full-time work during eligible scheduled holidays. The announcement says this applies to student visa applications made on or after 27 October 2026.",
+          "Work rights are not automatic. Eligibility depends on the course and the conditions printed on the eVisa; full-time holiday work also depends on the course structure and scheduled breaks.",
+          "Doctoral students remain a separate category. Immigration New Zealand's current guidance says a student enrolled in a New Zealand PhD has no hourly work limit, although the student must continue studying full-time."
+        ],
+        subsections: [
+          {
+            heading: "What if your visa was applied for before 27 October?",
+            body: [
+              "Do not assume the new condition has been added retrospectively. The official announcement ties the Master's change to applications made on or after 27 October 2026. Check the work condition on your current eVisa or decision letter, and contact Immigration New Zealand if the condition does not match the rule that should apply to your case."
+            ]
+          }
+        ]
+      },
+      {
+        heading: "English evidence now matters more in the genuine-student assessment",
+        body: [
+          "Immigration New Zealand has strengthened its instructions so that English-language ability is an explicit factor when officers assess whether a student can meet their visa conditions and make satisfactory academic progress.",
+          "This does not make one English test or score compulsory for every applicant. The evidence depends on the course, provider and application; INZ may ask for a test result or verification of current tertiary study.",
+          "Keep the application consistent: explain why the course fits your education, how you will fund it, what you plan to do afterwards and how your English supports the workload. Never use altered documents or answers that conflict with the evidence."
+        ],
+        bullets: [
+          "Check the provider's academic and English entry requirements before accepting the offer.",
+          "Include current, verifiable language evidence when it helps explain your readiness.",
+          "Explain any study gap, course change or weak prior result honestly and with supporting documents.",
+          "Keep your course choice, funding plan and post-study plan consistent across the application."
+        ]
+      },
+      {
+        heading: "How the post-course visa expiry change works",
+        body: [
+          "Under the 27 October update, the post-course period used for some student visas has increased from one month to two months. This gives affected students more time to decide and prepare their next lawful step after study. Immigration New Zealand also states that the separate 31 March expiry date used in relevant cases has not changed.",
+          "The extra month is not a Post-Study Work Visa and does not create new work rights. Any work before the student visa expires still depends on the conditions already written on that visa. You must hold a valid visa at all times and submit any eligible next application within its own deadline."
+        ]
+      },
+      {
+        heading: "Graduate work options changing from 16 November 2026",
+        body: [
+          "A separate set of changes starts on 16 November 2026. Because this article is published on 12 November, these options are announced but not yet open on the publication date. Applicants should recheck the live Immigration New Zealand pages on or after 16 November before applying.",
+          "The new Short-Term Graduate Work Visa offers up to six months of open work rights to eligible graduates of NZQCF Level 5 to 7 programmes that do not qualify for a Post-Study Work Visa. The qualification must have been studied full-time in New Zealand for at least 24 weeks and cannot be an English-language, foundation or bridging qualification. Applicants need NZD 5,000, must apply within three months of student-visa expiry and cannot have held either graduate visa before.",
+          "Post-Study Work Visa eligibility also expands to Level 7 graduate-diploma graduates who studied the full qualification in New Zealand and hold a bachelor's degree. The visa can match the New Zealand study period, up to one year; cross-crediting or recognition of prior learning does not count toward full-duration enrolment."
+        ],
+        table: {
+          headers: ["Route from 16 November", "Core study requirement", "Potential work period"],
+          rows: [
+            ["Short-Term Graduate Work Visa", "Eligible NZQCF Level 5–7 qualification, full-time for at least 24 weeks, not otherwise PSWV-eligible", "Up to 6 months"],
+            ["Level 7 graduate diploma PSWV route", "Full-duration Level 7 graduate diploma in New Zealand plus a bachelor's degree", "Study duration, up to 1 year"],
+            ["Eligible postgraduate diploma", "Level 8 qualification with at least 30 weeks of qualifying full-time study", "Potentially 1 year"],
+            ["Eligible Master's degree", "Level 9 qualification with at least 30 weeks enrolled in the Master's itself", "Potentially 3 years"],
+            ["Eligible New Zealand PhD graduate from India", "New Zealand PhD and all relevant visa requirements", "Potentially up to 4 years under the India–New Zealand FTA commitment"]
+          ]
+        }
+      },
+      {
+        heading: "Why the update matters for Indian applicants",
+        body: [
+          "India is one of New Zealand's largest student-visa applicant countries. INZ reports 13,895 applications from Indian nationals between 1 January and 30 September 2026 and a 64.1% approval rate among decisions in its table. This is not a forecast for an individual application.",
+          "The India–New Zealand Free Trade Agreement adds an India-specific commitment. From 16 November 2026, eligible Indian graduates with a New Zealand PhD can receive up to four years on a Post-Study Work Visa. It also commits to at least 20 in-study work hours for Indian students if the current general 25-hour setting changes later.",
+          "Course quality and career fit should still come before work-hour calculations. Part-time income should not be treated as the primary plan for tuition or living costs, and no course or visa creates a guaranteed job or residence outcome."
+        ]
+      },
+      {
+        heading: "A practical action plan for a 2027 intake",
+        body: [
+          "Start with the qualification level and course structure, then map the immigration rules that apply to that exact programme. Immigration New Zealand advises fee-paying students to apply at least three months before intended travel and says processing is busiest from October to March.",
+          "AE Global Group can help compare confirmed programmes and organize the application timeline. Admission and visa decisions remain with the university and Immigration New Zealand."
+        ],
+        bullets: [
+          "Confirm the course's NZQCF level, duration, credits and scheduled holidays.",
+          "Ask the provider to confirm the qualification title and post-study eligibility in writing.",
+          "Prepare verifiable English, academic, funding and study-plan evidence.",
+          "Budget without relying on part-time work to cover essential costs.",
+          "Apply early enough for the October-to-March peak period.",
+          "Read every condition on the eVisa before starting work.",
+          "Recheck the official 16 November graduate-work pages before relying on a future route."
+        ]
+      }
+    ],
+    checklist: [
+      "Exact visa application date",
+      "NZQCF level and course duration",
+      "English evidence",
+      "Credible funding plan",
+      "eVisa work conditions",
+      "Post-study route and deadline",
+      "Official guidance rechecked"
+    ],
+    internalLinks: [
+      { label: "Explore the New Zealand study destination guide", href: "/destinations/new-zealand" },
+      { label: "Prepare your study abroad application documents", href: "/blog/study-abroad-application-documents-checklist" },
+      { label: "See AE Global Group application support", href: "/services" }
+    ],
+    sources: [
+      { label: "Immigration New Zealand: student visa changes from 27 October 2026", href: "https://www.immigration.govt.nz/about-us/news-centre/changes-to-student-visas/" },
+      { label: "Immigration New Zealand: working on a student visa", href: "https://www.immigration.govt.nz/study/once-you-have-a-student-visa/working-on-a-student-visa/" },
+      { label: "Immigration New Zealand: genuine intentions to study", href: "https://www.immigration.govt.nz/process-to-apply/applying-for-a-visa/providing-evidence-and-documents-to-support-your-visa-application/genuine-intentions-to-study-in-new-zealand/" },
+      { label: "Immigration New Zealand: new and updated post-study work visa options", href: "https://www.immigration.govt.nz/about-us/news-centre/new-and-updated-post-study-work-visa-options/" },
+      { label: "Immigration New Zealand: India–New Zealand FTA visa commitments", href: "https://www.immigration.govt.nz/about-us/news-centre/india-new-zealand-free-trade-agreement-brings-new-visa-commitments/" },
+      { label: "Immigration New Zealand: international education and student visa statistics", href: "https://www.immigration.govt.nz/about-us/our-strategies-and-programmes/growing-international-education-in-new-zealand/" }
+    ],
+    sourcesCheckedAt: "2026-11-12",
+    faqs: [
+      {
+        question: "How many hours can a New Zealand Master's student work in 2026?",
+        answer: "For applications made on or after 27 October 2026, Master's students are generally limited to 25 hours a week during study and may work full-time in eligible holidays, subject to their eVisa."
+      },
+      {
+        question: "Do New Zealand PhD students still have unlimited work hours?",
+        answer: "Current INZ guidance says New Zealand PhD students have no hourly work limit, but they must keep studying full-time and follow their other visa conditions."
+      },
+      {
+        question: "Is an English test now compulsory for every New Zealand student visa?",
+        answer: "No. English ability is an explicit genuine-intentions factor, and INZ may ask for a test result or current-study verification. Course and provider requirements also apply."
+      },
+      {
+        question: "What is New Zealand's new six-month graduate work visa?",
+        answer: "From 16 November 2026, it gives eligible NZQCF Level 5 to 7 graduates up to six months of open work rights when their qualification does not qualify for a Post-Study Work Visa. Funds, study-duration and timing requirements apply."
+      },
+      {
+        question: "Can Indian PhD graduates get four years of post-study work rights in New Zealand?",
+        answer: "From 16 November 2026, Immigration New Zealand says eligible Indian graduates with a New Zealand PhD can receive a Post-Study Work Visa for up to four years under the India–New Zealand FTA commitments. All normal visa requirements still apply."
+      }
+    ]
+  },
+  {
     slug: "germany-dmat-aps-india-2027",
     title: "Germany dMAT for APS India: what 2027 Master's applicants need to know",
     metaTitle: "Germany dMAT for APS India: 2027 Guide",
