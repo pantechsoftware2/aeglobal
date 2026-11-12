@@ -18,6 +18,8 @@ import StoryTestimonials from "./components/StoryTestimonials";
 import TestimonialCarousel from "./components/TestimonialCarousel";
 import LeadEnquiry from "./components/LeadEnquiry";
 import SupportServiceList from "./components/SupportServiceList";
+import Link from "next/link";
+import { blogPosts } from "./data/blogPosts";
 import { destinations } from "./data/destinations";
 import { brandName, defaultDescription, defaultOpenGraph, jsonLd, siteUrl } from "./lib/seo";
 
@@ -97,6 +99,8 @@ const services = [
   { label: "Accommodation", icon: Home, copy: "Practical settling-in guidance" },
   { label: "Pre-Departure", icon: Send, copy: "Travel and arrival preparation" }
 ];
+
+const latestGuides = blogPosts.slice(0, 3);
 
 export default function HomePage() {
   const serviceSchema = {
@@ -288,6 +292,30 @@ export default function HomePage() {
       <section className="testimonials-section" aria-labelledby="student-feedback-title">
         <h2 id="student-feedback-title" className="sr-only">Student feedback</h2>
         <TestimonialCarousel />
+      </section>
+
+      <section className="home-guidance" aria-labelledby="home-guidance-title">
+        <div className="home-guidance-heading">
+          <div>
+            <p className="eyebrow">Latest study abroad guidance</p>
+            <h2 id="home-guidance-title">Plan with current, practical information.</h2>
+          </div>
+          <Link className="text-link" href="/blog">
+            Explore all guides <ArrowRight size={15} aria-hidden="true" />
+          </Link>
+        </div>
+        <div className="home-guidance-grid">
+          {latestGuides.map((post) => (
+            <article key={post.slug}>
+              <p>{post.category}</p>
+              <h3><Link href={`/blog/${post.slug}`}>{post.title}</Link></h3>
+              <span>{post.description}</span>
+              <Link className="text-link" href={`/blog/${post.slug}`}>
+                Read guide <ArrowRight size={15} aria-hidden="true" />
+              </Link>
+            </article>
+          ))}
+        </div>
       </section>
 
       <section className="cta" id="contact">

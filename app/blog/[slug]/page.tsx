@@ -6,7 +6,7 @@ import { ArrowLeft, ArrowRight, Check, Clock } from "lucide-react";
 import SiteHeader from "../../components/SiteHeader";
 import LeadEnquiry from "../../components/LeadEnquiry";
 import BlogShare from "../../components/BlogShare";
-import { blogPosts, getBlogPost } from "../../data/blogPosts";
+import { blogPosts, getBlogPost, getRelatedBlogPosts } from "../../data/blogPosts";
 import { brandName, defaultOpenGraph, jsonLd, siteUrl, toAbsoluteUrl } from "../../lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -103,7 +103,7 @@ export default async function BlogPostPage({ params }: Props) {
     }))
   } : null;
 
-  const relatedPosts = blogPosts.filter((item) => item.slug !== post.slug).slice(0, 3);
+  const relatedPosts = getRelatedBlogPosts(post.slug);
 
   return (
     <div className="blog-post-page">

@@ -180,7 +180,8 @@ export const blogPosts: BlogPost[] = [
     internalLinks: [
       { label: "Explore the New Zealand study destination guide", href: "/destinations/new-zealand" },
       { label: "Prepare your study abroad application documents", href: "/blog/study-abroad-application-documents-checklist" },
-      { label: "See AE Global Group application support", href: "/services" }
+      { label: "See AE Global Group application support", href: "/services" },
+      { label: "Explore AE Global Group study abroad guidance", href: "/" }
     ],
     sources: [
       { label: "Immigration New Zealand: student visa changes from 27 October 2026", href: "https://www.immigration.govt.nz/about-us/news-centre/changes-to-student-visas/" },
@@ -355,7 +356,8 @@ export const blogPosts: BlogPost[] = [
     internalLinks: [
       { label: "Explore the Germany study destination guide", href: "/destinations/germany" },
       { label: "Prepare your study abroad application documents", href: "/blog/study-abroad-application-documents-checklist" },
-      { label: "See AE Global Group application support", href: "/services" }
+      { label: "See AE Global Group application support", href: "/services" },
+      { label: "Explore AE Global Group study abroad guidance", href: "/" }
     ],
     sources: [
       { label: "APS India: Digital Master Test for selected Master's applicants", href: "https://aps-india.de/dmat/" },
@@ -502,7 +504,8 @@ export const blogPosts: BlogPost[] = [
     internalLinks: [
       { label: "Explore the Australia study destination guide", href: "/destinations/australia" },
       { label: "Compare all study destinations", href: "/study-destinations" },
-      { label: "See AE Global Group application and visa support", href: "/services" }
+      { label: "See AE Global Group application and visa support", href: "/services" },
+      { label: "Explore AE Global Group study abroad guidance", href: "/" }
     ],
     sources: [
       { label: "Changes to Student visa application rules (subclasses 500 and 590)", href: "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/changes-to-student-visa-application-rules-500-590" },
@@ -648,7 +651,8 @@ export const blogPosts: BlogPost[] = [
     internalLinks: [
       { label: "Explore the United Kingdom destination guide", href: "/destinations/united-kingdom" },
       { label: "Review AE Global Group services", href: "/services" },
-      { label: "Prepare your application documents", href: "/blog/study-abroad-application-documents-checklist" }
+      { label: "Prepare your application documents", href: "/blog/study-abroad-application-documents-checklist" },
+      { label: "Explore AE Global Group study abroad guidance", href: "/" }
     ],
     sources: [
       { label: "UK Statement of Changes HC 584 (3 September 2026)", href: "https://www.gov.uk/government/publications/statement-of-changes-to-the-immigration-rules-hc-584-3-september-2026/statement-of-changes-to-the-immigration-rules-hc-584-3-september-2026-accessible" },
@@ -727,6 +731,12 @@ export const blogPosts: BlogPost[] = [
       "English test status",
       "Country preference",
       "Document readiness"
+    ],
+    internalLinks: [
+      { label: "Compare universities for your shortlist", href: "/universities" },
+      { label: "Search courses by subject and study level", href: "/courses" },
+      { label: "Compare countries before choosing a destination", href: "/study-destinations" },
+      { label: "Explore AE Global Group study abroad guidance", href: "/" }
     ]
   },
   {
@@ -782,6 +792,12 @@ export const blogPosts: BlogPost[] = [
       "Statement of purpose notes",
       "Reference details where required",
       "Financial document plan"
+    ],
+    internalLinks: [
+      { label: "Review application and document support", href: "/services" },
+      { label: "Search courses before preparing applications", href: "/courses" },
+      { label: "Plan visa documents before the offer arrives", href: "/blog/visa-preparation-starts-before-the-offer" },
+      { label: "Explore AE Global Group study abroad guidance", href: "/" }
     ]
   },
   {
@@ -836,6 +852,12 @@ export const blogPosts: BlogPost[] = [
       "Visa document path",
       "Accommodation planning",
       "Pre-departure support"
+    ],
+    internalLinks: [
+      { label: "Compare all study destinations", href: "/study-destinations" },
+      { label: "Compare universities that fit your profile", href: "/universities" },
+      { label: "Search courses by subject and study level", href: "/courses" },
+      { label: "Explore AE Global Group study abroad guidance", href: "/" }
     ]
   },
   {
@@ -890,6 +912,12 @@ export const blogPosts: BlogPost[] = [
       "English evidence where required",
       "Visa timeline",
       "Travel and accommodation plan"
+    ],
+    internalLinks: [
+      { label: "Review application and visa support", href: "/services" },
+      { label: "Compare destination requirements", href: "/study-destinations" },
+      { label: "Prepare your application document checklist", href: "/blog/study-abroad-application-documents-checklist" },
+      { label: "Explore AE Global Group study abroad guidance", href: "/" }
     ]
   }
 ];
@@ -897,3 +925,51 @@ export const blogPosts: BlogPost[] = [
 enforceBlogImagePolicy(blogPosts);
 
 export const getBlogPost = (slug: string) => blogPosts.find((post) => post.slug === slug);
+
+const relatedBlogPostSlugs: Record<string, string[]> = {
+  "new-zealand-student-visa-changes-2026": [
+    "visa-preparation-starts-before-the-offer",
+    "compare-study-destinations-before-applying",
+    "study-abroad-application-documents-checklist"
+  ],
+  "germany-dmat-aps-india-2027": [
+    "how-to-build-a-study-abroad-shortlist",
+    "study-abroad-application-documents-checklist",
+    "compare-study-destinations-before-applying"
+  ],
+  "australia-student-visa-changes-2026-2027": [
+    "visa-preparation-starts-before-the-offer",
+    "compare-study-destinations-before-applying",
+    "study-abroad-application-documents-checklist"
+  ],
+  "uk-student-visa-maintenance-funds-2027": [
+    "visa-preparation-starts-before-the-offer",
+    "study-abroad-application-documents-checklist",
+    "compare-study-destinations-before-applying"
+  ],
+  "how-to-build-a-study-abroad-shortlist": [
+    "compare-study-destinations-before-applying",
+    "study-abroad-application-documents-checklist",
+    "germany-dmat-aps-india-2027"
+  ],
+  "study-abroad-application-documents-checklist": [
+    "visa-preparation-starts-before-the-offer",
+    "how-to-build-a-study-abroad-shortlist",
+    "compare-study-destinations-before-applying"
+  ],
+  "compare-study-destinations-before-applying": [
+    "how-to-build-a-study-abroad-shortlist",
+    "visa-preparation-starts-before-the-offer",
+    "study-abroad-application-documents-checklist"
+  ],
+  "visa-preparation-starts-before-the-offer": [
+    "study-abroad-application-documents-checklist",
+    "compare-study-destinations-before-applying",
+    "how-to-build-a-study-abroad-shortlist"
+  ]
+};
+
+export const getRelatedBlogPosts = (slug: string) =>
+  (relatedBlogPostSlugs[slug] ?? [])
+    .map((relatedSlug) => getBlogPost(relatedSlug))
+    .filter((post): post is BlogPost => Boolean(post));
