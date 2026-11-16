@@ -109,11 +109,13 @@ export default function AtomicGlobe() {
   useEffect(() => {
     let effectCleanup: (() => void) | undefined;
     let isCancelled = false;
+    let idleCallback: number | undefined;
+    let startTimer: number | undefined;
 
-    void (async () => {
-    const THREE = await import("three");
+    const initialize = async () => {
+      const THREE = await import("three");
 
-    if (isCancelled) return;
+      if (isCancelled) return;
 
     const host = hostRef.current;
     const markerLayer = markerLayerRef.current;
@@ -266,13 +268,33 @@ export default function AtomicGlobe() {
       if (host.contains(renderer.domElement)) host.removeChild(renderer.domElement);
     };
 
-    if (isCancelled) {
-      effectCleanup();
+      if (isCancelled) {
+        effectCleanup();
+      }
+    };
+
+    const scheduleInitialize = () => {
+      startTimer = window.setTimeout(() => {
+        if ("requestIdleCallback" in window) {
+          idleCallback = window.requestIdleCallback(() => void initialize(), { timeout: 1200 });
+          return;
+        }
+
+        void initialize();
+      }, 250);
+    };
+
+    if (document.readyState === "complete") {
+      scheduleInitialize();
+    } else {
+      window.addEventListener("load", scheduleInitialize, { once: true });
     }
-    })();
 
     return () => {
       isCancelled = true;
+      window.removeEventListener("load", scheduleInitialize);
+      if (startTimer !== undefined) window.clearTimeout(startTimer);
+      if (idleCallback !== undefined) window.cancelIdleCallback(idleCallback);
       effectCleanup?.();
     };
   }, []);

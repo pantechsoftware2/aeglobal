@@ -47,6 +47,127 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "ucas-2027-deadline-indian-students",
+    title: "UCAS 2027 deadline: a January application plan for Indian students",
+    metaTitle: "UCAS 2027 Deadline for Indian Students",
+    metaDescription: "Applying to UK undergraduate courses for 2027? Check the 13 January UCAS deadline, references, document uploads and a practical plan for Indian students.",
+    description: "Plan your UK undergraduate application around the January 2027 UCAS deadline, with clear steps for qualifications, references and supporting documents.",
+    category: "UK undergraduate applications",
+    publishedAt: "2026-11-16",
+    readingTime: "7 min read",
+    heroImage: "/images/blog/ucas-2027-deadline-indian-students.webp",
+    heroImageAlt: "Student comparing blank course cards beside navy and teal folders and a calendar marked with a teal circle",
+    heroImagePrompt: "Wide 16:9 premium editorial photograph for a UCAS 2027 UK undergraduate application guide for Indian students: overhead view of an Indian student's hands comparing blank cream course cards beside five navy and teal folders and an unmarked calendar with a teal circle on light limestone, autumn leaves, soft daylight and realistic paper textures. No laptop, landmarks, readable text, numbers, logos, watermarks, flags, passports or personal information.",
+    takeaway: "For most UK undergraduate courses starting in 2027, the UCAS equal consideration deadline is 13 January 2027 at 18:00 UK time. Your complete application, including its reference, must reach UCAS by then. Check the exact course deadline and your school's earlier internal date before making your submission plan.",
+    keywords: ["UCAS 2027 deadline", "UCAS application Indian students", "UK undergraduate application 2027", "UCAS January deadline", "UCAS supporting documents 2027"],
+    sections: [
+      {
+        heading: "Why plan your 2027 application now?",
+        body: [
+          "November is a useful point to turn a UK university shortlist into an application schedule. On 29 October 2026, UCAS released its first application figures for the 2027 cycle, covering the early October deadline. That is a genuine recent admissions development, but it does not tell you how competitive your individual course will be or predict your chance of an offer.",
+          "For an Indian student finishing school, the immediate challenge is practical: coordinate course research, academic information and a teacher's reference while continuing your studies. This guide focuses on undergraduate applications through UCAS. Treat the dates as confirmed application milestones, and the suggested weekly plan below as planning advice rather than a university requirement."
+        ]
+      },
+      {
+        heading: "Which UCAS deadline applies to you?",
+        body: [
+          "UCAS lists 13 January 2027 at 18:00 UK time for most undergraduate courses. Equal consideration means an on-time application is considered; it does not promise admission. The earlier 15 October 2026 deadline for Oxford, Cambridge and most medicine, dentistry and veterinary medicine/science courses has already passed.",
+          "Use the deadline attached to your exact course listing. A different intake or specialist application route may have different arrangements. If applying through a school or centre, handing your work to that centre is one stage: allow time for its checks and onward submission to UCAS."
+        ],
+        table: {
+          headers: ["Milestone", "Confirmed date", "Your next action"],
+          rows: [
+            ["Most undergraduate courses", "13 January 2027, 18:00 UK time", "Confirm the deadline on each course listing"],
+            ["Oxford, Cambridge and most medicine, dentistry and veterinary courses", "15 October 2026, 18:00 UK time — passed", "Ask the university before considering a late application"],
+            ["School or centre submission", "Set by your own school or centre", "Ask for its internal deadline now"]
+          ]
+        }
+      },
+      {
+        heading: "Build a course-by-course evidence sheet",
+        body: [
+          "Create one row for every course you are considering. Record its exact title, campus, intake, published entry requirements, relevant subjects and admissions contact. Save the official course link alongside your notes. This makes it easier to spot a mismatch before writing an application around a course you cannot realistically enter.",
+          "UCAS allows up to five choices. Choose a coherent subject direction so your application evidence makes sense across the list. For example, a student comparing computing degrees could note how each course balances programming, mathematics and project work, then decide which balance suits their interests. This is a comparison method, not a recommendation of a particular institution."
+        ],
+        subsections: [{
+          heading: "Record your Indian qualifications accurately",
+          body: [
+            "The UCAS application guide requires previous and current qualifications from secondary education onwards, including pending results and resits. Use the actual qualification titles rather than inventing UK equivalents. For CBSE, CISCE or a state board, check the correct awarding organisation and qualification entry carefully.",
+            "If a university's website does not clearly explain how it assesses your board or subjects, ask its admissions team. Keep their answer with your course notes. Avoid assuming that one institution's percentage requirement applies to another."
+          ]
+        }]
+      },
+      {
+        heading: "Arrange the reference before polishing the final draft",
+        body: [
+          "UCAS says applicants currently or recently in education should use a referee who knows them academically. A teacher can add predicted grades for qualifications still being studied. The reference must be completed before submission, so ask early and agree a realistic completion date.",
+          "Give your referee a concise factual summary: your intended subject, current studies, relevant academic projects and any information they have requested. Do not write a reference for them to present as their own. If your school does not normally provide predicted grades, discuss the process with it; UCAS's international guidance recommends working closely with the school to obtain them wherever possible.",
+          "Keep a simple tracker showing who is handling the reference and whether it is complete. That small administrative step can matter more than repeatedly rewriting an already clear introduction."
+        ]
+      },
+      {
+        heading: "Prepare the three personal statement answers",
+        body: [
+          "The current UCAS statement uses three questions about your motivation for the subject, preparation through education, and preparation outside formal education. The combined limit is 4,000 characters including spaces, with at least 350 characters for each answer. This format is already in use; it is not a newly announced November rule.",
+          "Start with an evidence bank in your own words. A science project, a book you questioned or a problem you explored independently can be useful when you explain what you learned. Select examples that reveal your thinking, rather than listing every certificate you hold. Check the full draft for repeated points and unsupported claims.",
+          "For example, describing how you tested a project idea and changed your approach gives a reader more to assess than simply calling yourself passionate. Keep the final answers truthful and recognisably yours."
+        ]
+      },
+      {
+        heading: "Understand the supporting-document option for 2027",
+        body: [
+          "The UCAS 2027 cycle toolkit confirms an option to upload supporting documents into relevant application sections. UCAS's detailed upload guidance says uploading is optional. Official qualification certificates, transcripts and relevant English-language certificates can support the information you enter; they do not replace the education section.",
+          "Check that files are readable and belong in the correct section. UCAS says you cannot add new documents after the application has been sent to it. A university may still request evidence directly or through its own portal, so continue monitoring messages after submission. An application upload is not confirmation that every later evidence request has been satisfied."
+        ]
+      },
+      {
+        heading: "A practical November-to-January action plan",
+        body: [
+          "Use the following sequence to protect study time and reduce last-minute corrections. Adjust it to your school's internal deadline; these are suggested working stages, not official cut-off dates."
+        ],
+        bullets: [
+          "November: narrow the subject direction, verify course requirements and ask the referee about timing.",
+          "Early December: complete qualification entries and prepare the statement evidence bank alongside your supporting files.",
+          "Before your centre's deadline: review course codes, campus, start year, academic entries and reference arrangements together.",
+          "Before the UCAS deadline: allow time for corrections and confirm that the application has actually been sent to UCAS.",
+          "After submission: check your email and application regularly, and track each university's requests and response dates separately."
+        ]
+      },
+      {
+        heading: "Get a focused review of your UK application plan",
+        body: [
+          "Bring AE Global Group your current qualification, intended subject, target intake and draft shortlist. We can help organise the questions to resolve, compare course information and map the remaining application steps. Use the UK destination guide and application-document checklist below to prepare for that conversation.",
+          "Before committing to a course, keep a separate family budget covering its published tuition and your expected living expenses. Recheck official UCAS and university guidance before submitting. Admissions decisions remain with universities, and application support cannot guarantee an offer."
+        ]
+      }
+    ],
+    checklist: ["Exact course and intake checked", "School's internal deadline confirmed", "Qualifications entered accurately", "Reference completion agreed", "Statement in your own words", "Supporting documents reviewed", "Submission status confirmed"],
+    internalLinks: [
+      { label: "Explore UK study planning with AE Global Group", href: "/destinations/united-kingdom" },
+      { label: "Prepare your study abroad application documents", href: "/blog/study-abroad-application-documents-checklist" },
+      { label: "Review AE Global Group application support", href: "/services" },
+      { label: "Discuss your 2027 UK undergraduate plan", href: "/contact" }
+    ],
+    sources: [
+      { label: "UCAS: 2027 application deadlines and late applications", href: "https://www.ucas.com/applying/applying-to-university/dates-and-deadlines-for-uni-applications" },
+      { label: "UCAS: 2027 cycle toolkit and document-upload update", href: "https://www.ucas.com/advisers/help-and-training/toolkits/2027-cycle-toolkit" },
+      { label: "UCAS: 29 October 2026 early-deadline application data", href: "https://www.ucas.com/corporate/news-and-key-documents/news/ucas-releases-undergraduate-application-data-from-15-october-deadline" },
+      { label: "UCAS: filling in qualifications and course choices", href: "https://www.ucas.com/applying/applying-to-university/filling-in-your-ucas-application" },
+      { label: "UCAS: arranging an academic reference", href: "https://www.ucas.com/applying/applying-university/how-get-ucas-reference" },
+      { label: "UCAS: supporting international students and predicted grades", href: "https://www.ucas.com/international/international-advisers/supporting-international-students" },
+      { label: "UCAS: personal statement questions and character limits", href: "https://www.ucas.com/applying/applying-to-university/writing-your-personal-statement/how-to-write-your-personal-statement" },
+      { label: "UCAS: supporting-document upload rules", href: "https://www.ucas.com/applying/applying-to-university/uploading-documents-to-your-application" }
+    ],
+    sourcesCheckedAt: "2026-11-16",
+    faqs: [
+      { question: "What is the UCAS deadline for most 2027 undergraduate courses?", answer: "It is 13 January 2027 at 18:00 UK time. Check your exact course listing and allow for an earlier school or centre deadline." },
+      { question: "Can Indian students apply after the January UCAS deadline?", answer: "Many universities accept later international applications, but availability varies. Ask the university about vacancies before applying; later consideration is not guaranteed." },
+      { question: "Can I apply while my Class 12 results are pending?", answer: "UCAS supports pending qualifications and predicted grades. Enter your studies accurately, coordinate with your school and check each university's requirements for your qualification." },
+      { question: "Are UCAS supporting-document uploads compulsory for 2027?", answer: "UCAS says uploads are optional. Universities may still request specific evidence separately, and you must enter your qualifications in the application." },
+      { question: "Does submitting before the deadline guarantee an offer?", answer: "No. Equal consideration protects consideration of an on-time application; the university makes the admissions decision." }
+    ]
+  },
+  {
     slug: "new-zealand-student-visa-changes-2026",
     title: "New Zealand student visa changes 2026: what Indian students need to know",
     metaTitle: "New Zealand Student Visa Changes 2026",

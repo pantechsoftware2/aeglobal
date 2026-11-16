@@ -125,6 +125,14 @@ export default function HomePage() {
       <SiteHeader />
 
       <section className="hero">
+        <Image
+          className="hero-background"
+          src="/images/hero-london-reference-bg.webp"
+          alt=""
+          fill
+          sizes="100vw"
+          preload
+        />
         <div className="hero-copy">
           <h1>Stop guessing.<br /><span>Start applying with clarity.</span></h1>
           <p>
@@ -187,7 +195,7 @@ export default function HomePage() {
                     alt={`${university.name} logo`}
                     width={240}
                     height={64}
-                    unoptimized
+                    sizes="180px"
                   />
                 </div>
               ))}
@@ -202,7 +210,7 @@ export default function HomePage() {
                     alt={`${university.name} logo`}
                     width={240}
                     height={64}
-                    unoptimized
+                    sizes="180px"
                   />
                 </div>
               ))}
@@ -311,7 +319,9 @@ export default function HomePage() {
               <h3><Link href={`/blog/${post.slug}`}>{post.title}</Link></h3>
               <span>{post.description}</span>
               <Link className="text-link" href={`/blog/${post.slug}`}>
-                Read guide <ArrowRight size={15} aria-hidden="true" />
+                <span aria-hidden="true">Read guide</span>
+                <span className="sr-only">Read {post.title}</span>
+                <ArrowRight size={15} aria-hidden="true" />
               </Link>
             </article>
           ))}

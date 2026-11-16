@@ -450,9 +450,21 @@ p {
   min-height: 600px;
   isolation: isolate;
   overflow: hidden;
-  background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.62) 42%, rgba(255, 255, 255, 0.38) 64%, rgba(255, 255, 255, 0.18) 100%),
-    url("/images/hero-london-reference-bg.png") center bottom / cover no-repeat;
+}
+
+.hero::after {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.62) 42%, rgba(255, 255, 255, 0.38) 64%, rgba(255, 255, 255, 0.18) 100%);
+}
+
+.hero > .hero-background {
+  z-index: 0;
+  object-fit: cover;
+  object-position: center bottom;
 }
 
 .hero::before {
@@ -1927,7 +1939,7 @@ p {
 .testimonial-body span {
   display: block;
   margin-top: 5px;
-  color: #7b8799;
+  color: #5f6b7c;
   font-size: 9px;
 }
 

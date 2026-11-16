@@ -68,7 +68,7 @@ export default function TestimonialCarousel() {
           />
         </div>
         <div className="testimonial-body">
-          <div className="stars" aria-label="5 out of 5 rating">
+          <div className="stars" role="img" aria-label="5 out of 5 rating">
             {Array.from({ length: 5 }).map((_, index) => (
               <Star key={index} size={15} fill="currentColor" />
             ))}
