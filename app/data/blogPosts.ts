@@ -47,6 +47,116 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "commonwealth-shared-scholarships-2027-india",
+    title: "Commonwealth Shared Scholarships 2027: an application guide for Indian students",
+    metaTitle: "Commonwealth Shared Scholarships 2027 for India",
+    metaDescription: "Apply for Commonwealth Shared Scholarships 2027: check Indian applicant eligibility, the 8 December deadline and separate university steps before submitting.",
+    description: "A practical guide to the open 2027/28 scholarship round, with eligibility checks, university application differences and a plan for your development statement.",
+    category: "UK scholarships",
+    publishedAt: "2026-11-19",
+    readingTime: "7 min read",
+    heroImage: "/images/blog/commonwealth-shared-scholarships-2027-india.webp",
+    heroImageAlt: "Two Indian graduate students discussing a miniature community water system in a bright university research studio",
+    heroImagePrompt: "Premium 16:9 editorial photograph for Commonwealth Shared Scholarships 2027 and UK postgraduate funding for Indian students: an Indian female graduate student in a navy cardigan discussing a miniature community water system with an Indian male graduate student in a muted teal shirt in a bright university research studio. Clear water vessels, small pipes and pale architectural blocks communicate development impact and shared learning. Natural candid expressions, realistic hands and materials, soft daylight, light neutral background. No readable text, logos, watermarks, flags, passports, personal information or landmark collage.",
+    takeaway: "Commonwealth Shared Scholarships for 2027/28 are open. The CSC deadline is 8 December 2026 at 16:00 GMT, equivalent to 21:30 IST. India is eligible, but applicants must meet the full conditions and choose an approved course. Follow your university's separate admissions instructions as well as the scholarship process.",
+    keywords: ["Commonwealth Shared Scholarships 2027", "Commonwealth Shared Scholarship India", "UK Masters scholarships Indian students", "Commonwealth scholarship deadline 2026"],
+    sections: [
+      {
+        heading: "Why this scholarship deserves attention in November",
+        body: [
+          "The 2027/28 application round opened on 10 November 2026, as confirmed by the University of Exeter. It supports UK study beginning in September or October 2027. This is an active application opportunity, rather than a proposal for a future scheme. For an Indian graduate looking for funding, the useful question now is whether an approved course fits both their academic background and their plans for work that benefits India.",
+          "Start with that fit before drafting essays. A funded course can still be the wrong choice if its teaching does not address the skills you need. This guide separates confirmed requirements from our suggested preparation steps; the official links below let you check the details for your own application."
+        ]
+      },
+      {
+        heading: "Check eligibility before investing time in an application",
+        body: [
+          "India appears on the eligible-country list. The core conditions include eligible citizenship or refugee status, permanent residence in an eligible country, availability to begin study in September 2027 and inability to afford UK study without the award. By September 2027, applicants need a first degree at UK 2:1 honours standard, or a 2:2 with a relevant postgraduate qualification. There is also a restriction concerning study or work exceeding one academic year in a high-income country. Read the CSC wording and ask about any borderline circumstances.",
+          "Do not convert your Indian percentage or CGPA into a UK classification yourself. Send the university your awarding institution, grading scale and transcript if equivalence is unclear. Keep its response with your application notes. Meeting minimum scholarship criteria does not establish that you meet a particular course's admission requirements."
+        ],
+        subsections: [{
+          heading: "Consider whether the return-home purpose suits your plans",
+          body: ["The CSC requires scholars to undertake to return home before their Student visa expires. Think honestly about how the course would support your work in India. If your main objective is overseas employment immediately after study, read the award conditions carefully before deciding whether this funding route fits your goals."]
+        }]
+      },
+      {
+        heading: "Use the approved course list, then check the university",
+        body: [
+          "The CSC publishes a specific 2027 eligible-course list organised by development themes. A university's participation does not make every degree it offers eligible. Match the exact course title and intake, then open the university's current scholarship page. Recheck an older shortlist rather than carrying forward last year's assumptions.",
+          "For example, the current list includes Southampton's MSc Gerontology and MSc Cancer Biology and Immunology. These serve different academic and career directions. Compare prerequisites, modules and the skills you want to develop rather than treating them as interchangeable funding options. The examples below illustrate process differences, not university recommendations."
+        ],
+        table: {
+          headers: ["University example", "Scholarship step", "Separate admission instruction"],
+          rows: [
+            ["Exeter", "CSC application by 8 December 2026, 16:00 GMT", "Apply for the eligible Master's by the published deadline; Exeter encourages earlier submission"],
+            ["Southampton", "CSC application by 8 December 2026, 16:00 GMT", "Shortlisted candidates are invited in mid-February to apply for their programme"]
+          ]
+        }
+      },
+      {
+        heading: "Keep two application records and an evidence folder",
+        body: [
+          "Use CSC Central through the official CSC page for the scholarship submission. University admission is a separate process: follow the institution's sequence rather than assuming a single timetable applies everywhere. Exeter, for example, asks candidates who have not met its English requirement by the scholarship deadline to email the steps they are taking. Southampton requires its course English conditions to be met by the end of February.",
+          "The CSC requires identity or citizenship evidence, complete higher-education transcripts, certified English translations where needed, and at least two signed PDF references in its specified format. Required documents must be uploaded by the closing deadline; an incomplete application is ineligible. Check the live form for all fields and instructions before finalising your folder."
+        ],
+        bullets: [
+          "Create separate tracker rows for the scholarship and course application, including the official URL and submission status.",
+          "Open each transcript file and check that all pages are legible and in order.",
+          "Ask referees early, give them factual context and leave the wording to them.",
+          "Review the completed form carefully: the CSC says submitted applications cannot be edited."
+        ]
+      },
+      {
+        heading: "Make the study plan and development case specific",
+        body: [
+          "The CSC's Master's assessment criteria look at what you want to learn, how well you have researched the course, and how your new skills could support development. Its applicant advice warns against relying on rankings or copying course descriptions. Explain the relationship between your experience, the learning you need and the work you intend to do afterwards.",
+          "As a planning exercise, draw three columns: a problem you understand, a skill you lack, and a realistic way to use that skill. For instance, someone with genuine community-health experience might connect a problem they observed to training in evaluating services. Describe the actual experience you have; do not adopt an invented project simply because it sounds impressive.",
+          "Next, test the plan's practical limits. Who would benefit, what role could you realistically hold, and what would show progress? Separate an ambition from an achievement. You can acknowledge that implementation depends on an employer or partner instead of promising outcomes outside your control."
+        ],
+        subsections: [{
+          heading: "Use evidence that another reader can understand",
+          body: ["Choose a small number of examples you can explain clearly. For each, describe your responsibility, the action you took and what you learned. Ask a trusted reader outside your subject to identify unclear language. Their questions can reveal gaps that another round of polishing would miss. Your final statement should remain your own work."]
+        }]
+      },
+      {
+        heading: "Understand the funding before making financial commitments",
+        body: [
+          "Exeter describes the award as covering full tuition, living costs, airfares and allowances. Read the CSC's detailed financial terms for approved expenses and conditions. Do not treat a possible award as money already secured, or assume every personal expense will be reimbursed.",
+          "Keep tuition and living expenses in separate budget rows. Add a third row for costs you need to clarify with the scholarship team, such as timing of payments or expenditure before travel. Ask before booking anything non-refundable. This article does not use an INR conversion because your actual exchange rate and spending needs will vary."
+        ]
+      },
+      {
+        heading: "Build a submission plan with time for corrections",
+        body: [
+          "Our suggested sequence is to resolve eligibility and course fit first, request references next, then draft the study plan alongside your document checks. Set yourself a review date before the official deadline so that an unreadable file or missing answer does not become a last-evening problem.",
+          "Bring AE Global Group your degree details, target subject, funding needs and draft course shortlist. We can help organise your UK study options and the questions to send to admissions teams. Use the UK guide, document checklist and contact links below to prepare a focused enquiry. Universities and the CSC make their own decisions; support cannot guarantee admission or funding. Recheck official guidance before submitting."
+        ]
+      }
+    ],
+    checklist: ["Full eligibility reviewed", "2027 approved course confirmed", "University process recorded", "Transcripts checked page by page", "References requested", "Development plan in your own words", "Submission reviewed before the deadline"],
+    internalLinks: [
+      { label: "Plan your UK studies with AE Global Group", href: "/destinations/united-kingdom" },
+      { label: "Prepare your application documents", href: "/blog/study-abroad-application-documents-checklist" },
+      { label: "Explore scholarship planning", href: "/scholarships" },
+      { label: "Discuss your UK Master's shortlist and funding needs", href: "/contact" }
+    ],
+    sources: [
+      { label: "CSC: 2027/28 applications, documents and award conditions", href: "https://cscuk.fcdo.gov.uk/scholarships/commonwealth-shared-scholarships-applications/" },
+      { label: "CSC: approved courses for 2027", href: "https://cscuk.fcdo.gov.uk/commonwealth-shared-scholarships-eligible-courses/" },
+      { label: "University of Exeter: 2027 entry and application instructions", href: "https://www.exeter.ac.uk/study/funding/award/?id=5909" },
+      { label: "University of Southampton: eligibility and application sequence", href: "https://www.southampton.ac.uk/study/fees-funding/scholarships/partnerships-commonwealth-shared" },
+      { label: "CSC: advice on preparing your application", href: "https://cscuk.fcdo.gov.uk/advice-for-applicants/" },
+      { label: "CSC: selection criteria for Master's study plans", href: "https://cscuk.fcdo.gov.uk/selection-criteria-for-assessment-of-applications/" }
+    ],
+    sourcesCheckedAt: "2026-11-19",
+    faqs: [
+      { question: "Can Indian students apply for Commonwealth Shared Scholarships 2027?", answer: "Yes. India is an eligible country, but applicants must satisfy the full CSC conditions and the requirements of an approved course. Nationality alone does not establish eligibility." },
+      { question: "What is the deadline in Indian time?", answer: "The CSC deadline is 8 December 2026 at 16:00 GMT, which is 21:30 IST on the same day. Check your university's separate instructions and submit with time to spare." },
+      { question: "Does the scholarship application also apply for my university place?", answer: "University admission is separate. Exeter asks for both applications by the published deadline; Southampton invites shortlisted candidates to apply for their programme later. Follow your chosen university's current sequence." },
+      { question: "Is every Master's at a participating university eligible?", answer: "No. Use the CSC's 2027 approved-course list and confirm the exact programme on the university's scholarship page before applying." }
+    ]
+  },
+  {
     slug: "ucas-2027-deadline-indian-students",
     title: "UCAS 2027 deadline: a January application plan for Indian students",
     metaTitle: "UCAS 2027 Deadline for Indian Students",
